@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { cloudinaryImages, getRandomImage } from "../../helpers/CloudinaryMapping";
+import {
+  cloudinaryImages,
+  getRandomImage,
+} from "../../helpers/CloudinaryMapping";
 
 export default function InspirationSection() {
   const [currentImages, setCurrentImages] = useState<Record<string, string>>(
@@ -48,7 +51,7 @@ export default function InspirationSection() {
     {
       category: "eventos-sociales",
       title: "Eventos Sociales",
-      link: "/organizacion-de-eventos",
+      link: "/organizacion-de-eventos/eventos-sociales",
     },
     {
       category: "catering-para-eventos",
@@ -63,27 +66,27 @@ export default function InspirationSection() {
     {
       category: "organizacion-de-bodas",
       title: "Organización de Bodas",
-      link: "/organizacion-de-eventos",
+      link: "/organizacion-de-eventos/organizacion-de-bodas",
     },
     {
       category: "pantallas-para-escenarios",
       title: "Pantallas para Escenarios",
-      link: "/organizacion-de-eventos",
+      link: "/organizacion-de-eventos/pantallas-para-escenarios",
     },
     {
       category: "stands-para-eventos",
       title: "Stands para Eventos",
-      link: "/organizacion-de-eventos",
+      link: "/organizacion-de-eventos/stands-para-eventos",
     },
     {
       category: "musica-para-eventos",
       title: "Música para Eventos",
-      link: "/organizacion-de-eventos",
+      link: "/organizacion-de-eventos/musica-para-eventos",
     },
     {
       category: "graduaciones",
       title: "Graduaciones",
-      link: "/organizacion-de-eventos",
+      link: "/organizacion-de-eventos/graduaciones",
     },
   ];
 
@@ -109,14 +112,18 @@ export default function InspirationSection() {
               className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               <div className="relative h-64 overflow-hidden">
-                <div
-                  className={`w-full h-full bg-cover bg-center group-hover:scale-110 transition-all duration-700 ${
-                    isTransitioning ? "opacity-0" : "opacity-100"
-                  }`}
-                  style={{
-                    backgroundImage: `url(${currentImages[category.category]})`,
-                  }}
-                />
+                {currentImages[category.category] && (
+                  <div
+                    className={`w-full h-full bg-cover bg-center group-hover:scale-110 transition-all duration-700 ${
+                      isTransitioning ? "opacity-0" : "opacity-100"
+                    }`}
+                    style={{
+                      backgroundImage: `url(${
+                        currentImages[category.category]
+                      })`,
+                    }}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-8">

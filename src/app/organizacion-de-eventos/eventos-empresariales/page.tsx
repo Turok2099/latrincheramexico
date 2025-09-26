@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ProcesoOrganizacion from "../../../components/EventosEmpresariales/ProcesoOrganizacion";
 
 export const metadata: Metadata = {
   title: "Eventos Empresariales - La Trinchera México",
@@ -34,6 +35,9 @@ export default function EventosEmpresarialesPage() {
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mx-auto"></div>
         </div>
       </section>
+
+      {/* Proceso de Organización */}
+      <ProcesoOrganizacion />
 
       {/* Contenido Principal */}
       <section className="py-20 bg-black">

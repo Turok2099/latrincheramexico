@@ -24,20 +24,26 @@ export default function Galeria() {
 
   // Función para obtener una imagen aleatoria
   const getRandomImage = (): string => {
-    if (allImages.length === 0) return "";
+    if (!allImages || allImages.length === 0) return "";
     return allImages[Math.floor(Math.random() * allImages.length)];
   };
 
   // Inicializar con una imagen aleatoria
   useEffect(() => {
-    setCurrentImage(getRandomImage());
+    const image = getRandomImage();
+    if (image) {
+      setCurrentImage(image);
+    }
   }, []);
 
   // Cambiar imagen y servicio cada 4 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % servicios.length);
-      setCurrentImage(getRandomImage());
+      const image = getRandomImage();
+      if (image) {
+        setCurrentImage(image);
+      }
     }, 4000);
 
     return () => clearInterval(interval);
@@ -57,12 +63,14 @@ export default function Galeria() {
         </div>
 
         <div className="relative h-96 md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
-          <div
-            className="absolute inset-0 bg-cover bg-center image-transition"
-            style={{
-              backgroundImage: `url(${currentImage})`,
-            }}
-          />
+          {currentImage && (
+            <div
+              className="absolute inset-0 bg-cover bg-center image-transition"
+              style={{
+                backgroundImage: `url(${currentImage})`,
+              }}
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
           <div className="absolute inset-0 flex flex-col justify-center items-center p-8 md:p-12">
             <h3

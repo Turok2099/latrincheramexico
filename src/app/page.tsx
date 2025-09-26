@@ -3,6 +3,7 @@ import Galeria from "@/components/Home/Galeria";
 import StatsSection from "@/components/Home/StatsSection";
 import InspirationSection from "@/components/Home/InspirationSection";
 import ServiciosDestacados from "@/components/Home/ServiciosDestacados";
+import SobreNosotros from "@/components/Home/SobreNosotros";
 import ContactForm from "@/components/Home/ContactForm";
 import LaTrinchera from "@/components/Home/LaTrinchera";
 
@@ -21,6 +22,9 @@ export default function Home() {
 
       {/* Sección de servicios destacados */}
       <ServiciosDestacados />
+
+      {/* Sección Sobre Nosotros */}
+      <SobreNosotros />
 
       {/* Formulario de contacto */}
       <ContactForm />

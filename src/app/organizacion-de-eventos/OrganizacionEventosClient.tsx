@@ -1,5 +1,7 @@
 import InspirationSection from "../../components/Home/InspirationSection";
 import HeroCarousel from "../../components/Home/HeroCarousel";
+import TiposEventos from "../../components/OrganizacionDeEventos/TiposEventos";
+import ContactForm from "../../components/Home/ContactForm";
 
 export default function OrganizacionEventosClient() {
   return (
@@ -24,6 +26,12 @@ export default function OrganizacionEventosClient() {
 
       {/* InspirationSection */}
       <InspirationSection />
+
+      {/* Tipos de Eventos */}
+      <TiposEventos />
+
+      {/* Formulario de contacto */}
+      <ContactForm />
     </div>
   );
 }

@@ -2,9 +2,22 @@ import type { Metadata } from "next";
 import OrganizacionEventosClient from "./OrganizacionEventosClient";
 
 export const metadata: Metadata = {
-  title: "Organización de Eventos - La Trinchera México",
+  title:
+    "Empresas Organizadoras de Eventos | Organización de Eventos Empresariales - La Trinchera México",
   description:
-    "Servicios completos de organización de eventos. Bodas, eventos empresariales, graduaciones, catering, fotografía y más.",
+    "Somos empresas organizadoras de eventos especializadas en organización de eventos empresariales, eventos sociales y organización de fiestas. Planificación de eventos profesional con más de 10 años de experiencia.",
+  keywords: [
+    "empresas organizadoras de eventos",
+    "organizar eventos",
+    "organización de eventos empresariales",
+    "organización de fiestas",
+    "eventos sociales",
+    "planificación de eventos",
+    "La Trinchera México",
+    "eventos corporativos",
+    "organización de bodas",
+    "eventos empresariales",
+  ],
 };
 
 export default function OrganizacionEventosPage() {

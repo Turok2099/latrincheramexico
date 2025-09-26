@@ -50,12 +50,36 @@ export default function Navbar() {
       hasSubmenu: true,
       submenu: [
         {
+          href: "/organizacion-de-eventos/eventos-sociales",
+          label: "Eventos Sociales",
+        },
+        {
           href: "/organizacion-de-eventos/servicio-de-catering-para-eventos",
           label: "Servicio de Catering",
         },
         {
           href: "/organizacion-de-eventos/eventos-empresariales",
           label: "Eventos Empresariales",
+        },
+        {
+          href: "/organizacion-de-eventos/organizacion-de-bodas",
+          label: "Organización de Bodas",
+        },
+        {
+          href: "/organizacion-de-eventos/pantallas-para-escenarios",
+          label: "Pantallas para Escenarios",
+        },
+        {
+          href: "/organizacion-de-eventos/stands-para-eventos",
+          label: "Stands para Eventos",
+        },
+        {
+          href: "/organizacion-de-eventos/musica-para-eventos",
+          label: "Música para Eventos",
+        },
+        {
+          href: "/organizacion-de-eventos/graduaciones",
+          label: "Graduaciones",
         },
       ],
     },

@@ -38,13 +38,13 @@ export default function EventosEmpresarialesSection() {
             </div>
 
             <p className="text-lg text-gray-600 leading-relaxed">
-              La organización de eventos empresariales requiere precisión,
+              La <span className="text-[#22d3f7] font-semibold">organización de eventos empresariales</span> requiere precisión,
               impacto y profesionalismo. Por eso, en nuestra agencia diseñamos
-              experiencias corporativas que fortalecen tu marca: lanzamientos,
-              conferencias, cenas de gala y team buildings. Nuestra
-              planificación de eventos se basa en metodologías claras,
+              <span className="text-[#22d3f7] font-semibold"> experiencias corporativas</span> que fortalecen tu marca: <span className="text-[#22d3f7] font-semibold">lanzamientos</span>,
+              <span className="text-[#22d3f7] font-semibold"> conferencias</span>, <span className="text-[#22d3f7] font-semibold">cenas de gala</span> y <span className="text-[#22d3f7] font-semibold">team buildings</span>. Nuestra
+              <span className="text-[#22d3f7] font-semibold"> planificación de eventos</span> se basa en metodologías claras,
               proveedores confiables y una ejecución impecable, posicionándonos
-              como una de las mejores agencias de eventos en CDMX.
+              como una de las mejores <span className="text-[#22d3f7] font-semibold">agencias de eventos en CDMX</span>.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">

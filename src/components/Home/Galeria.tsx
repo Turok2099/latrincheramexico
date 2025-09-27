@@ -7,9 +7,6 @@ export default function Galeria() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState("");
 
-  // Usar imágenes optimizadas de Cloudinary
-  const allImages = getAllImages();
-
   // Servicios disponibles
   const servicios = [
     { nombre: "Eventos Sociales" },
@@ -24,9 +21,10 @@ export default function Galeria() {
 
   // Función para obtener una imagen aleatoria
   const getRandomImage = useCallback((): string => {
+    const allImages = getAllImages();
     if (!allImages || allImages.length === 0) return "";
     return allImages[Math.floor(Math.random() * allImages.length)];
-  }, [allImages]);
+  }, []);
 
   // Inicializar con una imagen aleatoria
   useEffect(() => {
@@ -34,7 +32,7 @@ export default function Galeria() {
     if (image) {
       setCurrentImage(image);
     }
-  }, [getRandomImage]);
+  }, [getRandomImage]); // Incluir getRandomImage como dependencia
 
   // Cambiar imagen y servicio cada 4 segundos
   useEffect(() => {
@@ -47,7 +45,7 @@ export default function Galeria() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [servicios.length, getRandomImage]);
+  }, [getRandomImage, servicios.length]);
 
   return (
     <section className="w-full py-20 bg-white">

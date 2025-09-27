@@ -16,7 +16,7 @@ export default function EventosEmpresarialesPage() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/serviceCard/eventos-empresariales.png')",
+            backgroundImage: "url('/iconosservicios/empresa.png')",
           }}
         />
 

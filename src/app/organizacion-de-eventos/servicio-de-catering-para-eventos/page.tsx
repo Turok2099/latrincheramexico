@@ -99,7 +99,7 @@ export default function CateringPageClient() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/serviceCard/catering-para-eventos.png')",
+            backgroundImage: "url('/iconosservicios/catering.png')",
           }}
         />
 

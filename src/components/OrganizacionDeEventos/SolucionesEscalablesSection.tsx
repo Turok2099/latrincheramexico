@@ -19,10 +19,10 @@ export default function SolucionesEscalablesSection() {
             </div>
 
             <p className="text-lg text-gray-300 leading-relaxed">
-              Ya sea que busques la organización de fiestas privadas o la
-              organización de eventos masivos, nuestro equipo en la organización
-              de eventos CDMX está listo para ayudarte. Combinamos tecnología,
-              logística y creatividad para ofrecer soluciones escalables y
+              Ya sea que busques la <span className="text-[#22d3f7] font-semibold">organización de fiestas privadas</span> o la
+              <span className="text-[#22d3f7] font-semibold"> organización de eventos masivos</span>, nuestro equipo en la <span className="text-[#22d3f7] font-semibold">organización
+              de eventos CDMX</span> está listo para ayudarte. Combinamos <span className="text-[#22d3f7] font-semibold">tecnología</span>,
+              <span className="text-[#22d3f7] font-semibold"> logística</span> y creatividad para ofrecer <span className="text-[#22d3f7] font-semibold">soluciones escalables</span> y
               memorables. Si estás buscando una empresa que entienda tus
               necesidades y las convierta en resultados, estás en el lugar
               correcto.

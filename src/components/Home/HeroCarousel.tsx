@@ -10,14 +10,6 @@ export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  if (allServiceImages.length === 0) {
-    return (
-      <div className="absolute inset-0 bg-gray-800 flex items-center justify-center text-white">
-        Cargando imágenes...
-      </div>
-    );
-  }
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIsTransitioning(true);
@@ -30,6 +22,14 @@ export default function HeroCarousel() {
 
     return () => clearInterval(interval);
   }, []);
+
+  if (allServiceImages.length === 0) {
+    return (
+      <div className="absolute inset-0 bg-gray-800 flex items-center justify-center text-white">
+        Cargando imágenes...
+      </div>
+    );
+  }
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">

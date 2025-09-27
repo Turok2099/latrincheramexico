@@ -2,6 +2,9 @@ import InspirationSection from "../../components/Home/InspirationSection";
 import HeroCarousel from "../../components/Home/HeroCarousel";
 import TiposEventos from "../../components/OrganizacionDeEventos/TiposEventos";
 import ContactForm from "../../components/Home/ContactForm";
+import EventosSocialesSection from "../../components/OrganizacionDeEventos/EventosSocialesSection";
+import EventosEmpresarialesSection from "../../components/OrganizacionDeEventos/EventosEmpresarialesSection";
+import SolucionesEscalablesSection from "../../components/OrganizacionDeEventos/SolucionesEscalablesSection";
 
 export default function OrganizacionEventosClient() {
   return (
@@ -27,8 +30,17 @@ export default function OrganizacionEventosClient() {
       {/* InspirationSection */}
       <InspirationSection />
 
+      {/* Sección de Eventos Sociales */}
+      <EventosSocialesSection />
+
       {/* Tipos de Eventos */}
       <TiposEventos />
+
+      {/* Sección de Eventos Empresariales */}
+      <EventosEmpresarialesSection />
+
+      {/* Sección de Soluciones Escalables */}
+      <SolucionesEscalablesSection />
 
       {/* Formulario de contacto */}
       <ContactForm />

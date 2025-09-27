@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getAllImages } from "../../helpers/CloudinaryMapping";
 
 export default function Galeria() {
@@ -23,10 +23,10 @@ export default function Galeria() {
   ];
 
   // Función para obtener una imagen aleatoria
-  const getRandomImage = (): string => {
+  const getRandomImage = useCallback((): string => {
     if (!allImages || allImages.length === 0) return "";
     return allImages[Math.floor(Math.random() * allImages.length)];
-  };
+  }, [allImages]);
 
   // Inicializar con una imagen aleatoria
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Galeria() {
     if (image) {
       setCurrentImage(image);
     }
-  }, []);
+  }, [getRandomImage]);
 
   // Cambiar imagen y servicio cada 4 segundos
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Galeria() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [servicios.length]);
+  }, [servicios.length, getRandomImage]);
 
   return (
     <section className="w-full py-20 bg-white">

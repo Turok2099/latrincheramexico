@@ -19,13 +19,28 @@ export default function EventosSocialesSection() {
             </div>
 
             <p className="text-lg text-gray-600 leading-relaxed">
-              En nuestra empresa <span className="text-[#22d3f7] font-semibold">organizadora de eventos en CDMX</span>, transformamos
-              cada idea en una experiencia inolvidable. Nos especializamos en la
-              <span className="text-[#22d3f7] font-semibold"> organización de eventos sociales</span>, desde <span className="text-[#22d3f7] font-semibold">bodas</span> y <span className="text-[#22d3f7] font-semibold">cumpleaños</span> hasta
-              <span className="text-[#22d3f7] font-semibold"> celebraciones temáticas</span>, cuidando cada detalle para que tú solo te
-              ocupes de disfrutar. Con un enfoque personalizado y creativo,
-              convertimos cualquier evento social en un momento único que
-              refleja tu estilo y propósito.
+              En nuestra empresa{" "}
+              <span className="text-[#22d3f7] font-semibold">
+                organizadora de eventos en CDMX
+              </span>
+              , transformamos cada idea en una experiencia inolvidable. Nos
+              especializamos en la
+              <span className="text-[#22d3f7] font-semibold">
+                {" "}
+                organización de eventos sociales
+              </span>
+              , desde{" "}
+              <span className="text-[#22d3f7] font-semibold">bodas</span> y{" "}
+              <span className="text-[#22d3f7] font-semibold">cumpleaños</span>{" "}
+              hasta
+              <span className="text-[#22d3f7] font-semibold">
+                {" "}
+                celebraciones temáticas
+              </span>
+              , cuidando cada detalle para que tú solo te ocupes de disfrutar.
+              Con un enfoque personalizado y creativo, convertimos cualquier
+              evento social en un momento único que refleja tu estilo y
+              propósito.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">

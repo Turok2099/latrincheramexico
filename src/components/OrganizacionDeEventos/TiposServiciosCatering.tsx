@@ -98,6 +98,18 @@ export default function TiposServiciosCatering() {
         "Experiencia en eventos",
       ],
     },
+    {
+      nombre: "Mesas Temáticas",
+      descripcion:
+        "Mesas dulces y saladas personalizadas que se adaptan a la temática de tu evento. Desde postres gourmet hasta botanas artesanales, creamos experiencias visuales y gastronómicas memorables.",
+      icono: "🍰",
+      caracteristicas: [
+        "Mesas dulces personalizadas",
+        "Mesas saladas gourmet",
+        "Decoración temática",
+        "Presentación artística",
+      ],
+    },
   ];
 
   return (

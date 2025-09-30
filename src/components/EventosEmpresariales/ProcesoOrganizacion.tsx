@@ -1,13 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import {
   ClipboardDocumentListIcon,
   UserGroupIcon,
   ClockIcon,
   CheckBadgeIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 
 export default function ProcesoOrganizacion() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
   const pasos = [
     {
       numero: "01",
@@ -63,6 +67,10 @@ export default function ProcesoOrganizacion() {
     },
   ];
 
+  const toggleAccordion = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   return (
     <section className="w-full py-20 bg-black">
       <div className="max-w-7xl mx-auto px-6">
@@ -74,73 +82,108 @@ export default function ProcesoOrganizacion() {
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
             Nuestro método probado para{" "}
-            <strong className="text-[#22d3f7]">organizar eventos</strong>{" "}
+            <span className="text-[#22d3f7] font-bold">organizar eventos</span>{" "}
             garantiza resultados excepcionales. Desde la{" "}
-            <strong className="text-[#22d3f7]">planificación de eventos</strong>{" "}
+            <span className="text-[#22d3f7] font-bold">
+              planificación de eventos
+            </span>{" "}
             inicial hasta la ejecución final, cada paso está diseñado para el
             éxito.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-4 max-w-5xl mx-auto">
           {pasos.map((paso, index) => {
             const IconComponent = paso.icono;
-            const isEven = index % 2 === 0;
+            const isActive = activeIndex === index;
 
             return (
               <div
                 key={index}
-                className={`flex flex-col lg:flex-row items-center gap-8 ${
-                  isEven ? "lg:flex-row" : "lg:flex-row-reverse"
-                }`}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden transition-all duration-300 hover:border-[#22d3f7]/50"
               >
-                {/* Contenido de texto */}
-                <div className="flex-1 space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center">
-                      <span className="text-2xl font-bold text-white">
+                {/* Header del Acordeón */}
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full px-8 py-6 flex items-center justify-between text-left transition-all duration-300"
+                >
+                  <div className="flex items-center space-x-4 flex-1">
+                    {/* Número */}
+                    <div className="w-12 h-12 bg-[#22d3f7] rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-lg font-bold text-white">
                         {paso.numero}
                       </span>
                     </div>
-                    <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-[#22d3f7]" />
+
+                    {/* Icono */}
+                    <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                      <IconComponent className="w-5 h-5 text-[#22d3f7]" />
                     </div>
+
+                    {/* Título */}
+                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide">
+                      {paso.titulo}
+                    </h3>
                   </div>
 
-                  <h3 className="text-3xl font-bold text-white tracking-wide">
-                    {paso.titulo}
-                  </h3>
+                  {/* Icono de Chevron */}
+                  <ChevronDownIcon
+                    className={`w-6 h-6 text-[#22d3f7] transition-transform duration-300 flex-shrink-0 ${
+                      isActive ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    {paso.descripcion}
-                  </p>
+                {/* Contenido del Acordeón */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    isActive ? "max-h-96" : "max-h-0"
+                  }`}
+                >
+                  <div className="px-8 pb-6 space-y-4">
+                    {/* Descripción */}
+                    <p
+                      className="text-lg text-gray-300 leading-relaxed pl-16"
+                      dangerouslySetInnerHTML={{ __html: paso.descripcion }}
+                    />
 
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {paso.detalles.map((detalle, idx) => (
-                      <li key={idx} className="flex items-center text-gray-300">
-                        <div className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></div>
-                        {detalle}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Espacio visual */}
-                <div className="flex-1">
-                  <div className="h-64 bg-gradient-to-br from-[#22d3f7]/10 to-gray-800 rounded-2xl flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-24 h-24 bg-[#22d3f7] rounded-full flex items-center justify-center mx-auto mb-4">
-                        <IconComponent className="w-12 h-12 text-white" />
-                      </div>
-                      <p className="text-gray-300 font-medium">
-                        Paso {paso.numero}
-                      </p>
-                    </div>
+                    {/* Detalles */}
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-16">
+                      {paso.detalles.map((detalle, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-center text-gray-300"
+                        >
+                          <div className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3 flex-shrink-0"></div>
+                          {detalle}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            ¿Listo para empezar tu proyecto?
+          </h3>
+          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+            Contáctanos hoy y descubre cómo podemos hacer realidad el evento que
+            tu empresa necesita
+          </p>
+          <a
+            href="/contact"
+            className="group relative inline-block px-8 py-4 font-semibold border-2 border-[#22d3f7] bg-[#22d3f7] text-black overflow-hidden rounded-full cursor-pointer transition-all duration-300 hover:scale-105"
+          >
+            <span className="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 rounded-full transition-transform duration-400"></span>
+            <span className="relative z-10 group-hover:text-[#000000] transition-colors duration-400">
+              SOLICITA TU COTIZACIÓN
+            </span>
+          </a>
         </div>
       </div>
     </section>

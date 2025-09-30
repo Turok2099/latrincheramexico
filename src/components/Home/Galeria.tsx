@@ -1,51 +1,63 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { getAllImages } from "../../helpers/CloudinaryMapping";
+import {
+  cloudinaryImages,
+  getRandomImage,
+} from "../../helpers/CloudinaryMapping";
 
 export default function Galeria() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState("");
 
-  // Servicios disponibles
+  // Servicios disponibles con sus categorías de Cloudinary
   const servicios = [
-    { nombre: "Eventos Sociales" },
-    { nombre: "Catering para Eventos" },
-    { nombre: "Eventos Empresariales" },
-    { nombre: "Organización de Bodas" },
-    { nombre: "Pantallas para Escenarios" },
-    { nombre: "Stands para Eventos" },
-    { nombre: "Música para Eventos" },
-    { nombre: "Graduaciones" },
+    { nombre: "Eventos Sociales", categoria: "eventos-sociales" },
+    { nombre: "Catering para Eventos", categoria: "catering-para-eventos" },
+    { nombre: "Eventos Empresariales", categoria: "eventos-empresariales" },
+    { nombre: "Organización de Bodas", categoria: "organizacion-de-bodas" },
+    {
+      nombre: "Pantallas para Escenarios",
+      categoria: "pantallas-para-escenarios",
+    },
+    { nombre: "Stands para Eventos", categoria: "stands-para-eventos" },
+    { nombre: "Música para Eventos", categoria: "musica-para-eventos" },
+    { nombre: "Graduaciones", categoria: "graduaciones" },
   ];
 
-  // Función para obtener una imagen aleatoria
-  const getRandomImage = useCallback((): string => {
-    const allImages = getAllImages();
-    if (!allImages || allImages.length === 0) return "";
-    return allImages[Math.floor(Math.random() * allImages.length)];
-  }, []);
+  // Función para obtener una imagen aleatoria de una categoría específica
+  const getImageFromCategory = useCallback(
+    (categoria: keyof typeof cloudinaryImages): string => {
+      return getRandomImage(categoria);
+    },
+    []
+  );
 
-  // Inicializar con una imagen aleatoria
+  // Inicializar con la primera imagen de la primera categoría
   useEffect(() => {
-    const image = getRandomImage();
+    const image = getImageFromCategory(
+      servicios[0].categoria as keyof typeof cloudinaryImages
+    );
     if (image) {
       setCurrentImage(image);
     }
-  }, [getRandomImage]); // Incluir getRandomImage como dependencia
+  }, [getImageFromCategory]);
 
   // Cambiar imagen y servicio cada 4 segundos
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % servicios.length);
-      const image = getRandomImage();
+      const nextIndex = (currentIndex + 1) % servicios.length;
+      setCurrentIndex(nextIndex);
+      const image = getImageFromCategory(
+        servicios[nextIndex].categoria as keyof typeof cloudinaryImages
+      );
       if (image) {
         setCurrentImage(image);
       }
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [getRandomImage, servicios.length]);
+  }, [currentIndex, getImageFromCategory, servicios]);
 
   return (
     <section className="w-full py-20 bg-white">

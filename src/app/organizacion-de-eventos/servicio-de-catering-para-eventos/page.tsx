@@ -1,7 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import TiposServiciosCatering from "@/components/OrganizacionDeEventos/TiposServiciosCatering";
+import InspirationSection from "@/components/Home/InspirationSection";
 
 function CateringPageClient() {
   // Usar imágenes específicas de catering-para-eventos
@@ -64,11 +66,10 @@ function CateringPageClient() {
         </div>
       </section>
 
-      {/* Contenido Principal */}
+      {/* Bloque 1 - Fondo Negro */}
       <section className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Bloque 1 - Texto izquierda, imagen derecha */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
                 NUESTRO SERVICIO DE CATERING
@@ -86,27 +87,33 @@ function CateringPageClient() {
               </p>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
+                <Image
                   src={cateringImages[0]}
                   alt="Servicio de catering para eventos"
-                  className="w-full h-96 object-cover"
+                  fill
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Bloque 2 - Imagen izquierda, texto derecha */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+      {/* Bloque 2 - Fondo Blanco */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
+                <Image
                   src={cateringImages[1]}
                   alt="Banquetes para eventos"
-                  className="w-full h-96 object-cover"
+                  fill
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
               </div>
             </div>
             <div>
@@ -114,7 +121,7 @@ function CateringPageClient() {
                 EXPERIENCIAS ÚNICAS
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed">
                 En La Trinchera México entendemos que cada celebración es única,
                 por eso ofrecemos banquetes para eventos de todo tipo: desde
                 elegantes recepciones hasta banquetes para fiestas más íntimas.
@@ -126,9 +133,13 @@ function CateringPageClient() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Bloque 3 - Texto izquierda, imagen derecha */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+      {/* Bloque 3 - Fondo Negro */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
                 COMODIDAD Y EXCELENCIA
@@ -145,27 +156,33 @@ function CateringPageClient() {
               </p>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
+                <Image
                   src={cateringImages[2]}
                   alt="Catering a domicilio"
-                  className="w-full h-96 object-cover"
+                  fill
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Bloque 4 - Imagen izquierda, texto derecha */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+      {/* Bloque 4 - Fondo Blanco */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
+                <Image
                   src={cateringImages[3]}
                   alt="Experiencia en catering"
-                  className="w-full h-96 object-cover"
+                  fill
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
               </div>
             </div>
             <div>
@@ -173,7 +190,7 @@ function CateringPageClient() {
                 EXPERIENCIA COMPROBADA
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <p className="text-gray-700 text-lg leading-relaxed">
                 Con años de experiencia en el sector, hemos perfeccionado un
                 servicio de catering que combina creatividad culinaria, atención
                 personalizada y logística eficiente. Ya sea un desayuno
@@ -190,6 +207,9 @@ function CateringPageClient() {
 
       {/* Tipos de Servicios */}
       <TiposServiciosCatering />
+
+      {/* Sección de Inspiración */}
+      <InspirationSection />
     </div>
   );
 }

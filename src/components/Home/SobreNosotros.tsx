@@ -52,7 +52,7 @@ export default function SobreNosotros() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="https://res.cloudinary.com/dxbtafe9u/image/upload/v1758926285/trinchera/about/about2.png"
+                src="https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto/v1759531986/trinchera/main-images/about2.png"
                 alt="Equipo profesional de La Trinchera México"
                 width={600}
                 height={500}

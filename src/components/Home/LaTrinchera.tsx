@@ -11,7 +11,7 @@ export default function LaTrinchera() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/latrinchera.JPG')",
+          backgroundImage: "url('https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto/v1759531984/trinchera/main-images/latrinchera.jpg')",
         }}
       >
         {/* Overlay para el blur cuando se activa la información */}

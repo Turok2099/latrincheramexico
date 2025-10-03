@@ -8,6 +8,8 @@ interface OptimizedImageProps {
   className?: string;
   priority?: boolean;
   quality?: number;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
 }
 
 export default function OptimizedImage({
@@ -18,7 +20,13 @@ export default function OptimizedImage({
   className = '',
   priority = false,
   quality = 85,
+  sizes,
+  loading = priority ? 'eager' : 'lazy',
 }: OptimizedImageProps) {
+  // Generar sizes responsivas por defecto si no se proporcionan
+  const responsiveSizes = sizes || 
+    `(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw`;
+
   // Si la imagen ya está en Cloudinary, úsala directamente
   if (src.includes('cloudinary.com')) {
     return (
@@ -30,6 +38,8 @@ export default function OptimizedImage({
         className={className}
         priority={priority}
         quality={quality}
+        loading={loading}
+        sizes={responsiveSizes}
         placeholder="blur"
         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
       />
@@ -48,6 +58,8 @@ export default function OptimizedImage({
       className={className}
       priority={priority}
       quality={quality}
+      loading={loading}
+      sizes={responsiveSizes}
       placeholder="blur"
       blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
     />

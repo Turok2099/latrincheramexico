@@ -1,12 +1,26 @@
 import type { Metadata } from "next";
+import dynamic from 'next/dynamic';
 import HeroSection from "@/components/Home/HeroSection";
-import Galeria from "@/components/Home/Galeria";
-import StatsSection from "@/components/Home/StatsSection";
-import InspirationSection from "@/components/Home/InspirationSection";
-import ServiciosDestacados from "@/components/Home/ServiciosDestacados";
-import SobreNosotros from "@/components/Home/SobreNosotros";
-import ContactForm from "@/components/Home/ContactForm";
 import LaTrinchera from "@/components/Home/LaTrinchera";
+
+// 🚀 Lazy loading para componentes no críticos
+const Galeria = dynamic(() => import("@/components/Home/Galeria"), {
+  loading: () => <div className="min-h-screen bg-black flex items-center justify-center">Cargando galería...</div>
+});
+
+const StatsSection = dynamic(() => import("@/components/Home/StatsSection"), {
+  loading: () => <div className="h-64 bg-gray-900 animate-pulse"></div>
+});
+
+const InspirationSection = dynamic(() => import("@/components/Home/InspirationSection"));
+
+const ServiciosDestacados = dynamic(() => import("@/components/Home/ServiciosDestacados"), {
+  loading: () => <div className="h-96 bg-gray-800 animate-pulse"></div>
+});
+
+const SobreNosotros = dynamic(() => import("@/components/Home/SobreNosotros"));
+
+const ContactForm = dynamic(() => import("@/components/Home/ContactForm"));
 
 export const metadata: Metadata = {
   title:

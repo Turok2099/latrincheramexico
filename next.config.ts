@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -11,6 +15,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Optimización de transpilación moderna
+  experimental: {
+    optimizePackageImports: ['@heroicons/react', 'swiper'],
+  },
+  // Configuración de JavaScript moderno
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

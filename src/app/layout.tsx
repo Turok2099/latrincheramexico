@@ -9,11 +9,16 @@ const openSans = Open_Sans({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-open-sans",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
   title: "La Trinchera México",
   description: "Organización de eventos y reservas en La Trinchera México",
+  other: {
+    'font-display': 'swap',
+  },
 };
 
 export default function RootLayout({

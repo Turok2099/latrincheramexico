@@ -27,6 +27,18 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  /* 🚫 Prevenir scroll flotante en móvil */
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* 🏗️ Container principal para evitar rebounding */
+html {
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Animaciones personalizadas */
@@ -68,5 +80,43 @@ body {
   .fixed.bottom-6.right-6 {
     bottom: 1rem;
     right: 1rem;
+  }
+}
+
+/* 📱 Correcciones específicas para scroll en móvil */
+@media screen and (max-width: 768px) {
+  /* Prevenir bounce/rubber band effect en iOS */
+  body {
+    overflow-x: hidden !important;
+    overscroll-behavior-y: contain !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  /* Container principal para scroll controlado */
+  #__next {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+  }
+  
+  /* Prevenir momentum scrolling problemático */
+  html {
+    overscroll-behavior: none !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+  
+  /* Fix para elementos que pueden causar overflow */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevenir zoom accidental en inputs */
+  input, textarea, select {
+    font-size: 16px !important;
+    transform: scale(1) !important;
   }
 }

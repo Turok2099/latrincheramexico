@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import TiposServiciosCatering from "@/components/OrganizacionDeEventos/TiposServiciosCatering";
@@ -8,44 +7,23 @@ import InspirationSection from "@/components/Home/InspirationSection";
 function CateringPageClient() {
   // Usar imágenes específicas de catering-para-eventos
   const cateringImages = cloudinaryImages["catering-para-eventos"];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Carrusel automático de imágenes de catering
-  useEffect(() => {
-    if (cateringImages.length === 0) return;
-
-    const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentImageIndex(
-          (prevIndex) => (prevIndex + 1) % cateringImages.length
-        );
-        setIsTransitioning(false);
-      }, 500);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [cateringImages.length]);
+  // 🖼️ Imagen hero fija optimizada
+  const heroImage =
+    cateringImages[0] || cloudinaryImages["catering-para-eventos"][0];
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section con Carrusel */}
+      {/* Hero Section - Imagen Fija Optimizada */}
       <section className="relative w-full h-screen">
-        {/* Carrusel de imágenes de catering */}
+        {/* Imagen de fondo fija */}
         <div className="absolute inset-0 overflow-hidden">
-          {cateringImages.length > 0 && (
-            <div
-              className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
-                isTransitioning
-                  ? "scale-105 opacity-80"
-                  : "scale-100 opacity-100"
-              }`}
-              style={{
-                backgroundImage: `url(${cateringImages[currentImageIndex]})`,
-              }}
-            />
-          )}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${heroImage})`,
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90" />
           <div className="absolute inset-0 bg-black/15" />
         </div>

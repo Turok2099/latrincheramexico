@@ -1,10 +1,33 @@
+"use client";
+import HeroSection from "@/components/HeroSection";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import InspirationSection from "@/components/Home/InspirationSection";
+
 export default function EventosSocialesPage() {
+  const heroImage = cloudinaryImages["eventos-sociales"][0];
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-zinc-200 font-['Open_Sans'] p-6">
-      <h1 className="text-4xl font-semibold mb-4">Eventos Sociales</h1>
-      <p className="text-lg text-center">
-        Esta página está en construcción. Muy pronto tendrás novedades.
-      </p>
+    <div className="min-h-screen bg-black text-white">
+      <HeroSection
+        title="EVENTOS"
+        highlightText="SOCIALES"
+        subtitle="Celebramos contigo los momentos más importantes de tu vida"
+        backgroundImage={heroImage}
+      />
+
+      {/* Contenido en construcción */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#22d3f7]">
+            PRÓXIMAMENTE
+          </h2>
+          <p className="text-xl text-gray-300">
+            Estamos preparando contenido increíble para esta sección.
+          </p>
+        </div>
+      </section>
+
+      <InspirationSection />
     </div>
   );
 }

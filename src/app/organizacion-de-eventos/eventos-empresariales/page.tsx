@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import ProcesoOrganizacion from "@/components/EventosEmpresariales/ProcesoOrganizacion";
@@ -8,44 +7,24 @@ import InspirationSection from "@/components/Home/InspirationSection";
 export default function EventosEmpresarialesPage() {
   const eventosEmpresarialesImages = cloudinaryImages["eventos-empresariales"];
   const cateringImages = cloudinaryImages["catering-para-eventos"];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Carrusel automático de imágenes
-  useEffect(() => {
-    if (eventosEmpresarialesImages.length === 0) return;
-
-    const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentImageIndex(
-          (prevIndex) => (prevIndex + 1) % eventosEmpresarialesImages.length
-        );
-        setIsTransitioning(false);
-      }, 500);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [eventosEmpresarialesImages.length]);
+  // 🖼️ Imagen hero fija optimizada
+  const heroImage =
+    eventosEmpresarialesImages[0] ||
+    cloudinaryImages["eventos-empresariales"][0];
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section con Carrusel */}
+      {/* Hero Section - Imagen Fija Optimizada */}
       <section className="relative w-full h-screen">
-        {/* Carrusel de imágenes */}
+        {/* Imagen de fondo fija */}
         <div className="absolute inset-0 overflow-hidden">
-          {eventosEmpresarialesImages.length > 0 && (
-            <div
-              className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
-                isTransitioning
-                  ? "scale-105 opacity-80"
-                  : "scale-100 opacity-100"
-              }`}
-              style={{
-                backgroundImage: `url(${eventosEmpresarialesImages[currentImageIndex]})`,
-              }}
-            />
-          )}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${heroImage})`,
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90" />
           <div className="absolute inset-0 bg-black/15" />
         </div>

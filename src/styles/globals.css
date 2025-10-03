@@ -45,3 +45,28 @@ body {
   animation: slideInLeft 0.8s ease-out forwards;
   opacity: 0;
 }
+
+/* ✨ Animaciones para botón de WhatsApp */
+@keyframes bounce-slow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite;
+}
+
+/* 📱 Estilos específicos para WhatsApp - mobile friendly */
+@media (max-width: 768px) {
+  .fixed.bottom-6.right-6 {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}

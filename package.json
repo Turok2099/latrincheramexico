@@ -9,7 +9,11 @@
     "start": "next start",
     "lint": "next lint",
     "analyze": "set ANALYZE=true && npm run build",
-    "analyze:win": "cross-env ANALYZE=true npm run build"
+    "analyze:win": "cross-env ANALYZE=true npm run build",
+    "lighthouse:prod": "lighthouse https://latrincheramexico.com --view --output html --output-path ./lighthouse-report-prod.html",
+    "lighthouse:local": "lighthouse http://localhost:3000 --view --output html --output-path ./lighthouse-report-local.html",
+    "lighthouse:mobile": "lighthouse https://latrincheramexico.com --preset=perf --emulated-form-factor=mobile --view --output html --output-path ./lighthouse-mobile.html",
+    "lighthouse:desktop": "lighthouse https://latrincheramexico.com --preset=perf --emulated-form-factor=desktop --view --output html --output-path ./lighthouse-desktop.html"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -30,6 +34,7 @@
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.4.5",
+    "lighthouse": "^12.8.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

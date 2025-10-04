@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
+import { useEffect } from "react";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
 import TiposServiciosCatering from "@/components/OrganizacionDeEventos/TiposServiciosCatering";
 import InspirationSection from "@/components/Home/InspirationSection";
 
@@ -9,23 +11,49 @@ function CateringPageClient() {
   const cateringImages = cloudinaryImages["catering-para-eventos"];
 
   // 🖼️ Imagen hero fija optimizada
-  const heroImage =
-    cateringImages[0] || cloudinaryImages["catering-para-eventos"][0];
+  const heroImageUrl = cateringImages[0] || cloudinaryImages["catering-para-eventos"][0];
+  const optimizedHeroUrl = optimizeCloudinaryUrl(heroImageUrl, {
+    width: 1920,
+    height: 1080,
+    quality: 'auto:eco',
+    priority: true
+  });
+
+  // Preload crítico para LCP
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = optimizedHeroUrl;
+    link.fetchPriority = 'high';
+    document.head.appendChild(link);
+
+    return () => {
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
+  }, [optimizedHeroUrl]);
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section - Imagen Fija Optimizada */}
       <section className="relative w-full h-screen">
-        {/* Imagen de fondo fija */}
+        {/* Imagen de fondo optimizada con Next/Image */}
         <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${heroImage})`,
-            }}
+          <Image
+            src={optimizedHeroUrl}
+            alt="Servicio de Catering para Eventos"
+            fill
+            priority
+            quality={75}
+            sizes="100vw"
+            className="object-cover"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90" />
-          <div className="absolute inset-0 bg-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90 z-10" />
+          <div className="absolute inset-0 bg-black/15 z-10" />
         </div>
 
         {/* Contenido superpuesto */}

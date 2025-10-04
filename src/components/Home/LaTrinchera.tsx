@@ -1,19 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { optimizeCloudinaryUrl } from '@/helpers/ImageOptimizer';
+import Image from 'next/image';
 
 export default function LaTrinchera() {
   const [showInfo, setShowInfo] = useState(false);
+  
+  // URL optimizada para LCP crítico
+  const heroImageUrl = 'https://res.cloudinary.com/dxbtafe9u/image/upload/v1759531984/trinchera/main-images/latrinchera.jpg';
+  const optimizedHeroUrl = optimizeCloudinaryUrl(heroImageUrl, {
+    width: 1920,
+    height: 1080,
+    quality: 'auto:eco',
+    priority: true
+  });
+
+  // Preload crítico
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = optimizedHeroUrl;
+    link.fetchPriority = 'high';
+    document.head.appendChild(link);
+
+    return () => {
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
+  }, [optimizedHeroUrl]);
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
-      {/* Imagen de fondo */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto/v1759531984/trinchera/main-images/latrinchera.jpg')",
-        }}
-      >
+      {/* Imagen de fondo optimizada con Next/Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={optimizedHeroUrl}
+          alt="La Trinchera México - Mural José Clemente Orozco"
+          fill
+          priority
+          quality={75}
+          sizes="100vw"
+          className="object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+        />
+      </div>
+      
+      <div className="absolute inset-0">
+
         {/* Overlay para el blur cuando se activa la información */}
         <div
           className={`absolute inset-0 backdrop-blur-sm bg-black/50 transition-all duration-500 ${

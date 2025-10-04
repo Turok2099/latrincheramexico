@@ -68,7 +68,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${openSans.variable} font-open-sans antialiased`}>
+      <body
+        className={`${openSans.variable} font-open-sans antialiased flex flex-col min-h-screen`}
+      >
         {/* 📊 Google Tag Manager (noscript) */}
         <noscript>
           <iframe

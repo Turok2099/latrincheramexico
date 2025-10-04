@@ -8,20 +8,21 @@ cloudinary.config({
 
 export default cloudinary;
 
-// Función para generar URLs optimizadas
+// Función para generar URLs optimizadas con WebP/AVIF
 export const getOptimizedImageUrl = (
   publicId: string,
   width: number = 1200,
   height: number = 800,
-  quality: string = "auto"
+  quality: string = "auto:eco"
 ) => {
   return cloudinary.url(publicId, {
     width,
     height,
     crop: "fill",
     quality,
-    format: "auto",
+    format: "auto", // Formato automático (WebP/AVIF según navegador)
     secure: true,
+    flags: ["progressive", "lossy"], // Carga progresiva y compresión lossy
   });
 };
 

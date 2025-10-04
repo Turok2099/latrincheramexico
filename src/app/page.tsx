@@ -1,22 +1,31 @@
 import type { Metadata } from "next";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/Home/HeroSection";
 import LaTrinchera from "@/components/Home/LaTrinchera";
 
 // 🚀 Lazy loading para componentes no críticos
 const Galeria = dynamic(() => import("@/components/Home/Galeria"), {
-  loading: () => <div className="min-h-screen bg-black flex items-center justify-center">Cargando galería...</div>
+  loading: () => (
+    <div className="min-h-screen bg-black flex items-center justify-center">
+      Cargando galería...
+    </div>
+  ),
 });
 
 const StatsSection = dynamic(() => import("@/components/Home/StatsSection"), {
-  loading: () => <div className="h-64 bg-gray-900 animate-pulse"></div>
+  loading: () => <div className="h-64 bg-gray-900 animate-pulse"></div>,
 });
 
-const InspirationSection = dynamic(() => import("@/components/Home/InspirationSection"));
+const InspirationSection = dynamic(
+  () => import("@/components/Home/InspirationSection")
+);
 
-const ServiciosDestacados = dynamic(() => import("@/components/Home/ServiciosDestacados"), {
-  loading: () => <div className="h-96 bg-gray-800 animate-pulse"></div>
-});
+const ServiciosDestacados = dynamic(
+  () => import("@/components/Home/ServiciosDestacados"),
+  {
+    loading: () => <div className="h-96 bg-gray-800 animate-pulse"></div>,
+  }
+);
 
 const SobreNosotros = dynamic(() => import("@/components/Home/SobreNosotros"));
 
@@ -69,7 +78,7 @@ export const metadata: Metadata = {
     siteName: "La Trinchera México",
     images: [
       {
-        url: "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905577/trinchera/eventos-sociales/23.png",
+        url: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
         width: 1200,
         height: 630,
         alt: "La Trinchera México - Organización de Eventos",
@@ -84,7 +93,7 @@ export const metadata: Metadata = {
     description:
       "Somos la mejor empresa de organización de eventos en Ciudad de México. Especialistas en bodas, eventos corporativos, graduaciones y celebraciones.",
     images: [
-      "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905577/trinchera/eventos-sociales/23.png",
+      "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     ],
   },
   robots: {
@@ -111,9 +120,9 @@ export default function Home() {
     description:
       "Empresa líder en organización de eventos en Ciudad de México. Especialistas en bodas, eventos corporativos, graduaciones y celebraciones.",
     url: "https://trinchera-6lmo4poby-jorge-castros-projects-839066ef.vercel.app",
-    logo: "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905577/trinchera/eventos-sociales/23.png",
+    logo: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_400,h_400,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     image:
-      "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905577/trinchera/eventos-sociales/23.png",
+      "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     telephone: "+52-55-1234-5678",
     email: "contacto@latrinchera.mx",
     address: {

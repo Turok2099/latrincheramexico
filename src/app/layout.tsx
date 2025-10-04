@@ -5,19 +5,22 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Open_Sans } from "next/font/google";
 
+// Optimizar fuente con display: swap y fallback
 const openSans = Open_Sans({
-  weight: "400",
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
   variable: "--font-open-sans",
-  display: "swap",
+  display: "swap", // CRÍTICO: Previene FOIT (Flash of Invisible Text)
   preload: true,
+  fallback: ["system-ui", "arial"],
+  adjustFontFallback: true, // Ajusta métricas del fallback
 });
 
 export const metadata: Metadata = {
   title: "La Trinchera México",
   description: "Organización de eventos y reservas en La Trinchera México",
   other: {
-    'font-display': 'swap',
+    "font-display": "swap",
   },
 };
 
@@ -28,7 +31,42 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${openSans.variable} font-open-sans`}>
+      <head>
+        {/* ⚡ DNS Prefetch y Preconnect para recursos externos */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="//res.cloudinary.com" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://res.cloudinary.com"
+          crossOrigin="anonymous"
+        />
+
+        {/* 🚀 CSS Crítico Inline - Above the Fold */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+            :root{--color-primary:#22d3f7;--color-accent:#22d3f7;--background:#000000;--foreground:#ededed;--font-sans:"Open Sans",system-ui,-apple-system,sans-serif}
+            *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}
+            html{font-family:var(--font-sans);line-height:1.6;-webkit-text-size-adjust:100%;tab-size:4;overflow-x:hidden}
+            body{background:var(--background);color:var(--foreground);font-family:var(--font-sans);margin:0;padding:0;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:touch;line-height:inherit;font-feature-settings:"kern"}
+            img,video{max-width:100%;height:auto}
+            h1,h2,h3{margin:0;font-weight:700;line-height:1.2}
+            button{cursor:pointer}
+            .fixed{position:fixed}
+            @media(max-width:768px){body{position:relative;width:100%;overscroll-behavior-y:contain}}
+          `,
+          }}
+        />
+      </head>
+      <body className={`${openSans.variable} font-open-sans antialiased`}>
         <Navbar />
         {children}
         <Footer />

@@ -35,7 +35,7 @@ export default function StatsSection() {
 
   const stats = [
     {
-      number: "200+",
+      number: "+150",
       label: "Eventos Realizados",
       icon: UsersIcon,
     },

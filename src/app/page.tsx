@@ -35,23 +35,34 @@ export const metadata: Metadata = {
   title:
     "La Trinchera México | Organización de Eventos en CDMX | Bodas, Corporativos y Más",
   description:
-    "Somos la mejor empresa de organización de eventos en Ciudad de México. Especialistas en bodas, eventos corporativos, graduaciones y celebraciones. Servicios completos: catering, mobiliario, fotografía, música y más. ¡Transformamos tu evento en una experiencia inolvidable!",
+    "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
   keywords: [
-    "organización de eventos CDMX",
+    "eventos sociales",
+    "organizacion de eventos",
+    "evento social",
+    "organización de eventos",
+    "salón de eventos sociales",
+    "empresas organizadoras de eventos",
+    "organizar eventos",
+    "organizacion eventos",
+    "organizacion de eventos empresariales",
+    "organizador eventos",
+    "organizacion de bodas",
+    "organizador de eventos sociales",
+    "planificación de eventos",
+    "organizacion de fiestas",
+    "fiesta organizacion",
+    "organizacion fiesta infantil",
+    "organizacion fiestas",
+    "organizacion de eventos en CDMX",
     "eventos corporativos Ciudad de México",
-    "organización de bodas México",
-    "catering para eventos",
     "mobiliario para eventos",
-    "fotografía de eventos",
-    "música para eventos",
-    "graduaciones México",
+    "musica para eventos",
     "eventos empresariales CDMX",
     "La Trinchera México",
     "agencia de eventos",
-    "planificación de eventos",
-    "coordinación de eventos",
+    "coordinacion de eventos",
     "eventos sociales México",
-    "celebración de eventos",
   ],
   authors: [{ name: "La Trinchera México" }],
   creator: "La Trinchera México",
@@ -61,9 +72,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(
-    "https://trinchera-6lmo4poby-jorge-castros-projects-839066ef.vercel.app"
-  ),
+  metadataBase: new URL("https://latrincheramexico.com"),
   alternates: {
     canonical: "/",
     languages: {
@@ -73,8 +82,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "La Trinchera México | Organización de Eventos en CDMX",
     description:
-      "Somos la mejor empresa de organización de eventos en Ciudad de México. Especialistas en bodas, eventos corporativos, graduaciones y celebraciones. ¡Transformamos tu evento en una experiencia inolvidable!",
-    url: "https://trinchera-6lmo4poby-jorge-castros-projects-839066ef.vercel.app",
+      "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
+    url: "https://latrincheramexico.com",
     siteName: "La Trinchera México",
     images: [
       {
@@ -91,7 +100,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "La Trinchera México | Organización de Eventos en CDMX",
     description:
-      "Somos la mejor empresa de organización de eventos en Ciudad de México. Especialistas en bodas, eventos corporativos, graduaciones y celebraciones.",
+      "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
     images: [
       "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     ],
@@ -118,13 +127,13 @@ export default function Home() {
     "@type": "Organization",
     name: "La Trinchera México",
     description:
-      "Empresa líder en organización de eventos en Ciudad de México. Especialistas en bodas, eventos corporativos, graduaciones y celebraciones.",
-    url: "https://trinchera-6lmo4poby-jorge-castros-projects-839066ef.vercel.app",
+      "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
+    url: "https://latrincheramexico.com",
     logo: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_400,h_400,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     image:
       "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
-    telephone: "+52-55-1234-5678",
-    email: "contacto@latrinchera.mx",
+    telephone: "+52-55-4521-0178",
+    email: "contacto@latrincheramexico.com",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Ciudad de México",

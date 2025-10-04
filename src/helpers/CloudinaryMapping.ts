@@ -68,6 +68,7 @@ export const cloudinaryImages = {
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905625/trinchera/musica-para-eventos/35.png",
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905629/trinchera/musica-para-eventos/36.png",
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905633/trinchera/musica-para-eventos/37.png",
+    "https://res.cloudinary.com/dxbtafe9u/image/upload/v1759545585/trinchera/musica-para-eventos/mariachi.png",
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905636/trinchera/musica-para-eventos/38.png",
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905639/trinchera/musica-para-eventos/39.png",
   ],

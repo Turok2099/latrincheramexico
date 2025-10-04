@@ -44,4 +44,8 @@ next-env.d.ts
 lighthouse-*.html
 lighthouse-*.json
 
+# Documentation files (except README)
+*.md
+!README.md
+
 .vercel

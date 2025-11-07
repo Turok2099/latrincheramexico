@@ -13,20 +13,16 @@ export function middleware(req) {
     "/tag/",
   ];
 
-  // Bloquear URLs con parámetro ?p=xxxx (propio de WordPress)
+  // Bloquear URLs con ?p=xxxx
   if (url.searchParams.has("p")) {
-    return new NextResponse("Not found", {
-      status: 404,
-      headers: { "Content-Type": "text/plain", "Cache-Control": "no-store" },
-    });
+    const notFoundUrl = new URL("/404", req.url); // <-- importante
+    return NextResponse.rewrite(notFoundUrl, { status: 404 });
   }
 
-  // Bloquear rutas que coincidan con patrones comunes de WordPress
+  // Bloquear rutas tipo WordPress
   if (wpPatterns.some((pattern) => pathname.startsWith(pattern))) {
-    return new NextResponse("Not found", {
-      status: 404,
-      headers: { "Content-Type": "text/plain", "Cache-Control": "no-store" },
-    });
+    const notFoundUrl = new URL("/404", req.url); // <-- importante
+    return NextResponse.rewrite(notFoundUrl, { status: 404 });
   }
 
   return NextResponse.next();

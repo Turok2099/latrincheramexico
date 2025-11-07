@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import HeroSection from "@/components/Home/HeroSection";
 import LaTrinchera from "@/components/Home/LaTrinchera";
 
@@ -121,7 +122,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+type HomeSearchParams = Record<string, string | string[] | undefined>;
+
+type HomeProps = {
+  searchParams?: Promise<HomeSearchParams>;
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+
+  if (resolvedSearchParams?.p) {
+    notFound();
+  }
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",

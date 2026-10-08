@@ -47,5 +47,8 @@ lighthouse-*.json
 # Documentation files (except README)
 *.md
 !README.md
+!CLAUDE.md
+!.claude/
+!.claude/**
 
 .vercel

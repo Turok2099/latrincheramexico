@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 text-gray-700 py-12 px-6">
+    <footer className="bg-surface-light text-ink-muted py-12 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Navegación superior */}
         <div className="flex justify-center mb-8">
@@ -20,12 +20,6 @@ export default function Footer() {
               Servicios
             </Link>
             <Link
-              href="/darkkitchen"
-              className="hover:text-[#22d3f7] transition-colors"
-            >
-              Dark Kitchen
-            </Link>
-            <Link
               href="/contact"
               className="hover:text-[#22d3f7] transition-colors"
             >
@@ -35,12 +29,12 @@ export default function Footer() {
         </div>
 
         {/* Línea divisoria */}
-        <div className="border-t border-gray-300 mb-8"></div>
+        <div className="border-t border-black/10 mb-8"></div>
 
         {/* Footer inferior */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           {/* Copyright */}
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-ink-muted">
             © 2025 La Trinchera México. Todos los derechos reservados.
           </div>
 
@@ -90,7 +84,7 @@ export default function Footer() {
 
             {/* Email */}
             <a
-              href="mailto:contacto@latrinchera.mx"
+              href="mailto:contacto@latrincheramexico.com"
               className="hover:scale-110 transition-transform duration-300"
               aria-label="Email"
             >

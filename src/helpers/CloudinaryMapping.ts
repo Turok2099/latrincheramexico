@@ -59,11 +59,6 @@ export const cloudinaryImages = {
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905604/trinchera/eventos-sociales/30.png",
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905609/trinchera/eventos-sociales/31.png",
   ],
-  graduaciones: [
-    "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905614/trinchera/graduaciones/32.png",
-    "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905617/trinchera/graduaciones/33.png",
-    "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905621/trinchera/graduaciones/34.png",
-  ],
   "musica-para-eventos": [
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905625/trinchera/musica-para-eventos/35.png",
     "https://res.cloudinary.com/dxbtafe9u/image/upload/v1758905629/trinchera/musica-para-eventos/36.png",

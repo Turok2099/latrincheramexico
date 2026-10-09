@@ -57,15 +57,15 @@ export default function StatsSection() {
   ];
 
   return (
-    <section id="stats-section" className="w-full py-20 bg-gray-100">
+    <section id="stats-section" className="w-full py-20 bg-surface-light">
       <div className="max-w-7xl mx-auto px-6 py-10 mb-10">
         {/* Título de la sección */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
+          <h2 className="text-4xl md:text-5xl font-bold text-surface mb-6 tracking-wide">
             Números que Hablan
           </h2>
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-ink-muted text-lg max-w-2xl mx-auto">
             La experiencia y confianza de nuestros clientes respaldan nuestro
             trabajo
           </p>

@@ -1,469 +1,393 @@
-"use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import Link from "next/link";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
 import InspirationSection from "@/components/Home/InspirationSection";
 
-function StandsParaEventosPage() {
-  // Usar imágenes específicas de stands-para-eventos
-  const standsImages = cloudinaryImages["stands-para-eventos"];
+const SITE = "https://latrincheramexico.com";
+const PAGE_URL = `${SITE}/organizacion-de-eventos/stands-para-eventos`;
 
-  // 🖼️ Imagen hero fija optimizada
-  const heroImageUrl =
-    standsImages[0] || cloudinaryImages["stands-para-eventos"][0];
-  const optimizedHeroUrl = optimizeCloudinaryUrl(heroImageUrl, {
+const datosCotizacion = [
+  "Fecha del evento",
+  "Ciudad y recinto",
+  "Medidas del espacio y altura permitida",
+  "Tipo de espacio",
+  "Objetivo de la marca en el evento",
+  "Referencias visuales",
+  "Presupuesto aproximado",
+  "Horarios de montaje y desmontaje que indique el organizador",
+];
+
+const faqs = [
+  {
+    q: "¿Qué información necesitan para cotizar un stand?",
+    a: "La fecha del evento, la ciudad y el recinto, las medidas del espacio y la altura permitida, el tipo de espacio, el objetivo de tu marca, referencias visuales, un presupuesto aproximado y los horarios de montaje y desmontaje del organizador.",
+  },
+  {
+    q: "¿Qué incluye el servicio de stands?",
+    a: "Diseño, fabricación y montaje de stands para eventos, ferias y exposiciones, y también la renta de stands. El alcance exacto de cada proyecto se define en la cotización.",
+  },
+  {
+    q: "¿Rentan stands?",
+    a: "Sí. La renta de stands para expo y ferias no tiene un costo fijo: elaboramos el presupuesto después de diseñar el proyecto y el stand.",
+  },
+  {
+    q: "¿De qué depende el precio de un stand o de su renta?",
+    a: "No manejamos un precio fijo. Elaboramos el presupuesto después de diseñar el proyecto y el stand, a partir de las medidas del espacio, el diseño necesario, el recinto y los horarios de montaje.",
+  },
+  {
+    q: "¿Pueden adaptar el diseño al espacio de la exposición?",
+    a: "Sí. Diseñamos el stand según tu marca, tu objetivo y el espacio asignado por el organizador. Compártenos las medidas y la altura permitida.",
+  },
+  {
+    q: "¿Atienden eventos en CDMX?",
+    a: "Sí. Por ahora atendemos eventos en CDMX y en el Estado de México.",
+  },
+];
+
+const ejemplos = [
+  {
+    indice: 1,
+    alt: "Render de un stand con panel rojo, logotipos hexagonales iluminados y una pantalla al centro",
+    pie: "Diseño de stand (render)",
+  },
+  {
+    indice: 4,
+    alt: "Módulo de atención tipo mostrador con paneles gráficos en un diseño en 3D",
+    pie: "Diseño de módulo de atención (render)",
+  },
+  {
+    indice: 2,
+    alt: "Escenario montado dentro de una carpa, con panel gráfico rojo y blanco, podio y pantalla de presentación",
+    pie: "Montaje de escenografía",
+  },
+  {
+    indice: 5,
+    alt: "Render de un escenario con escalones, pantallas y gráficos de colores",
+    pie: "Diseño de escenografía (render)",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      name: "Diseño, fabricación, montaje y renta de stands",
+      serviceType: "Stands para eventos, ferias y exposiciones",
+      url: PAGE_URL,
+      description:
+        "Diseño, fabricación, montaje y renta de stands personalizados para eventos, ferias y exposiciones.",
+      areaServed: [
+        { "@type": "City", name: "Ciudad de México" },
+        { "@type": "State", name: "Estado de México" },
+      ],
+      provider: {
+        "@type": "Organization",
+        name: "La Trinchera México",
+        url: SITE,
+        telephone: "+52-55-4521-0178",
+        email: "contacto@latrincheramexico.com",
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: SITE },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Organización de eventos",
+          item: `${SITE}/organizacion-de-eventos`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Stands para eventos",
+          item: PAGE_URL,
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
+function Photo({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 600px"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+    </div>
+  );
+}
+
+function Divider() {
+  return (
+    <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
+  );
+}
+
+function CtaButton() {
+  return (
+    <Link
+      href="/contact"
+      className="inline-block bg-[#22d3f7] text-black font-bold px-8 py-3 rounded-full hover:bg-[#1ab8d4] transition-colors duration-300"
+    >
+      Cotizar mi stand
+    </Link>
+  );
+}
+
+export default function StandsParaEventosPage() {
+  const images = cloudinaryImages["stands-para-eventos"];
+  const heroUrl = optimizeCloudinaryUrl(images[3], {
     width: 1920,
     height: 1080,
     quality: "auto:eco",
     priority: true,
   });
 
-  // Preload crítico para LCP
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = optimizedHeroUrl;
-    link.fetchPriority = "high";
-    document.head.appendChild(link);
-
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
-    };
-  }, [optimizedHeroUrl]);
-
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section - Imagen Fija Optimizada */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+      {/* Hero */}
       <section className="relative w-full h-screen">
-        {/* Imagen de fondo optimizada con Next/Image */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src={optimizedHeroUrl}
-            alt="Stands para Eventos y Ferias"
+            src={heroUrl}
+            alt="Pasillo de una exposición con varios stands y visitantes"
             fill
             priority
             quality={75}
             sizes="100vw"
             className="object-cover"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90 z-10" />
-          <div className="absolute inset-0 bg-black/15 z-10" />
         </div>
-
-        {/* Contenido superpuesto */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide">
-              STANDS PARA
-              <span className="block text-[#22d3f7] mt-2">EVENTOS</span>
+              STANDS PARA EVENTOS,
+              <span className="block text-[#22d3f7] mt-2">FERIAS Y EXPOSICIONES</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Diseño, fabricación y montaje de stands creativos que destacan tu
-              marca
+            <p className="text-xl md:text-2xl text-muted mb-8 leading-relaxed">
+              Diseño, fabricación, montaje y renta de stands personalizados
             </p>
+            <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
+            <CtaButton />
+          </div>
+        </div>
+      </section>
+
+      {/* Introducción */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
+                STANDS PARA EXPOSICIONES Y EVENTOS
+              </h2>
+              <Divider />
+              <p className="text-muted text-lg leading-relaxed mb-4">
+                Diseñamos, fabricamos y montamos stands para eventos, ferias y
+                exposiciones. La Trinchera México es una empresa de
+                organización de eventos con más de 10 años de experiencia, y
+                trabajamos cada stand a partir de lo que tu marca necesita
+                mostrar.
+              </p>
+              <p className="text-muted text-lg leading-relaxed">
+                Si tu stand forma parte de un evento mayor, conoce nuestros{" "}
+                <Link
+                  href="/organizacion-de-eventos"
+                  className="text-[#22d3f7] underline hover:text-[#1ab8d4]"
+                >
+                  servicios de organización de eventos
+                </Link>{" "}
+                y la{" "}
+                <Link
+                  href="/organizacion-de-eventos/eventos-corporativos"
+                  className="text-[#22d3f7] underline hover:text-[#1ab8d4]"
+                >
+                  organización de eventos corporativos
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="order-1 lg:order-2">
+              <Photo
+                src={images[1]}
+                alt="Render de un stand con panel rojo, logotipos hexagonales iluminados y una pantalla al centro"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Diseño */}
+      <section className="py-20 bg-surface-light">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-surface">
+            Diseño de stands según tu marca y tu espacio
+          </h2>
+          <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
+          <p className="text-ink-muted text-lg leading-relaxed mb-4">
+            El diseño de stands parte de tres datos: tu marca, el objetivo que
+            quieres lograr en el evento y el espacio que te asignó el
+            organizador. Con esa información desarrollamos stands
+            personalizados que se adaptan a las medidas y a la altura
+            permitida del recinto.
+          </p>
+          <p className="text-ink-muted text-lg leading-relaxed">
+            Compártenos tus referencias visuales y las medidas de tu espacio, y
+            preparamos una propuesta de diseño y montaje de stands a tu medida.
+          </p>
+        </div>
+      </section>
+
+      {/* Fabricación y montaje */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Photo
+                src={images[2]}
+                alt="Escenario montado dentro de una carpa, con panel gráfico rojo y blanco, podio y pantalla de presentación"
+              />
+            </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
+                FABRICACIÓN Y MONTAJE DE STANDS
+              </h2>
+              <Divider />
+              <p className="text-muted text-lg leading-relaxed mb-4">
+                Una vez aprobado el diseño, nos encargamos de la fabricación de
+                stands y de su montaje en el recinto. Coordinamos el montaje y
+                el desmontaje con los horarios que indique el organizador del
+                evento.
+              </p>
+              <p className="text-muted text-lg leading-relaxed">
+                ¿Tu stand necesita pantallas? Consulta la{" "}
+                <Link
+                  href="/organizacion-de-eventos/pantallas-para-escenarios"
+                  className="text-[#22d3f7] underline hover:text-[#1ab8d4]"
+                >
+                  renta de pantallas LED para eventos
+                </Link>
+                ; se cotiza como un servicio aparte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Renta */}
+      <section className="py-20 bg-surface-light">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-surface">
+            Renta de stands para expo
+          </h2>
+          <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
+          <p className="text-ink-muted text-lg leading-relaxed mb-4">
+            Además de diseñar, fabricar y montar tu stand, ofrecemos la renta de
+            stands para ferias, exposiciones y eventos corporativos. La renta no
+            tiene un costo fijo: elaboramos el presupuesto después de diseñar el
+            proyecto y el stand, según tu marca, el espacio asignado y las
+            necesidades de tu evento.
+          </p>
+          <p className="text-ink-muted text-lg leading-relaxed">
+            Si buscas renta de stands en CDMX o en el Estado de México, envíanos
+            los datos de tu evento y empezamos con el diseño.
+          </p>
+        </div>
+      </section>
+
+      {/* Ejemplos */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
+              EJEMPLOS DE TRABAJOS
+            </h2>
             <div className="w-24 h-1 bg-[#22d3f7] mx-auto"></div>
           </div>
-        </div>
-      </section>
-
-      {/* Bloque 1 - Fondo Negro - Diseño y Fabricación */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                DISEÑO Y FABRICACIÓN DE STANDS PROFESIONALES
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                En La Trinchera México somos expertos{" "}
-                <strong className="text-[#22d3f7]">
-                  fabricantes de stands
-                </strong>{" "}
-                que transforman espacios en experiencias memorables. Nuestro
-                servicio integral incluye{" "}
-                <strong className="text-[#22d3f7]">diseño de stands</strong>,{" "}
-                <strong className="text-[#22d3f7]">fabricacion de stand</strong>{" "}
-                personalizada y{" "}
-                <strong className="text-[#22d3f7]">montaje de stands</strong>{" "}
-                profesional. Desde el primer boceto hasta la instalación final,
-                creamos{" "}
-                <strong className="text-[#22d3f7]">stands creativos</strong> que
-                capturan la esencia de tu marca y atraen la atención de tu
-                público objetivo en ferias, expos y eventos corporativos.
-              </p>
-            </div>
-            <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={standsImages[0]}
-                  alt="Diseño de stands para eventos"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {ejemplos.map((e) => (
+              <figure key={e.indice}>
+                <div className="relative rounded-2xl overflow-hidden h-72">
+                  <Image
+                    src={images[e.indice]}
+                    alt={e.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3 text-muted text-center">{e.pie}</figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Bloque 2 - Fondo Blanco - Stands para Ferias y Expos */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={standsImages[1]}
-                  alt="Stands para ferias y exposiciones"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
-            </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                💼 STANDS PARA FERIAS Y EXPOSICIONES
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Ofrecemos{" "}
-                <strong className="text-[#22d3f7]">
-                  renta de stands para expo
-                </strong>{" "}
-                y venta de{" "}
-                <strong className="text-[#22d3f7]">stands para ferias</strong>{" "}
-                de todos los tamaños. Nuestros{" "}
-                <strong className="text-[#22d3f7]">stands para expos</strong>{" "}
-                están diseñados para maximizar la visibilidad de tu marca en{" "}
-                <strong className="text-[#22d3f7]">
-                  stand para ferias y exposiciones
-                </strong>
-                . Ya sea que necesites un{" "}
-                <strong className="text-[#22d3f7]">stand de feria</strong>{" "}
-                compacto o un imponente{" "}
-                <strong className="text-[#22d3f7]">stand de exposición</strong>,
-                contamos con soluciones adaptadas a tu presupuesto y
-                necesidades.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Bloque 3 - Fondo Negro - Stands Portátiles y Versátiles */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                🎯 STANDS PORTÁTILES Y VERSÁTILES
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Si buscas movilidad y practicidad, nuestros{" "}
-                <strong className="text-[#22d3f7]">
-                  stand portatiles para ferias
-                </strong>{" "}
-                y{" "}
-                <strong className="text-[#22d3f7]">
-                  stands portatiles para ferias
-                </strong>{" "}
-                son la solución ideal. Cada{" "}
-                <strong className="text-[#22d3f7]">
-                  stand publicitario portatil
-                </strong>{" "}
-                se instala en minutos y se transporta fácilmente. Disponemos de{" "}
-                <strong className="text-[#22d3f7]">stand de exhibición</strong>{" "}
-                en diferentes materiales y acabados, garantizando que tu{" "}
-                <strong className="text-[#22d3f7]">
-                  stand para exposiciones
-                </strong>{" "}
-                luzca profesional y moderno en cualquier ubicación.
-              </p>
-            </div>
-            <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={standsImages[2]}
-                  alt="Stands portátiles para ferias"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Bloque 4 - Fondo Blanco - Materiales y Personalización */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={standsImages[3]}
-                  alt="Diseño personalizado de stands"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
-            </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                MATERIALES Y DISEÑO PERSONALIZADO
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                Trabajamos con materiales de primera calidad para{" "}
-                <strong className="text-[#22d3f7]">diseñar un stand</strong> que
-                refleje tu identidad corporativa. Desde{" "}
-                <strong className="text-[#22d3f7]">
-                  stand de madera para ferias
-                </strong>{" "}
-                con acabados elegantes, hasta{" "}
-                <strong className="text-[#22d3f7]">
-                  stand de carton para exposicion
-                </strong>{" "}
-                con diseños ecológicos e innovadores, cada proyecto es único.
-              </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Nuestro equipo te asesora para{" "}
-                <strong className="text-[#22d3f7]">diseñar stand</strong> que se
-                adapte a tu presupuesto sin sacrificar calidad ni impacto
-                visual. Te ayudamos a elegir el mejor{" "}
-                <strong className="text-[#22d3f7]">stand exposicion</strong>{" "}
-                para destacar entre la competencia.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sección de Tipos de Stands */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-              TIPOS DE
-              <span className="block text-[#22d3f7] mt-2">
-                STANDS PARA EVENTOS
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Soluciones personalizadas para cada tipo de evento y presupuesto
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Tipo 1 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
-              <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span className="text-3xl">🏢</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                Stands Modulares
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                Estructuras versátiles y reutilizables, ideales para{" "}
-                <strong>stands para eventos</strong> recurrentes.
-              </p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>✓ Montaje rápido</li>
-                <li>✓ Personalizable</li>
-                <li>✓ Económico</li>
-              </ul>
-            </div>
-
-            {/* Tipo 2 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
-              <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span className="text-3xl">🎨</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                Stands Personalizados
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                Diseño único adaptado a tu marca. Perfecto para{" "}
-                <strong>stand de expo</strong> premium.
-              </p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>✓ Diseño exclusivo</li>
-                <li>✓ Máximo impacto</li>
-                <li>✓ Iluminación LED</li>
-              </ul>
-            </div>
-
-            {/* Tipo 3 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
-              <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span className="text-3xl">📦</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                Stands Portátiles
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                Ligeros y fáciles de transportar. Ideal como{" "}
-                <strong>stand publicitario portatil</strong>.
-              </p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>✓ Fácil transporte</li>
-                <li>✓ Instalación simple</li>
-                <li>✓ Bajo costo</li>
-              </ul>
-            </div>
-
-            {/* Tipo 4 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
-              <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span className="text-3xl">🌳</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                Stands Ecológicos
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                <strong>Stand de carton para exposicion</strong> y materiales
-                sustentables.
-              </p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>✓ Materiales reciclables</li>
-                <li>✓ Eco-friendly</li>
-                <li>✓ Innovador</li>
-              </ul>
-            </div>
-
-            {/* Tipo 5 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
-              <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span className="text-3xl">🪵</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                Stands de Madera
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                <strong>Stand de madera para ferias</strong> con acabados
-                elegantes y naturales.
-              </p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>✓ Aspecto premium</li>
-                <li>✓ Duradero</li>
-                <li>✓ Versátil</li>
-              </ul>
-            </div>
-
-            {/* Tipo 6 */}
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
-              <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
-                <span className="text-3xl">⚡</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                Stands Interactivos
-              </h3>
-              <p className="text-gray-600 text-center mb-4">
-                Con pantallas digitales y tecnología para{" "}
-                <strong>stands para eventos</strong> modernos.
-              </p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>✓ Pantallas LED</li>
-                <li>✓ Tecnología táctil</li>
-                <li>✓ Experiencias digitales</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sección de Servicios */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              NUESTROS SERVICIOS DE
-              <span className="block text-[#22d3f7] mt-2">
-                STANDS PARA EVENTOS
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
-              <h3 className="text-xl font-bold text-[#22d3f7] mb-3 text-center">
-                Diseño Personalizado
-              </h3>
-              <p className="text-gray-300 text-center text-sm">
-                Creamos <strong>diseño de stands</strong> únicos adaptados a tu
-                marca
-              </p>
-            </div>
-
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
-              <h3 className="text-xl font-bold text-[#22d3f7] mb-3 text-center">
-                Fabricación
-              </h3>
-              <p className="text-gray-300 text-center text-sm">
-                <strong>Fabricantes de stands</strong> con materiales de calidad
-                premium
-              </p>
-            </div>
-
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
-              <h3 className="text-xl font-bold text-[#22d3f7] mb-3 text-center">
-                Montaje Profesional
-              </h3>
-              <p className="text-gray-300 text-center text-sm">
-                <strong>Montaje de stands</strong> rápido y seguro en el lugar
-              </p>
-            </div>
-
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
-              <h3 className="text-xl font-bold text-[#22d3f7] mb-3 text-center">
-                Renta de Stands
-              </h3>
-              <p className="text-gray-300 text-center text-sm">
-                <strong>Renta de stands para expo</strong> con opciones
-                flexibles
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Final */}
-      <section className="py-20 bg-white">
+      {/* Cotización */}
+      <section className="py-20 bg-surface-light">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-            ¿LISTO PARA DESTACAR EN TU PRÓXIMA FERIA O EXPO?
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-surface">
+            Qué enviar para cotizar tu stand
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Diseñamos y fabricamos el <strong>stand para feria</strong> perfecto
-            para tu marca
+          <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
+          <p className="text-ink-muted text-lg leading-relaxed mb-6">
+            Para preparar tu cotización necesitamos:
           </p>
-          <a
-            href="/contact"
-            className="inline-block bg-[#22d3f7] text-black font-bold px-10 py-4 rounded-full text-lg hover:bg-[#1ab8d4] transition-colors duration-300 shadow-lg hover:shadow-xl"
-          >
-            SOLICITA UNA COTIZACIÓN
-          </a>
+          <ul className="text-ink-muted text-lg leading-relaxed mb-8 space-y-2 inline-block text-left">
+            {datosCotizacion.map((d) => (
+              <li key={d} className="flex items-center">
+                <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3 shrink-0"></span>
+                {d}
+              </li>
+            ))}
+          </ul>
+          <div>
+            <CtaButton />
+          </div>
         </div>
       </section>
 
-      {/* Sección de Inspiración */}
+      {/* Preguntas frecuentes */}
+      <section className="py-20 bg-black">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-10 tracking-wide text-center text-white">
+            Preguntas frecuentes sobre stands para eventos
+          </h2>
+          <div className="space-y-4">
+            {faqs.map((f) => (
+              <details key={f.q} className="bg-surface rounded-xl border border-white/10 p-5">
+                <summary className="cursor-pointer font-semibold text-white">{f.q}</summary>
+                <p className="mt-3 text-muted leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <InspirationSection />
     </div>
   );
 }
-
-export default StandsParaEventosPage;

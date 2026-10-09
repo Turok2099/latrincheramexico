@@ -14,7 +14,7 @@ const Galeria = dynamic(() => import("@/components/Home/Galeria"), {
 });
 
 const StatsSection = dynamic(() => import("@/components/Home/StatsSection"), {
-  loading: () => <div className="h-64 bg-gray-900 animate-pulse"></div>,
+  loading: () => <div className="h-64 bg-surface animate-pulse"></div>,
 });
 
 const InspirationSection = dynamic(
@@ -24,7 +24,7 @@ const InspirationSection = dynamic(
 const ServiciosDestacados = dynamic(
   () => import("@/components/Home/ServiciosDestacados"),
   {
-    loading: () => <div className="h-96 bg-gray-800 animate-pulse"></div>,
+    loading: () => <div className="h-96 bg-surface animate-pulse"></div>,
   }
 );
 
@@ -34,37 +34,9 @@ const ContactForm = dynamic(() => import("@/components/Home/ContactForm"));
 
 export const metadata: Metadata = {
   title:
-    "La Trinchera México | Organización de Eventos en CDMX | Bodas, Corporativos y Más",
+    "La Trinchera México | Organización de Eventos en CDMX",
   description:
-    "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
-  keywords: [
-    "eventos sociales",
-    "organizacion de eventos",
-    "evento social",
-    "organización de eventos",
-    "salón de eventos sociales",
-    "empresas organizadoras de eventos",
-    "organizar eventos",
-    "organizacion eventos",
-    "organizacion de eventos empresariales",
-    "organizador eventos",
-    "organizacion de bodas",
-    "organizador de eventos sociales",
-    "planificación de eventos",
-    "organizacion de fiestas",
-    "fiesta organizacion",
-    "organizacion fiesta infantil",
-    "organizacion fiestas",
-    "organizacion de eventos en CDMX",
-    "eventos corporativos Ciudad de México",
-    "mobiliario para eventos",
-    "musica para eventos",
-    "eventos empresariales CDMX",
-    "La Trinchera México",
-    "agencia de eventos",
-    "coordinacion de eventos",
-    "eventos sociales México",
-  ],
+    "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música para eventos. Más de 10 años de experiencia.",
   authors: [{ name: "La Trinchera México" }],
   creator: "La Trinchera México",
   publisher: "La Trinchera México",
@@ -83,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "La Trinchera México | Organización de Eventos en CDMX",
     description:
-      "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
+      "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música para eventos. Más de 10 años de experiencia.",
     url: "https://latrincheramexico.com",
     siteName: "La Trinchera México",
     images: [
@@ -101,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "La Trinchera México | Organización de Eventos en CDMX",
     description:
-      "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
+      "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música para eventos. Más de 10 años de experiencia.",
     images: [
       "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     ],
@@ -116,9 +88,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "google-site-verification-code-here", // Agregar cuando tengas el código
   },
 };
 
@@ -139,31 +108,17 @@ export default async function Home({ searchParams }: HomeProps) {
     "@type": "Organization",
     name: "La Trinchera México",
     description:
-      "Somos la mejor empresa de organización de eventos en CDMX. Especialistas en catering, eventos empresariales e infraestructura para eventos.",
+      "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música para eventos. Más de 10 años de experiencia.",
     url: "https://latrincheramexico.com",
     logo: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_400,h_400,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     image:
       "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     telephone: "+52-55-4521-0178",
     email: "contacto@latrincheramexico.com",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Ciudad de México",
-      addressCountry: "MX",
-    },
-    sameAs: [
-      "https://www.facebook.com/latrincheramexico",
-      "https://www.instagram.com/latrincheramexico",
+    areaServed: [
+      { "@type": "City", name: "Ciudad de México" },
+      { "@type": "State", name: "Estado de México" },
     ],
-    serviceArea: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 19.4326,
-        longitude: -99.1332,
-      },
-      geoRadius: "50000",
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Servicios de Organización de Eventos",
@@ -172,18 +127,18 @@ export default async function Home({ searchParams }: HomeProps) {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Organización de Bodas",
+            name: "Eventos Corporativos",
             description:
-              "Servicio completo de organización de bodas desde la planificación hasta la ejecución",
+              "Organización y producción de eventos corporativos y empresariales en CDMX",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Eventos Corporativos",
+            name: "Organización de Bodas",
             description:
-              "Organización de eventos empresariales, conferencias y team buildings",
+              "Planificación y organización de bodas",
           },
         },
         {
@@ -192,25 +147,34 @@ export default async function Home({ searchParams }: HomeProps) {
             "@type": "Service",
             name: "Catering para Eventos",
             description:
-              "Servicio de catering completo con menús personalizados",
+              "Servicio de catering para eventos",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Mobiliario para Eventos",
+            name: "Stands para Eventos",
             description:
-              "Renta de mobiliario elegante y decoración para eventos",
+              "Diseño, fabricación y montaje de stands",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Fotografía y Video",
+            name: "Pantallas para Escenarios",
             description:
-              "Servicio profesional de fotografía y video para eventos",
+              "Pantallas LED para escenarios y eventos",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Música para Eventos",
+            description:
+              "DJ y grupos musicales para eventos",
           },
         },
       ],

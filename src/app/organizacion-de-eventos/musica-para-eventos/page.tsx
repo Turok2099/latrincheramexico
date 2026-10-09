@@ -63,7 +63,7 @@ function MusicaParaEventosPage() {
               MÚSICA PARA
               <span className="block text-[#22d3f7] mt-2">EVENTOS</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted mb-8 leading-relaxed">
               DJ para fiestas, grupos musicales y mariachis para crear la
               atmósfera perfecta
             </p>
@@ -92,7 +92,7 @@ function MusicaParaEventosPage() {
                 🎧 TU DJ PARA FIESTAS IDEAL
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <p className="text-muted text-lg leading-relaxed">
                 En La Trinchera México contamos con el{" "}
                 <strong className="text-[#22d3f7]">DJ para fiestas</strong>{" "}
                 ideal para animar cualquier celebración, desde un íntimo{" "}
@@ -101,7 +101,7 @@ function MusicaParaEventosPage() {
                 </strong>{" "}
                 hasta un espectacular{" "}
                 <strong className="text-[#22d3f7]">DJ para eventos</strong>{" "}
-                corporativos o sociales. Nuestros{" "}
+                corporativos. Nuestros{" "}
                 <strong className="text-[#22d3f7]">DJs para bodas</strong> crean
                 la atmósfera perfecta con mezclas personalizadas y un{" "}
                 <strong className="text-[#22d3f7]">
@@ -125,7 +125,7 @@ function MusicaParaEventosPage() {
                 🎵 MÚSICA PARA EVENTOS QUE INSPIRA
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-ink-muted text-lg leading-relaxed">
                 En La Trinchera México ofrecemos{" "}
                 <strong className="text-[#22d3f7]">música para eventos</strong>{" "}
                 que se adapta a cualquier ocasión, desde celebraciones íntimas
@@ -168,7 +168,7 @@ function MusicaParaEventosPage() {
                 💍 MÚSICA ESPECIAL PARA BODAS
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <p className="text-muted text-lg leading-relaxed">
                 Sabemos que la música es el corazón de una celebración, por eso
                 ponemos a tu disposición{" "}
                 <strong className="text-[#22d3f7]">músicos para bodas</strong> y{" "}
@@ -220,7 +220,7 @@ function MusicaParaEventosPage() {
                 🎺 ALEGRÍA CON MARIACHIS Y FIESTAS TEMÁTICAS
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">
+              <p className="text-ink-muted text-lg leading-relaxed mb-6">
                 Si buscas un toque auténtico y festivo, ofrecemos{" "}
                 <strong className="text-[#22d3f7]">
                   contratacion de mariachis
@@ -239,7 +239,7 @@ function MusicaParaEventosPage() {
                 </strong>
                 , nuestros músicos llevan alegría y emoción a cada presentación.
               </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-ink-muted text-lg leading-relaxed">
                 También contamos con opciones para{" "}
                 <strong className="text-[#22d3f7]">música para bautizo</strong>,{" "}
                 <strong className="text-[#22d3f7]">
@@ -258,17 +258,17 @@ function MusicaParaEventosPage() {
       </section>
 
       {/* Sección de Servicios Musicales */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface-light">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-surface">
               SERVICIOS DE
               <span className="block text-[#22d3f7] mt-2">
                 MÚSICA Y ENTRETENIMIENTO
               </span>
             </h2>
             <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-ink-muted max-w-3xl mx-auto">
               Entretenimiento musical profesional para todo tipo de eventos
             </p>
           </div>
@@ -279,14 +279,14 @@ function MusicaParaEventosPage() {
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🎧</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 DJ Profesional
               </h3>
-              <p className="text-gray-600 text-center mb-4">
+              <p className="text-ink-muted text-center mb-4">
                 <strong>DJ para fiestas</strong> y eventos con equipos de alta
                 calidad
               </p>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-ink-muted space-y-2">
                 <li>✓ Mezclas personalizadas</li>
                 <li>✓ Sistema de sonido profesional</li>
                 <li>✓ Iluminación LED</li>
@@ -299,13 +299,13 @@ function MusicaParaEventosPage() {
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🎸</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Grupos Musicales
               </h3>
-              <p className="text-gray-600 text-center mb-4">
+              <p className="text-ink-muted text-center mb-4">
                 <strong>Grupos musicales para eventos</strong> y fiestas en vivo
               </p>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-ink-muted space-y-2">
                 <li>✓ Bandas versátiles</li>
                 <li>✓ Repertorio variado</li>
                 <li>✓ Músicos profesionales</li>
@@ -318,13 +318,13 @@ function MusicaParaEventosPage() {
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🎺</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Mariachis
               </h3>
-              <p className="text-gray-600 text-center mb-4">
+              <p className="text-ink-muted text-center mb-4">
                 <strong>Mariachis para serenata</strong>, bodas y cumpleaños
               </p>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-ink-muted space-y-2">
                 <li>✓ Mariachis profesionales</li>
                 <li>✓ Repertorio tradicional</li>
                 <li>✓ Canciones personalizadas</li>
@@ -337,14 +337,14 @@ function MusicaParaEventosPage() {
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">💍</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Música para Bodas
               </h3>
-              <p className="text-gray-600 text-center mb-4">
+              <p className="text-ink-muted text-center mb-4">
                 <strong>Músicos para bodas</strong> que crean momentos
                 inolvidables
               </p>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-ink-muted space-y-2">
                 <li>✓ Ceremonia religiosa/civil</li>
                 <li>✓ Cóctel y recepción</li>
                 <li>✓ Primera bailada</li>
@@ -357,13 +357,13 @@ function MusicaParaEventosPage() {
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🎈</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Música Infantil
               </h3>
-              <p className="text-gray-600 text-center mb-4">
+              <p className="text-ink-muted text-center mb-4">
                 <strong>Música para fiestas infantiles</strong> y cumpleaños
               </p>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-ink-muted space-y-2">
                 <li>✓ Canciones para niños</li>
                 <li>✓ Animación interactiva</li>
                 <li>✓ Karaoke infantil</li>
@@ -376,14 +376,14 @@ function MusicaParaEventosPage() {
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🏢</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Eventos Corporativos
               </h3>
-              <p className="text-gray-600 text-center mb-4">
+              <p className="text-ink-muted text-center mb-4">
                 <strong>DJ para eventos</strong> corporativos y fiestas de
                 empresa
               </p>
-              <ul className="text-sm text-gray-600 space-y-2">
+              <ul className="text-sm text-ink-muted space-y-2">
                 <li>✓ Música ambiental</li>
                 <li>✓ DJ para networking</li>
                 <li>✓ Sonido profesional</li>
@@ -406,74 +406,74 @@ function MusicaParaEventosPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Bodas
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>Música para una boda</strong> perfecta
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Cumpleaños
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>Musicas para cumpleaños</strong> inolvidables
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Bautizos
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>Música para bautizo</strong> especial
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 XV Años
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 DJ y <strong>grupos musicales para fiestas</strong>
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Aniversarios
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>Musica para fiestas</strong> especiales
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Fiestas Infantiles
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>Música para fiesta infantil</strong> divertida
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Eventos Corporativos
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>DJ para eventos</strong> empresariales
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
+            <div className="bg-surface p-6 rounded-xl border border-[#22d3f7]/30 hover:border-[#22d3f7] transition-colors duration-300">
               <h3 className="text-lg font-bold text-[#22d3f7] mb-2 text-center">
                 Fiestas en Casa
               </h3>
-              <p className="text-gray-300 text-center text-sm">
+              <p className="text-muted text-center text-sm">
                 <strong>DJ para fiestas en casa</strong> íntimas
               </p>
             </div>
@@ -484,10 +484,10 @@ function MusicaParaEventosPage() {
       {/* CTA Final */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-surface">
             ¿LISTO PARA LLENAR TU EVENTO DE MÚSICA Y ALEGRÍA?
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-ink-muted mb-8">
             Contrata nuestro <strong>DJ para fiestas</strong>,{" "}
             <strong>grupos musicales</strong> o{" "}
             <strong>mariachis para serenata</strong>

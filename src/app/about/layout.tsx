@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sobre Nosotros | La Trinchera México - Expertos en Organización de Eventos",
+  title: "Sobre Nosotros | La Trinchera México",
   description:
-    "Conoce a La Trinchera México, empresa líder en organización de eventos en CDMX con más de 10 años de experiencia. Equipo profesional especializado en bodas, eventos corporativos y celebraciones sociales.",
+    "Conoce a La Trinchera México, empresa de organización de eventos en CDMX con más de 10 años de experiencia. Equipo profesional especializado en bodas, eventos corporativos y otros servicios para eventos.",
   keywords: [
     "sobre nosotros",
     "La Trinchera México",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sobre Nosotros - La Trinchera México",
     description:
-      "Empresa líder en organización de eventos con más de 10 años de experiencia. Conoce nuestro equipo y nuestra pasión por crear eventos inolvidables.",
+      "Empresa de organización de eventos con más de 10 años de experiencia. Conoce nuestro equipo y nuestra pasión por crear eventos inolvidables.",
     type: "website",
     locale: "es_MX",
     url: "https://latrincheramexico.com/about",

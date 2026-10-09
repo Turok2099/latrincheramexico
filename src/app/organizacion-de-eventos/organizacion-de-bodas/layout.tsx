@@ -1,46 +1,42 @@
 import type { Metadata } from "next";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
+
+const ogImage = optimizeCloudinaryUrl(cloudinaryImages["organizacion-de-bodas"][0], {
+  width: 1200,
+  height: 630,
+});
 
 export const metadata: Metadata = {
-  title:
-    "Organización de Bodas | Wedding Planner Profesional - La Trinchera México",
+  title: "Organización de Bodas y Wedding Planner CDMX | La Trinchera",
   description:
-    "Wedding planner profesional en CDMX. Organizamos bodas inolvidables, bodas en la playa, bodas de aniversario. Servicio completo: invitaciones de boda, decoraciones para bodas, banquetes, vestida de novia y más.",
-  keywords: [
-    "bodas",
-    "organización de bodas",
-    "wedding planner",
-    "wedding planner México",
-    "organizador de bodas",
-    "invitación de boda",
-    "invitación de boda digital",
-    "decoraciones para bodas",
-    "decoraciones de boda",
-    "bodas en la playa",
-    "boda en la playa",
-    "vestida de novia",
-    "recuerditos de boda",
-    "aniversario de boda",
-    "bodas de aniversario",
-    "banquetes para fiestas",
-    "banquetes para bodas",
-    "planificación de bodas",
-    "coordinación de bodas",
-    "La Trinchera México",
-    "bodas CDMX",
-    "bodas Ciudad de México",
-  ],
+    "Organización de bodas en CDMX: planeación, coordinación e infraestructura para bodas privadas, pequeñas o grandes. Cotiza con tu wedding planner. Más de 10 años de experiencia.",
+  alternates: {
+    canonical: "/organizacion-de-eventos/organizacion-de-bodas",
+  },
   openGraph: {
-    title: "Organización de Bodas | Wedding Planner - La Trinchera México",
+    title: "Organización de Bodas y Wedding Planner CDMX | La Trinchera México",
     description:
-      "Hacemos realidad el día más importante de tu vida. Wedding planner profesional especializado en bodas, bodas en la playa y celebraciones únicas.",
+      "Planeación, coordinación e infraestructura para bodas privadas, pequeñas o grandes, en Ciudad de México.",
+    url: "https://latrincheramexico.com/organizacion-de-eventos/organizacion-de-bodas",
+    siteName: "La Trinchera México",
     type: "website",
     locale: "es_MX",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Organización de bodas en CDMX - La Trinchera México",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Organización de Bodas - La Trinchera México",
+    title: "Organización de Bodas y Wedding Planner CDMX | La Trinchera México",
     description:
-      "Wedding planner profesional para bodas inolvidables en CDMX y bodas en la playa.",
+      "Planeación, coordinación e infraestructura para tu boda en Ciudad de México.",
+    images: [ogImage],
   },
   robots: {
     index: true,

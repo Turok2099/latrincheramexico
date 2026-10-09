@@ -21,13 +21,6 @@ export const services = [
     ctaLabel: "Ver más",
   },
   {
-    title: "Graduaciones",
-    description:
-      "Transformamos tu graduación en una experiencia memorable: banquete, música, fotografía y viajes organizados con estilo.",
-    imageUrl: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto/v1759531992/trinchera/main-images/1.png",
-    ctaLabel: "Ver más",
-  },
-  {
     title: "Organización de bodas",
     description:
       "Planeamos tu boda de principio a fin: ambientación, música, banquete, video y atención personalizada que marca diferencia.",

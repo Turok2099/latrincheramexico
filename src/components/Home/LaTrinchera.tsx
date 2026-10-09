@@ -102,7 +102,7 @@ export default function LaTrinchera() {
           <p className="text-sm md:text-lg text-[#22d3f7] font-medium">
             José Clemente Orozco
           </p>
-          <p className="text-xs md:text-sm text-gray-300 mt-1">
+          <p className="text-xs md:text-sm text-muted mt-1">
             1926 • Antiguo Colegio de San Ildefonso
           </p>
         </div>

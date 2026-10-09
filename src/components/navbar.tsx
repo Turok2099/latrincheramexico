@@ -67,12 +67,9 @@ export default function Navbar() {
     // Mapeo de búsquedas a rutas
     const searchMap: { [key: string]: string } = {
       catering: "/organizacion-de-eventos/servicio-de-catering-para-eventos",
-      "eventos empresariales": "/organizacion-de-eventos/eventos-empresariales",
-      empresariales: "/organizacion-de-eventos/eventos-empresariales",
-      "eventos sociales": "/organizacion-de-eventos/eventos-sociales",
-      sociales: "/organizacion-de-eventos/eventos-sociales",
+      "eventos corporativos": "/organizacion-de-eventos/eventos-corporativos",
+      corporativos: "/organizacion-de-eventos/eventos-corporativos",
       bodas: "/organizacion-de-eventos/organizacion-de-bodas",
-      graduaciones: "/organizacion-de-eventos/graduaciones",
       musica: "/organizacion-de-eventos/musica-para-eventos",
       música: "/organizacion-de-eventos/musica-para-eventos",
       pantallas: "/organizacion-de-eventos/pantallas-para-escenarios",
@@ -108,16 +105,12 @@ export default function Navbar() {
       hasSubmenu: true,
       submenu: [
         {
-          href: "/organizacion-de-eventos/eventos-sociales",
-          label: "Eventos Sociales",
-        },
-        {
           href: "/organizacion-de-eventos/servicio-de-catering-para-eventos",
           label: "Servicio de Catering",
         },
         {
-          href: "/organizacion-de-eventos/eventos-empresariales",
-          label: "Eventos Empresariales",
+          href: "/organizacion-de-eventos/eventos-corporativos",
+          label: "Eventos Corporativos",
         },
         {
           href: "/organizacion-de-eventos/organizacion-de-bodas",
@@ -135,13 +128,8 @@ export default function Navbar() {
           href: "/organizacion-de-eventos/musica-para-eventos",
           label: "Música para Eventos",
         },
-        {
-          href: "/organizacion-de-eventos/graduaciones",
-          label: "Graduaciones",
-        },
       ],
     },
-    { href: "/darkkitchen", label: "Dark Kitchen" },
     { href: "/about", label: "Nosotros" },
     { href: "/contact", label: "Contacto" },
   ];

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { enviarContacto } from "@/lib/enviarContacto";
 
 // Declarar tipo para dataLayer de GTM
 declare global {
@@ -18,7 +19,9 @@ export default function ContactForm() {
     fechaEvento: "",
     numeroInvitados: "",
     mensaje: "",
+    sitioWeb: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -38,11 +41,16 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    // Simular envío del formulario
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const resultado = await enviarContacto(formData, "/");
+    setIsSubmitting(false);
+    if (!resultado.ok) {
+      setError(resultado.error);
+      return;
+    }
 
-    // 📊 Track evento de envío de formulario en GTM/GA4
+    // 📊 Consulta entregada (guardada en el servidor). Sin nombre, correo, teléfono ni mensaje.
     if (typeof window !== "undefined" && window.dataLayer) {
       window.dataLayer.push({
         event: "form_submission",
@@ -55,27 +63,22 @@ export default function ContactForm() {
       });
     }
 
-    setIsSubmitting(false);
     setIsSubmitted(true);
-
-    // Resetear formulario después de 3 segundos
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        nombre: "",
-        email: "",
-        telefono: "",
-        tipoEvento: "",
-        fechaEvento: "",
-        numeroInvitados: "",
-        mensaje: "",
-      });
-    }, 3000);
+    setFormData({
+      nombre: "",
+      email: "",
+      telefono: "",
+      tipoEvento: "",
+      fechaEvento: "",
+      numeroInvitados: "",
+      mensaje: "",
+      sitioWeb: "",
+    });
   };
 
   if (isSubmitted) {
     return (
-      <section className="w-full py-20 bg-gradient-to-b from-gray-900 to-black">
+      <section className="w-full py-20 bg-gradient-to-b from-surface to-black">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-12 border border-[#22d3f7]/20">
             <div className="w-20 h-20 bg-[#22d3f7] rounded-full flex items-center justify-center mx-auto mb-6">
@@ -96,7 +99,7 @@ export default function ContactForm() {
             <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">
               ¡Mensaje Enviado!
             </h3>
-            <p className="text-gray-400 text-lg">
+            <p className="text-muted text-lg">
               Gracias por contactarnos. Nos pondremos en contacto contigo en las
               próximas 24 horas.
             </p>
@@ -115,7 +118,7 @@ export default function ContactForm() {
             Cuéntanos tu Proyecto
           </h2>
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted text-lg max-w-2xl mx-auto">
             Completa el formulario y nos pondremos en contacto contigo para
             crear el evento de tus sueños
           </p>
@@ -124,6 +127,11 @@ export default function ContactForm() {
         {/* Formulario */}
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Campo trampa anti-bots: invisible para personas */}
+            <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+              <label htmlFor="sitioWeb">No llenar este campo</label>
+              <input type="text" id="sitioWeb" name="sitioWeb" value={formData.sitioWeb} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+            </div>
             {/* Primera fila */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -140,7 +148,7 @@ export default function ContactForm() {
                   value={formData.nombre}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                   placeholder="Tu nombre completo"
                 />
               </div>
@@ -158,7 +166,7 @@ export default function ContactForm() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                   placeholder="tu@email.com"
                 />
               </div>
@@ -180,7 +188,7 @@ export default function ContactForm() {
                   value={formData.telefono}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                   placeholder="+52 55 1234 5678"
                 />
               </div>
@@ -198,7 +206,7 @@ export default function ContactForm() {
                     value={formData.tipoEvento}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 pr-10 bg-gray-800 border-none rounded-lg text-white focus:outline-none transition-all duration-300"
+                    className="w-full px-4 py-3 pr-10 bg-surface border-none rounded-lg text-white focus:outline-none transition-all duration-300"
                     style={{
                       border: "none",
                       outline: "none",
@@ -208,46 +216,40 @@ export default function ContactForm() {
                       appearance: "none",
                     }}
                   >
-                    <option value="" className="bg-gray-800 text-white">
+                    <option value="" className="bg-surface text-white">
                       Selecciona el tipo de evento
                     </option>
-                    <option value="catering" className="bg-gray-800 text-white">
+                    <option value="catering" className="bg-surface text-white">
                       Servicio de Catering para Eventos
                     </option>
                     <option
                       value="empresariales"
-                      className="bg-gray-800 text-white"
+                      className="bg-surface text-white"
                     >
                       Eventos Empresariales
                     </option>
-                    <option value="bodas" className="bg-gray-800 text-white">
+                    <option value="bodas" className="bg-surface text-white">
                       Organización de Bodas
                     </option>
                     <option
-                      value="graduaciones"
-                      className="bg-gray-800 text-white"
-                    >
-                      Graduaciones
-                    </option>
-                    <option
                       value="mobiliario"
-                      className="bg-gray-800 text-white"
+                      className="bg-surface text-white"
                     >
                       Mobiliario para Eventos
                     </option>
                     <option
                       value="fotografia"
-                      className="bg-gray-800 text-white"
+                      className="bg-surface text-white"
                     >
                       Fotografía y Video Profesional
                     </option>
                     <option
                       value="pantallas"
-                      className="bg-gray-800 text-white"
+                      className="bg-surface text-white"
                     >
                       Pantallas LED
                     </option>
-                    <option value="otro" className="bg-gray-800 text-white">
+                    <option value="otro" className="bg-surface text-white">
                       Otro
                     </option>
                   </select>
@@ -304,7 +306,7 @@ export default function ContactForm() {
                   onChange={handleChange}
                   required
                   min="1"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                   placeholder="Ej: 150"
                 />
               </div>
@@ -325,13 +327,18 @@ export default function ContactForm() {
                 onChange={handleChange}
                 required
                 rows={4}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300 resize-none"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300 resize-none"
                 placeholder="Describe tu visión, ubicación, presupuesto aproximado y cualquier detalle especial que tengas en mente..."
               />
             </div>
 
             {/* Botón de envío */}
             <div className="text-center pt-6">
+              {error && (
+                <p role="alert" className="text-center text-red-400 pb-4">
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
                 disabled={isSubmitting}

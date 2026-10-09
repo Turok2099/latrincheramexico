@@ -1,41 +1,42 @@
 import type { Metadata } from "next";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
+
+const ogImage = optimizeCloudinaryUrl(cloudinaryImages["eventos-empresariales"][0], {
+  width: 1200,
+  height: 630,
+});
 
 export const metadata: Metadata = {
-  title:
-    "Eventos Empresariales | Agencia de Eventos Corporativos CDMX - La Trinchera México",
+  title: "Eventos Corporativos en CDMX | Productora de Eventos - La Trinchera",
   description:
-    "Agencia de eventos empresariales y corporativos en CDMX. Productora de eventos profesionales, empresas organizadoras de eventos, catering empresarial. Más de 10 años de experiencia.",
-  keywords: [
-    "eventos empresariales",
-    "eventos corporativos",
-    "agencia de eventos",
-    "productora de eventos",
-    "empresas organizadoras de eventos",
-    "catering empresarial",
-    "eventos empresariales en cdmx",
-    "eventos corporativos en cdmx",
-    "organización de eventos empresariales",
-    "eventos corporativos cdmx",
-    "productora de eventos cdmx",
-    "agencia de eventos corporativos",
-    "empresas de eventos",
-    "La Trinchera México",
-    "eventos empresariales méxico",
-    "organización de eventos corporativos",
-  ],
+    "Organización y producción de eventos corporativos y empresariales en CDMX. Planeación, infraestructura y operación para tu empresa. Más de 10 años de experiencia.",
+  alternates: {
+    canonical: "/organizacion-de-eventos/eventos-corporativos",
+  },
   openGraph: {
-    title:
-      "Eventos Empresariales | Agencia de Eventos Corporativos - La Trinchera México",
+    title: "Eventos Corporativos en CDMX | La Trinchera México",
     description:
-      "Somos tu agencia de eventos empresariales especializada en CDMX. Productora de eventos corporativos con experiencia en organización y catering empresarial.",
+      "Productora y organizadores de eventos corporativos y empresariales en Ciudad de México: planeación, infraestructura y operación.",
+    url: "https://latrincheramexico.com/organizacion-de-eventos/eventos-corporativos",
+    siteName: "La Trinchera México",
     type: "website",
     locale: "es_MX",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Eventos corporativos en CDMX - La Trinchera México",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eventos Empresariales | Agencia de Eventos Corporativos CDMX",
+    title: "Eventos Corporativos en CDMX | La Trinchera México",
     description:
-      "Productora de eventos empresariales y corporativos. Empresas organizadoras de eventos profesionales en Ciudad de México.",
+      "Organización y producción de eventos corporativos y empresariales en Ciudad de México.",
+    images: [ogImage],
   },
   robots: {
     index: true,
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EventosEmpresarialesLayout({
+export default function EventosCorporativosLayout({
   children,
 }: {
   children: React.ReactNode;

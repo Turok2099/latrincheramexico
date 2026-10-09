@@ -1,41 +1,42 @@
 import type { Metadata } from "next";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
+
+const ogImage = optimizeCloudinaryUrl(
+  cloudinaryImages["pantallas-para-escenarios"][0],
+  { width: 1200, height: 630 }
+);
 
 export const metadata: Metadata = {
-  title:
-    "Pantallas para Eventos | Pantallas LED Gigantes para Escenarios - La Trinchera México",
+  title: "Renta de Pantallas LED para Eventos | La Trinchera México",
   description:
-    "Pantallas gigantes y pantallas LED para eventos. Renta de pantallas LED gigantes para escenarios, pantallas de LED gigantes para eventos corporativos, bodas y conciertos. Tecnología audiovisual profesional.",
-  keywords: [
-    "pantallas gigantes",
-    "pantallas para eventos",
-    "pantallas led gigantes",
-    "pantallas led para eventos",
-    "pantallas gigantes para eventos",
-    "pantalla led para escenario",
-    "pantallas de led gigantes",
-    "pantallas para escenarios",
-    "renta de pantallas led",
-    "pantallas audiovisuales",
-    "pantallas para bodas",
-    "pantallas para conciertos",
-    "tecnología audiovisual",
-    "La Trinchera México",
-    "pantallas CDMX",
-    "eventos con pantallas",
-  ],
+    "Renta y montaje de pantallas LED para eventos: pantallas de 3 × 3 metros o mayores instaladas en la ubicación de tu evento. Cotiza en CDMX y Edomex con La Trinchera México.",
+  alternates: {
+    canonical: "/organizacion-de-eventos/pantallas-para-escenarios",
+  },
   openGraph: {
-    title:
-      "Pantallas para Eventos | Pantallas LED Gigantes - La Trinchera México",
+    title: "Renta de Pantallas LED para Eventos | La Trinchera México",
     description:
-      "Pantallas gigantes y pantallas LED para eventos. Tecnología audiovisual de vanguardia para bodas, eventos corporativos y conciertos.",
+      "Pantallas LED de 3 × 3 metros o mayores con montaje en la ubicación de tu evento. Solicita tu cotización.",
+    url: "https://latrincheramexico.com/organizacion-de-eventos/pantallas-para-escenarios",
+    siteName: "La Trinchera México",
     type: "website",
     locale: "es_MX",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Pantallas LED montadas en un escenario - La Trinchera México",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pantallas para Eventos - La Trinchera México",
+    title: "Renta de Pantallas LED para Eventos | La Trinchera México",
     description:
-      "Pantallas LED gigantes y pantallas para escenarios. Tecnología audiovisual profesional para eventos.",
+      "Renta y montaje de pantallas LED de 3 × 3 metros o mayores para eventos.",
+    images: [ogImage],
   },
   robots: {
     index: true,

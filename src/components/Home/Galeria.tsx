@@ -12,7 +12,6 @@ export default function Galeria() {
 
   // Servicios disponibles con sus categorías de Cloudinary
   const servicios = [
-    { nombre: "Eventos Sociales", categoria: "eventos-sociales" },
     { nombre: "Catering para Eventos", categoria: "catering-para-eventos" },
     { nombre: "Eventos Empresariales", categoria: "eventos-empresariales" },
     { nombre: "Organización de Bodas", categoria: "organizacion-de-bodas" },
@@ -22,7 +21,6 @@ export default function Galeria() {
     },
     { nombre: "Stands para Eventos", categoria: "stands-para-eventos" },
     { nombre: "Música para Eventos", categoria: "musica-para-eventos" },
-    { nombre: "Graduaciones", categoria: "graduaciones" },
   ];
 
   // Función para obtener una imagen aleatoria de una categoría específica
@@ -63,11 +61,11 @@ export default function Galeria() {
     <section className="w-full py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
+          <h2 className="text-4xl md:text-5xl font-bold text-surface mb-6 tracking-wide">
             Galería
           </h2>
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-ink-muted text-lg max-w-2xl mx-auto">
             Una muestra de nuestros trabajos más destacados
           </p>
         </div>

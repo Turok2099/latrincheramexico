@@ -54,7 +54,7 @@ export default function AboutPage() {
               <br />
               al servicio de personas
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300">
+            <p className="text-xl md:text-2xl text-muted">
               Más de 10 años transformando sueños en eventos inolvidables
             </p>
           </div>
@@ -77,11 +77,11 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-surface">
                 Nuestra Historia
               </h2>
               <div className="w-24 h-1 bg-[#22d3f7] mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">
+              <p className="text-ink-muted text-lg leading-relaxed mb-6">
                 La Trinchera México nació de una{" "}
                 <strong className="text-[#22d3f7]">pasión compartida</strong>{" "}
                 por crear momentos inolvidables. Con más de{" "}
@@ -91,7 +91,7 @@ export default function AboutPage() {
                 en la organización de eventos, hemos tenido el privilegio de ser
                 parte de miles de historias únicas.
               </p>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">
+              <p className="text-ink-muted text-lg leading-relaxed mb-6">
                 Desde una boda íntima hasta un evento corporativo de gran
                 escala, cada celebración es tratada con el mismo nivel de{" "}
                 <strong className="text-[#22d3f7]">
@@ -100,7 +100,7 @@ export default function AboutPage() {
                 . Conocemos en profundidad nuestro negocio, lo que nos permite
                 llevar tu evento a un nivel superior.
               </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="text-ink-muted text-lg leading-relaxed">
                 Somos más que organizadores de eventos; somos{" "}
                 <strong className="text-[#22d3f7]">
                   arquitectos de experiencias
@@ -144,7 +144,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-bold text-[#22d3f7] mb-4 text-center">
                 Nuestra Misión
               </h3>
-              <p className="text-gray-300 text-center leading-relaxed">
+              <p className="text-muted text-center leading-relaxed">
                 Transformar cada evento en una experiencia inolvidable,
                 superando las expectativas de nuestros clientes mediante un
                 servicio integral, profesional y personalizado que refleje su
@@ -178,7 +178,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-bold text-[#22d3f7] mb-4 text-center">
                 Nuestra Visión
               </h3>
-              <p className="text-gray-300 text-center leading-relaxed">
+              <p className="text-muted text-center leading-relaxed">
                 Ser la empresa líder en organización de eventos en México,
                 reconocida por nuestra innovación, excelencia en el servicio y
                 nuestra capacidad para crear celebraciones que trascienden y
@@ -193,94 +193,94 @@ export default function AboutPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-surface">
               Nuestros Valores
             </h2>
             <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-ink-muted max-w-3xl mx-auto">
               Los principios que guían cada decisión y cada evento que creamos
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Valor 1 */}
-            <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
+            <div className="bg-surface-light p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">💎</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Excelencia
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-ink-muted text-center">
                 Buscamos la perfección en cada detalle, desde la planificación
                 hasta la ejecución.
               </p>
             </div>
 
             {/* Valor 2 */}
-            <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
+            <div className="bg-surface-light p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🤝</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Compromiso
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-ink-muted text-center">
                 Tu evento es tan importante para nosotros como lo es para ti.
                 Nos comprometemos al 100%.
               </p>
             </div>
 
             {/* Valor 3 */}
-            <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
+            <div className="bg-surface-light p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🎨</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Creatividad
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-ink-muted text-center">
                 Transformamos ideas en realidades únicas que superan
                 expectativas.
               </p>
             </div>
 
             {/* Valor 4 */}
-            <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
+            <div className="bg-surface-light p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">🏆</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Profesionalismo
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-ink-muted text-center">
                 Equipo certificado y capacitado para manejar eventos de
                 cualquier magnitud.
               </p>
             </div>
 
             {/* Valor 5 */}
-            <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
+            <div className="bg-surface-light p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">❤️</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Pasión
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-ink-muted text-center">
                 Amamos lo que hacemos y se refleja en cada evento que creamos.
               </p>
             </div>
 
             {/* Valor 6 */}
-            <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
+            <div className="bg-surface-light p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border-t-4 border-[#22d3f7]">
               <div className="w-16 h-16 bg-[#22d3f7] rounded-full flex items-center justify-center mb-6 mx-auto">
                 <span className="text-3xl">⚡</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-xl font-bold text-surface mb-4 text-center">
                 Innovación
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-ink-muted text-center">
                 Siempre a la vanguardia en tendencias y tecnología para eventos.
               </p>
             </div>
@@ -321,7 +321,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold text-white mb-2">
                   Experiencia Comprobada
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-muted">
                   Más de 10 años organizando eventos exitosos de todo tipo y
                   tamaño en Ciudad de México.
                 </p>
@@ -349,7 +349,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold text-white mb-2">
                   Servicio Integral
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-muted">
                   Todo lo que necesitas en un solo lugar: catering, decoración,
                   música, mobiliario y más.
                 </p>
@@ -377,7 +377,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold text-white mb-2">
                   Atención Personalizada
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-muted">
                   Cada cliente es único. Adaptamos nuestros servicios a tus
                   necesidades específicas.
                 </p>
@@ -405,7 +405,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold text-white mb-2">
                   Equipo Profesional
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-muted">
                   Staff certificado y capacitado para garantizar el éxito de tu
                   evento.
                 </p>
@@ -433,7 +433,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold text-white mb-2">
                   Precios Competitivos
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-muted">
                   Ofrecemos la mejor relación calidad-precio del mercado sin
                   comprometer la excelencia.
                 </p>
@@ -461,7 +461,7 @@ export default function AboutPage() {
                 <h3 className="text-xl font-bold text-white mb-2">
                   Garantía de Satisfacción
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-muted">
                   Tu satisfacción es nuestra prioridad. Trabajamos hasta que
                   estés 100% feliz.
                 </p>
@@ -472,7 +472,7 @@ export default function AboutPage() {
       </section>
 
       {/* Estadísticas - Fondo Gradiente */}
-      <section className="py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+      <section className="py-20 bg-gradient-to-b from-black via-surface to-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
@@ -487,7 +487,7 @@ export default function AboutPage() {
               <div className="text-5xl md:text-6xl font-bold text-[#22d3f7] mb-2">
                 10+
               </div>
-              <div className="text-gray-400 text-lg">Años de Experiencia</div>
+              <div className="text-muted text-lg">Años de Experiencia</div>
             </div>
 
             {/* Stat 2 */}
@@ -495,7 +495,7 @@ export default function AboutPage() {
               <div className="text-5xl md:text-6xl font-bold text-[#22d3f7] mb-2">
                 +150
               </div>
-              <div className="text-gray-400 text-lg">Eventos Realizados</div>
+              <div className="text-muted text-lg">Eventos Realizados</div>
             </div>
 
             {/* Stat 3 */}
@@ -503,7 +503,7 @@ export default function AboutPage() {
               <div className="text-5xl md:text-6xl font-bold text-[#22d3f7] mb-2">
                 98%
               </div>
-              <div className="text-gray-400 text-lg">Clientes Satisfechos</div>
+              <div className="text-muted text-lg">Clientes Satisfechos</div>
             </div>
 
             {/* Stat 4 */}
@@ -511,7 +511,7 @@ export default function AboutPage() {
               <div className="text-5xl md:text-6xl font-bold text-[#22d3f7] mb-2">
                 50+
               </div>
-              <div className="text-gray-400 text-lg">
+              <div className="text-muted text-lg">
                 Profesionales en Equipo
               </div>
             </div>
@@ -522,10 +522,10 @@ export default function AboutPage() {
       {/* CTA Final */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-surface">
             ¿Listo para Crear Tu Evento Inolvidable?
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-ink-muted mb-8">
             Contáctanos hoy y descubre cómo podemos hacer realidad tu visión
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

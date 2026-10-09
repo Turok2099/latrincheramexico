@@ -10,12 +10,12 @@ export default function SobreNosotros() {
           {/* Bloque de texto - Izquierda */}
           <div className="space-y-8">
             {/* Título pequeño */}
-            <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            <div className="text-sm font-semibold text-ink-muted uppercase tracking-wider">
               Sobre Nosotros
             </div>
 
             {/* Título principal */}
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-surface leading-tight">
               Una empresa de{" "}
               <span className="relative">
                 personas
@@ -25,11 +25,11 @@ export default function SobreNosotros() {
             </h2>
 
             {/* Descripción */}
-            <div className="bg-gray-50 rounded-xl p-8 border-l-4 border-[#22d3f7]">
-              <p className="text-lg text-gray-700 leading-relaxed">
+            <div className="bg-surface-light rounded-xl p-8 border-l-4 border-[#22d3f7]">
+              <p className="text-lg text-ink-muted leading-relaxed">
                 Somos un equipo de{" "}
                 <strong>
-                  profesionales en la organización de eventos sociales
+                  profesionales en la organización de eventos
                 </strong>{" "}
                 con más de <strong>10 años de experiencia</strong>. Conocemos en
                 profundidad nuestro negocio lo que nos permite{" "}
@@ -66,7 +66,7 @@ export default function SobreNosotros() {
 
             {/* Elemento decorativo */}
             <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#22d3f7] rounded-full opacity-20"></div>
-            <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gray-800 rounded-full opacity-10"></div>
+            <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-surface rounded-full opacity-10"></div>
           </div>
         </div>
       </div>

@@ -1,256 +1,343 @@
-"use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import Link from "next/link";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
-import ProcesoOrganizacion from "@/components/EventosEmpresariales/ProcesoOrganizacion";
+import ProcesoOrganizacion from "@/components/OrganizacionDeEventos/ProcesoOrganizacion";
 import InspirationSection from "@/components/Home/InspirationSection";
 
-export default function EventosEmpresarialesPage() {
-  const eventosEmpresarialesImages = cloudinaryImages["eventos-empresariales"];
-  const cateringImages = cloudinaryImages["catering-para-eventos"];
+const SITE = "https://latrincheramexico.com";
+const PAGE_URL = `${SITE}/organizacion-de-eventos/eventos-corporativos`;
 
-  // 🖼️ Imagen hero fija optimizada
-  const heroImageUrl = eventosEmpresarialesImages[0] || cloudinaryImages["eventos-empresariales"][0];
-  const optimizedHeroUrl = optimizeCloudinaryUrl(heroImageUrl, {
+const faqs = [
+  {
+    q: "¿Qué incluye la organización de eventos corporativos?",
+    a: "Planeación, diseño, infraestructura y operación del evento: escenarios, pantallas LED, stands, iluminación y sonorización, tecnología audiovisual y catering, según lo que tu empresa necesite.",
+  },
+  {
+    q: "¿Qué tipos de eventos empresariales organizan?",
+    a: "Conferencias, expos, congresos, lanzamientos y fiestas corporativas, entre otros. Cada proyecto se diseña a la medida de la empresa.",
+  },
+  {
+    q: "¿Atienden eventos corporativos en CDMX?",
+    a: "Sí. Atendemos eventos en CDMX y en el Estado de México. Cuéntanos la fecha y el tipo de evento para preparar una propuesta.",
+  },
+  {
+    q: "¿Pueden transmitir o grabar el evento?",
+    a: "Sí. Ofrecemos transmisión en vivo, transmisión multiplataforma, traducción simultánea y grabación profesional.",
+  },
+  {
+    q: "¿Cómo solicito una cotización?",
+    a: "Escríbenos desde la página de contacto o por WhatsApp con el tipo de evento, la fecha y el número aproximado de asistentes.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      name: "Organización y producción de eventos corporativos",
+      serviceType: "Eventos corporativos y empresariales",
+      url: PAGE_URL,
+      description:
+        "Organización y producción de eventos corporativos y empresariales en CDMX: planeación, infraestructura, tecnología audiovisual y operación.",
+      areaServed: [
+        { "@type": "City", name: "Ciudad de México" },
+        { "@type": "State", name: "Estado de México" },
+      ],
+      provider: {
+        "@type": "Organization",
+        name: "La Trinchera México",
+        url: SITE,
+        telephone: "+52-55-4521-0178",
+        email: "contacto@latrincheramexico.com",
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: SITE },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Organización de eventos",
+          item: `${SITE}/organizacion-de-eventos`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Eventos corporativos",
+          item: PAGE_URL,
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+
+function Bullets({ items, className }: { items: string[]; className: string }) {
+  return (
+    <ul className={`${className} space-y-2`}>
+      {items.map((item) => (
+        <li key={item} className="flex items-center">
+          <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Photo({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 600px"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+    </div>
+  );
+}
+
+export default function EventosCorporativosPage() {
+  const images = cloudinaryImages["eventos-empresariales"];
+  const cateringImages = cloudinaryImages["catering-para-eventos"];
+  const heroUrl = optimizeCloudinaryUrl(images[0], {
     width: 1920,
     height: 1080,
-    quality: 'auto:eco',
-    priority: true
+    quality: "auto:eco",
+    priority: true,
   });
-
-  // Preload crítico para LCP
-  useEffect(() => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = optimizedHeroUrl;
-    link.fetchPriority = 'high';
-    document.head.appendChild(link);
-
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
-    };
-  }, [optimizedHeroUrl]);
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section - Imagen Fija Optimizada */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+      {/* Hero */}
       <section className="relative w-full h-screen">
-        {/* Imagen de fondo optimizada con Next/Image */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src={optimizedHeroUrl}
-            alt="Eventos Empresariales"
+            src={heroUrl}
+            alt="Evento corporativo en CDMX con escenario y pantallas LED"
             fill
             priority
             quality={75}
             sizes="100vw"
             className="object-cover"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90 z-10" />
-          <div className="absolute inset-0 bg-black/15 z-10" />
         </div>
-
-        {/* Contenido superpuesto */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-wide">
               EVENTOS
-              <span className="block text-[#22d3f7] mt-2">EMPRESARIALES</span>
+              <span className="block text-[#22d3f7] mt-2">CORPORATIVOS EN CDMX</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Tu agencia de eventos empresariales especializada
+            <p className="text-xl md:text-2xl text-muted mb-8 leading-relaxed">
+              Productora y organizadores de eventos empresariales en Ciudad de México
             </p>
-            <div className="w-24 h-1 bg-[#22d3f7] mx-auto"></div>
+            <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
+            <Link
+              href="/contact"
+              className="inline-block bg-[#22d3f7] text-black font-bold px-8 py-3 rounded-full hover:bg-[#1ab8d4] transition-colors duration-300"
+            >
+              Solicitar cotización
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Bloque 1 - Fondo Negro */}
+      {/* Organización de eventos corporativos */}
       <section className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                EXPERTOS EN EVENTOS CORPORATIVOS
+                ORGANIZACIÓN DE EVENTOS CORPORATIVOS
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Somos tu agencia de eventos empresariales especializada. Nuestro
-                equipo de expertos se encargará de diseñar y operar todos los
-                aspectos de tu proyecto. Planeación, operación, diseño e
-                infraestructura para tu evento. Hacemos que lo que tu empresa
-                necesite se vuelva realidad.
+              <p className="text-muted text-lg leading-relaxed mb-4">
+                Somos una empresa para eventos corporativos con más de 10 años
+                de experiencia. Nuestro equipo se encarga de la organización de
+                eventos empresariales de principio a fin: planeación, diseño,
+                infraestructura y operación.
+              </p>
+              <p className="text-muted text-lg leading-relaxed">
+                Si buscas organizadores de eventos corporativos que se
+                responsabilicen de cada detalle, trabajamos contigo para que lo
+                que tu empresa necesita se haga realidad.
               </p>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={eventosEmpresarialesImages[0]}
-                  alt="Eventos corporativos"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
+              <Photo src={images[0]} alt="Organización de eventos corporativos" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bloque 2 - Fondo Blanco */}
+      {/* Producción: infraestructura */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={eventosEmpresarialesImages[1]}
-                  alt="Montaje de estructuras"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
+              <Photo src={images[1]} alt="Montaje de escenario y estructuras para evento empresarial" />
             </div>
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                MONTAJE DE ESTRUCTURAS
+                PRODUCCIÓN DE EVENTOS CORPORATIVOS
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                Diseñamos todo tipo de estructuras para tu evento empresarial.
-                Desde escenarios hasta pantallas gigantes, stands personalizados
-                y escenografía completa.
+              <p className="text-ink-muted text-lg leading-relaxed mb-6">
+                Como productora de eventos corporativos diseñamos y montamos la
+                infraestructura que tu evento necesita, desde escenarios hasta
+                pantallas gigantes, stands personalizados y escenografía
+                completa.
               </p>
-              <ul className="text-gray-600 space-y-2">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Escenarios profesionales
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Pantallas Gigantes LED
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Stands Personalizados
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Iluminación y Sonorización
-                </li>
-              </ul>
+              <Bullets
+                className="text-ink-muted mb-6"
+                items={[
+                  "Escenarios profesionales",
+                  "Pantallas gigantes LED",
+                  "Stands personalizados",
+                  "Iluminación y sonorización",
+                ]}
+              />
+              <p className="text-ink-muted">
+                Conoce también nuestros{" "}
+                <Link href="/organizacion-de-eventos/stands-para-eventos" className="text-black underline hover:text-[#1ab8d4]">
+                  stands para eventos
+                </Link>{" "}
+                y{" "}
+                <Link href="/organizacion-de-eventos/pantallas-para-escenarios" className="text-black underline hover:text-[#1ab8d4]">
+                  pantallas para escenarios
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bloque 3 - Fondo Negro */}
+      {/* Tecnología audiovisual */}
       <section className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                TECNOLOGÍA AUDIOVISUAL
+                TECNOLOGÍA AUDIOVISUAL PARA EVENTOS EMPRESARIALES
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Infraestructura audiovisual de primer nivel a tu alcance.
-                Contamos con lo último en tecnología para transmisión en vivo,
-                traducción simultánea y producción multiplataforma.
+              <p className="text-muted text-lg leading-relaxed mb-6">
+                Tecnología para transmisión en vivo, traducción simultánea y
+                producción multiplataforma, para que tu evento llegue también a
+                quienes no pueden asistir.
               </p>
-              <ul className="text-gray-400 space-y-2">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Transmisión en vivo
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Traducción simultánea
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Transmisión Multiplataformas
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3"></span>
-                  Grabación profesional
-                </li>
-              </ul>
+              <Bullets
+                className="text-muted"
+                items={[
+                  "Transmisión en vivo",
+                  "Traducción simultánea",
+                  "Transmisión multiplataforma",
+                  "Grabación profesional",
+                ]}
+              />
             </div>
             <div className="order-1 lg:order-2">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={eventosEmpresarialesImages[2]}
-                  alt="Tecnología audiovisual"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
+              <Photo src={images[2]} alt="Tecnología audiovisual para eventos empresariales" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bloque 4 - Fondo Blanco */}
+      {/* Tipos de eventos */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-96">
-                <Image
-                  src={cateringImages[0]}
-                  alt="Catering empresarial"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-              </div>
+              <Photo src={cateringImages[0]} alt="Catering para evento corporativo" />
             </div>
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
-                TODO TIPO DE EVENTOS
+                EVENTOS EMPRESARIALES QUE ORGANIZAMOS
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#22d3f7] to-transparent mb-8"></div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                Somos especialistas en la organización de conferencias, expos,
-                fiestas empresariales, congresos, lanzamientos y mucho más. Cada
-                proyecto es único y lo tratamos con la dedicación que merece.
+              <p className="text-ink-muted text-lg leading-relaxed mb-6">
+                Organizamos conferencias, expos, congresos, lanzamientos y
+                fiestas corporativas. Cada proyecto es único y lo tratamos con
+                la dedicación que merece. Si tu evento requiere alimentos,
+                revisa nuestro{" "}
+                <Link href="/organizacion-de-eventos/servicio-de-catering-para-eventos" className="text-black underline hover:text-[#1ab8d4]">
+                  servicio de catering para eventos
+                </Link>
+                .
               </p>
               <div className="grid grid-cols-2 gap-3">
-                <div className="bg-gray-100 rounded-lg p-3 text-center border border-gray-200">
-                  <p className="text-gray-700 font-medium text-sm">
-                    Conferencias
-                  </p>
-                </div>
-                <div className="bg-gray-100 rounded-lg p-3 text-center border border-gray-200">
-                  <p className="text-gray-700 font-medium text-sm">Expos</p>
-                </div>
-                <div className="bg-gray-100 rounded-lg p-3 text-center border border-gray-200">
-                  <p className="text-gray-700 font-medium text-sm">
-                    Fiestas Corporativas
-                  </p>
-                </div>
-                <div className="bg-gray-100 rounded-lg p-3 text-center border border-gray-200">
-                  <p className="text-gray-700 font-medium text-sm">Congresos</p>
-                </div>
+                {["Conferencias", "Expos", "Fiestas corporativas", "Congresos", "Lanzamientos"].map((t) => (
+                  <div key={t} className="bg-surface-light rounded-lg p-3 text-center border border-black/10">
+                    <p className="text-ink-muted font-medium text-sm">{t}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Proceso de Organización */}
+      {/* CDMX */}
+      <section className="py-20 bg-black">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-wide text-[#22d3f7]">
+            AGENCIA DE EVENTOS CORPORATIVOS EN CIUDAD DE MÉXICO
+          </h2>
+          <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-8"></div>
+          <p className="text-muted text-lg leading-relaxed mb-8">
+            Atendemos eventos en CDMX y en el Estado de México. Si buscas empresas
+            organizadoras de eventos corporativos en CDMX, cuéntanos la fecha,
+            el tipo de evento y el número aproximado de asistentes para
+            preparar tu propuesta.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block bg-[#22d3f7] text-black font-bold px-8 py-3 rounded-full hover:bg-[#1ab8d4] transition-colors duration-300"
+          >
+            Solicitar cotización
+          </Link>
+        </div>
+      </section>
+
       <ProcesoOrganizacion />
 
-      {/* Sección de Inspiración */}
+      {/* Preguntas frecuentes */}
+      <section className="py-20 bg-black">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-10 tracking-wide text-center text-white">
+            Preguntas frecuentes sobre eventos corporativos
+          </h2>
+          <div className="space-y-4">
+            {faqs.map((f) => (
+              <details key={f.q} className="bg-surface rounded-xl border border-white/10 p-5 group">
+                <summary className="cursor-pointer font-semibold text-white">{f.q}</summary>
+                <p className="mt-3 text-muted leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <InspirationSection />
     </div>
   );

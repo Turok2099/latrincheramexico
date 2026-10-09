@@ -4,34 +4,9 @@ module.exports = {
   generateRobotsTxt: true,
   sitemapSize: 5000,
   generateIndexSitemap: false,
-  exclude: ["/auth/*", "/api/*", "/admin/*", "/_next/*"],
-  additionalPaths: async (config) => {
-    const baseUrl = config.siteUrl;
-
-    // Rutas adicionales importantes
-    const additionalRoutes = [
-      {
-        loc: `${baseUrl}/organizacion-de-eventos`,
-        changefreq: "weekly",
-        priority: 0.8,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${baseUrl}/organizacion-de-eventos/servicio-de-catering-para-eventos`,
-        changefreq: "weekly",
-        priority: 0.7,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${baseUrl}/darkkitchen/menu`,
-        changefreq: "monthly",
-        priority: 0.6,
-        lastmod: new Date().toISOString(),
-      },
-    ];
-
-    return additionalRoutes;
-  },
+  exclude: ["/auth/*", "/api/*", "/admin/*", "/_next/*", "/404"],
+  // "/" se renderiza de forma dinámica (usa searchParams), por lo que next-sitemap no la detecta sola
+  additionalPaths: async (config) => [await config.transform(config, "/")],
   robotsTxtOptions: {
     policies: [
       {

@@ -44,7 +44,7 @@ export default function ProcesoOrganizacion() {
       icono: ClockIcon,
       titulo: "Ejecución y Supervisión",
       descripcion:
-        "El día del evento, nuestro equipo supervisa cada detalle para asegurar que todo funcione perfectamente. La <strong className='text-[#22d3f7]'>organización de eventos empresariales</strong> y sociales requiere precisión absoluta.",
+        "El día del evento, nuestro equipo supervisa cada detalle para asegurar que todo funcione perfectamente. La <strong className='text-[#22d3f7]'>organización de eventos empresariales</strong> y de bodas requiere precisión absoluta.",
       detalles: [
         "Supervisión en tiempo real",
         "Resolución de imprevistos",
@@ -80,7 +80,7 @@ export default function ProcesoOrganizacion() {
             <span className="text-[#22d3f7]">Organización de Eventos</span>
           </h2>
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+          <p className="text-muted text-lg max-w-3xl mx-auto">
             Nuestro método probado para{" "}
             <span className="text-[#22d3f7] font-bold">organizar eventos</span>{" "}
             garantiza resultados excepcionales. Desde la{" "}
@@ -116,7 +116,7 @@ export default function ProcesoOrganizacion() {
                     </div>
 
                     {/* Icono */}
-                    <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-surface rounded-full flex items-center justify-center flex-shrink-0">
                       <IconComponent className="w-5 h-5 text-[#22d3f7]" />
                     </div>
 
@@ -143,7 +143,7 @@ export default function ProcesoOrganizacion() {
                   <div className="px-8 pb-6 space-y-4">
                     {/* Descripción */}
                     <p
-                      className="text-lg text-gray-300 leading-relaxed pl-16"
+                      className="text-lg text-muted leading-relaxed pl-16"
                       dangerouslySetInnerHTML={{ __html: paso.descripcion }}
                     />
 
@@ -152,7 +152,7 @@ export default function ProcesoOrganizacion() {
                       {paso.detalles.map((detalle, idx) => (
                         <li
                           key={idx}
-                          className="flex items-center text-gray-300"
+                          className="flex items-center text-muted"
                         >
                           <div className="w-2 h-2 bg-[#22d3f7] rounded-full mr-3 flex-shrink-0"></div>
                           {detalle}
@@ -171,7 +171,7 @@ export default function ProcesoOrganizacion() {
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             ¿Listo para empezar tu proyecto?
           </h3>
-          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-muted text-lg mb-8 max-w-2xl mx-auto">
             Contáctanos hoy y descubre cómo podemos hacer realidad el evento que
             tu empresa necesita
           </p>

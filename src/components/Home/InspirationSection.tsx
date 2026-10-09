@@ -49,19 +49,14 @@ export default function InspirationSection() {
 
   const inspirationCategories = [
     {
-      category: "eventos-sociales",
-      title: "Eventos Sociales",
-      link: "/organizacion-de-eventos/eventos-sociales",
-    },
-    {
       category: "catering-para-eventos",
       title: "Catering para Eventos",
       link: "/organizacion-de-eventos/servicio-de-catering-para-eventos",
     },
     {
       category: "eventos-empresariales",
-      title: "Eventos Empresariales",
-      link: "/organizacion-de-eventos/eventos-empresariales",
+      title: "Eventos Corporativos",
+      link: "/organizacion-de-eventos/eventos-corporativos",
     },
     {
       category: "organizacion-de-bodas",
@@ -83,22 +78,17 @@ export default function InspirationSection() {
       title: "Música para Eventos",
       link: "/organizacion-de-eventos/musica-para-eventos",
     },
-    {
-      category: "graduaciones",
-      title: "Graduaciones",
-      link: "/organizacion-de-eventos/graduaciones",
-    },
   ];
 
   return (
     <section className="w-full py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
+          <h2 className="text-4xl md:text-5xl font-bold text-surface mb-6 tracking-wide">
             Inspírate
           </h2>
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-ink-muted text-lg max-w-2xl mx-auto">
             Descubre nuestras creaciones y deja que la inspiración te guíe hacia
             el evento perfecto
           </p>

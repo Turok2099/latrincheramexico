@@ -1,55 +1,42 @@
 import type { Metadata } from "next";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
+
+const ogImage = optimizeCloudinaryUrl(cloudinaryImages["stands-para-eventos"][3], {
+  width: 1200,
+  height: 630,
+});
 
 export const metadata: Metadata = {
-  title:
-    "Stands para Eventos y Ferias | Diseño de Stands | Renta de Stands - La Trinchera México",
+  title: "Stands para Eventos y Exposiciones | La Trinchera México",
   description:
-    "Diseño, fabricación y montaje de stands para eventos, ferias y exposiciones. Stands creativos, stand publicitario portátil, renta de stands para expo. Fabricantes de stands profesionales en CDMX.",
-  keywords: [
-    "stands para expos",
-    "montaje de stands",
-    "diseño stands",
-    "stands para eventos",
-    "stands para ferias",
-    "stand para ferias",
-    "diseño de stands",
-    "stand feria",
-    "stand de feria",
-    "stand para exposiciones",
-    "stand publicitario portatil",
-    "stand para ferias y exposiciones",
-    "fabricantes de stands",
-    "renta de stands para expo",
-    "fabricacion de stand",
-    "stand para feria",
-    "stand portatiles para ferias",
-    "renta de stand para expo",
-    "stand de carton para exposicion",
-    "stand de madera para ferias",
-    "stand exposicion",
-    "stands portatiles para ferias",
-    "stands creativos",
-    "diseñar un stand",
-    "diseñar stand",
-    "stand de exhibición",
-    "stand de expo",
-    "stand de exposición",
-    "La Trinchera México",
-    "stands CDMX",
-  ],
+    "Diseño, fabricación, montaje y renta de stands para eventos, ferias y exposiciones. Stands personalizados según tu marca y tu espacio. Cotiza en CDMX y Edomex.",
+  alternates: {
+    canonical: "/organizacion-de-eventos/stands-para-eventos",
+  },
   openGraph: {
-    title:
-      "Stands para Eventos | Diseño y Renta de Stands - La Trinchera México",
+    title: "Stands para Eventos y Exposiciones | La Trinchera México",
     description:
-      "Diseño, fabricación y montaje de stands para eventos, ferias y exposiciones. Stands creativos y personalizados.",
+      "Diseño, fabricación, montaje y renta de stands personalizados para eventos, ferias y exposiciones. Solicita tu cotización.",
+    url: "https://latrincheramexico.com/organizacion-de-eventos/stands-para-eventos",
+    siteName: "La Trinchera México",
     type: "website",
     locale: "es_MX",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Stands en una exposición - La Trinchera México",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stands para Eventos - La Trinchera México",
+    title: "Stands para Eventos y Exposiciones | La Trinchera México",
     description:
-      "Diseño y fabricación de stands para ferias, expos y eventos corporativos. Soluciones creativas y profesionales.",
+      "Diseño, fabricación, montaje y renta de stands personalizados para eventos, ferias y exposiciones.",
+    images: [ogImage],
   },
   robots: {
     index: true,

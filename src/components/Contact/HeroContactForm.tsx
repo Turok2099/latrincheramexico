@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { enviarContacto } from "@/lib/enviarContacto";
 
 export default function HeroContactForm() {
   const eventosEmpresarialesImages = cloudinaryImages["eventos-empresariales"];
@@ -15,7 +16,9 @@ export default function HeroContactForm() {
     fechaEvento: "",
     numeroInvitados: "",
     mensaje: "",
+    sitioWeb: "",
   });
+  const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -45,21 +48,35 @@ export default function HeroContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setError(null);
+    const resultado = await enviarContacto(formData, "/contact");
     setIsSubmitting(false);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        nombre: "",
-        email: "",
-        telefono: "",
-        tipoEvento: "",
-        fechaEvento: "",
-        numeroInvitados: "",
-        mensaje: "",
+    if (!resultado.ok) {
+      setError(resultado.error);
+      return;
+    }
+
+    // Consulta entregada (guardada en el servidor): sin datos personales en analítica
+    if (typeof window !== "undefined" && window.dataLayer) {
+      window.dataLayer.push({
+        event: "form_submission",
+        form_name: "Formulario de Contacto Página",
+        form_type: formData.tipoEvento || "No especificado",
+        page_path: window.location.pathname,
       });
-    }, 3000);
+    }
+
+    setIsSubmitted(true);
+    setFormData({
+      nombre: "",
+      email: "",
+      telefono: "",
+      tipoEvento: "",
+      fechaEvento: "",
+      numeroInvitados: "",
+      mensaje: "",
+      sitioWeb: "",
+    });
   };
 
   return (
@@ -101,7 +118,7 @@ export default function HeroContactForm() {
               <h3 className="text-2xl font-bold text-white mb-4 tracking-wide">
                 ¡Mensaje Enviado!
               </h3>
-              <p className="text-gray-300 text-lg">
+              <p className="text-muted text-lg">
                 Gracias por contactarnos. Nos pondremos en contacto contigo en
                 las próximas 24 horas.
               </p>
@@ -114,13 +131,18 @@ export default function HeroContactForm() {
                 Cuéntanos tu Proyecto
               </h1>
               <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-              <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              <p className="text-muted text-lg max-w-2xl mx-auto">
                 Completa el formulario y nos pondremos en contacto contigo para
                 crear el evento de tus sueños
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Campo trampa anti-bots: invisible para personas */}
+                <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                  <label htmlFor="sitioWeb">No llenar este campo</label>
+                  <input type="text" id="sitioWeb" name="sitioWeb" value={formData.sitioWeb} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
@@ -136,7 +158,7 @@ export default function HeroContactForm() {
                       value={formData.nombre}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                       placeholder="Tu nombre completo"
                     />
                   </div>
@@ -154,7 +176,7 @@ export default function HeroContactForm() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                       placeholder="tu@email.com"
                     />
                   </div>
@@ -174,7 +196,7 @@ export default function HeroContactForm() {
                       value={formData.telefono}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                       placeholder="+52 55 1234 5678"
                     />
                   </div>
@@ -191,10 +213,9 @@ export default function HeroContactForm() {
                       value={formData.tipoEvento}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-gray-800/80 border border-white/30 rounded-lg text-white focus:outline-none focus:border-[#22d3f7] focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-surface border border-white/30 rounded-lg text-white focus:outline-none focus:border-[#22d3f7] focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                     >
                       <option value="">Selecciona el tipo de evento</option>
-                      <option value="eventos-sociales">Eventos Sociales</option>
                       <option value="catering-para-eventos">
                         Catering para Eventos
                       </option>
@@ -213,7 +234,6 @@ export default function HeroContactForm() {
                       <option value="musica-para-eventos">
                         Música para Eventos
                       </option>
-                      <option value="graduaciones">Graduaciones</option>
                     </select>
                   </div>
                 </div>
@@ -250,7 +270,7 @@ export default function HeroContactForm() {
                       onChange={handleChange}
                       required
                       min="1"
-                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300"
                       placeholder="Ej: 150"
                     />
                   </div>
@@ -269,11 +289,16 @@ export default function HeroContactForm() {
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-gray-400 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300 resize-none"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder:text-muted/70 focus:border-[#22d3f7] focus:outline-none focus:ring-2 focus:ring-[#22d3f7]/20 transition-all duration-300 resize-none"
                     placeholder="Describe tu visión, ubicación, presupuesto aproximado y cualquier detalle especial que tengas en mente..."
                   />
                 </div>
                 <div className="text-center pt-6">
+                  {error && (
+                    <p role="alert" className="text-center text-red-400 pt-4">
+                      {error}
+                    </p>
+                  )}
                   <button
                     type="submit"
                     disabled={isSubmitting}

@@ -10,9 +10,9 @@ Complementa a `vercel-react-best-practices` (reglas generales; ver exclusiones e
 ## Mapa
 - Imagenes: `src/components/OptimizedImage.tsx`, `src/helpers/ImageOptimizer.ts` (`optimizeCloudinaryUrl`), `src/helpers/CloudinaryMapping.ts`, `MainImagesMapping.ts`, `src/lib/cloudinary.ts`. `next.config.ts` permite solo `res.cloudinary.com`, formatos avif/webp y `deviceSizes`/`imageSizes` propios.
 - Carruseles: Swiper en `src/components/Home/HeroCarousel.tsx` y similares.
-- Fuente: Open Sans con `next/font/google` en `src/app/layout.tsx`. CSS critico en linea ahi y en `src/styles/critical.css`; `experimental.optimizeCss` (critters) esta activo.
+- Fuente: Open Sans con `next/font/google` en `src/app/layout.tsx`. CSS critico en linea ahi (`critical.css` ya no existe); `experimental.optimizeCss` (critters) esta activo.
 - Terceros: GTM con `<Script>` en `layout.tsx`.
-- Trabajo previo: `OPTIMIZACION_IMAGENES.md`, `OPTIMIZACION_CSS_RENDER_BLOCKING.md`, `LIGHTHOUSE.md`, `PRUEBAS_OPTIMIZACION.md`. Leerlos y no repetir lo ya hecho.
+- Los documentos de optimizacion previos (imagenes, CSS, Lighthouse) ya no estan en el repo: medir de nuevo antes de asumir que algo ya se optimizo.
 
 ## Reglas
 1. **Medir primero**: linea base con `npm run build && npm run start` y luego `npm run lighthouse:local` (no contra `dev`); para bundle, `npm run analyze`. Repetir con las mismas condiciones tras el cambio. Sin comparacion, no afirmar mejora: decir "no medido".

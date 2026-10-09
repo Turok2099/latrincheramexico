@@ -5,9 +5,9 @@ Sitio de La Trinchera México, infraestructura para eventos (identidad definida 
 Stack (versiones instaladas): Next.js 15.4.10 (App Router), React 19.1.0, TypeScript 5, Tailwind CSS 4.1, Swiper, Cloudinary, Google Tag Manager `GTM-55QXTXJ9`.
 
 ## Estructura
-- `src/app/` rutas (App Router); servicios en `organizacion-de-eventos/*`, además `about`, `contact`, `darkkitchen`, `404`.
+- `src/app/` rutas (App Router); servicios en `organizacion-de-eventos/*`, además `about`, `contact`, `404`.
 - `src/components/` componentes (`Home/`, `Contact/`, `OrganizacionDeEventos/`, `navbar.tsx`, `Footer.tsx`, `WhatsAppButton.tsx`, `OptimizedImage.tsx`).
-- `src/helpers/` datos y utilidades de imágenes/servicios; `src/lib/cloudinary.ts`; `src/styles/` (`globals.css`, `critical.css`).
+- `src/helpers/` datos y utilidades de imágenes/servicios; `src/lib/cloudinary.ts`; `src/styles/globals.css`.
 - `middleware.js` (404 para URLs tipo WordPress), `next-sitemap.config.js`, `public/` (sitemap.xml, robots.txt y verificación de Google versionados).
 
 ## Comandos

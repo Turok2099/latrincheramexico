@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  // Redirección permanente de la URL anterior de eventos corporativos
+  async redirects() {
+    return [
+      {
+        source: "/organizacion-de-eventos/eventos-empresariales",
+        destination: "/organizacion-de-eventos/eventos-corporativos",
+        permanent: true,
+      },
+    ];
+  },
   // Headers para mejorar caché y seguridad
   async headers() {
     return [

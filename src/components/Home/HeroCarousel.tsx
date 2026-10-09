@@ -25,7 +25,7 @@ export default function HeroCarousel() {
 
   if (allServiceImages.length === 0) {
     return (
-      <div className="absolute inset-0 bg-gray-800 flex items-center justify-center text-white">
+      <div className="absolute inset-0 bg-surface flex items-center justify-center text-white">
         Cargando imágenes...
       </div>
     );

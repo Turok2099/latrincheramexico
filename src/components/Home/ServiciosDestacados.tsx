@@ -18,7 +18,7 @@ export default function ServiciosDestacados() {
       id: 2,
       titulo: "Expertise Técnico y Logístico",
       descripcion:
-        "Coordinación profesional con proveedores, artistas y staff técnico. Infraestructura robusta para eventos sociales, empresariales y masivos.",
+        "Coordinación profesional con proveedores, artistas y staff técnico. Infraestructura robusta para eventos empresariales y bodas.",
       icono: CogIcon,
     },
     {
@@ -42,11 +42,11 @@ export default function ServiciosDestacados() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Título de la sección */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 tracking-wide">
+          <h2 className="text-4xl md:text-5xl font-bold text-surface mb-6 tracking-wide">
             Nuestro Enfoque
           </h2>
           <div className="w-24 h-1 bg-[#22d3f7] mx-auto mb-6"></div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-ink-muted text-lg max-w-2xl mx-auto">
             Combinamos creatividad, tecnología y experiencia para crear eventos
             extraordinarios
           </p>
@@ -59,7 +59,7 @@ export default function ServiciosDestacados() {
             return (
               <div
                 key={caracteristica.id}
-                className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100"
+                className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-black/10"
               >
                 {/* Icono */}
                 <div className="flex justify-center mb-6">
@@ -69,12 +69,12 @@ export default function ServiciosDestacados() {
                 </div>
 
                 {/* Título */}
-                <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center tracking-wide">
+                <h3 className="text-2xl font-bold text-surface mb-4 text-center tracking-wide">
                   {caracteristica.titulo}
                 </h3>
 
                 {/* Descripción */}
-                <p className="text-gray-600 text-center leading-relaxed">
+                <p className="text-ink-muted text-center leading-relaxed">
                   {caracteristica.descripcion}
                 </p>
               </div>

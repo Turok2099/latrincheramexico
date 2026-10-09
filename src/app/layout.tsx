@@ -18,8 +18,9 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://latrincheramexico.com"),
   title: "La Trinchera México",
-  description: "Organización de eventos y reservas en La Trinchera México",
+  description: "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música.",
   other: {
     "font-display": "swap",
   },

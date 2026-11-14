@@ -66,7 +66,7 @@ Este archivo distingue lo implementado en el proyecto de lo comprobado en produc
 - [x] Sitemap regenerado localmente después de agregar `/aviso-privacidad`.
 - [ ] Confirmar el Build Command real de Vercel: `npm run build` no regenera sitemap/robots; `npm run build:sitemap` sí. Mantener los archivos generados al publicar cambios de rutas.
 - [ ] Comprobar en producción las URLs del sitemap y su procesamiento/indexación en Search Console. La verificación de propiedad no confirma indexación.
-- [x] Sincronizados CLAUDE.md, .claude/HALLAZGOS.md y skills con el estado actual. Guías extensas de rendimiento, React e interfaz configuradas para invocación manual; detalle comercial de SEO separado en una referencia.
+- [x] Sincronizados CLAUDE.md, .claude/HALLAZGOS.md y skills con el estado actual. Cinco skills locales con selección automática específica y referencias bajo demanda; retirada la referencia al plugin frontend-design no instalado. Detalle comercial de SEO separado en una referencia.
 
 ## Redes sociales (pospuestas por decisión del usuario)
 

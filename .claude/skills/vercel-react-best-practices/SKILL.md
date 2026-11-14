@@ -1,7 +1,6 @@
 ---
 name: vercel-react-best-practices
-description: Consulta manual de reglas de rendimiento React/Next.js para un problema concreto.
-disable-model-invocation: true
+description: Reglas específicas para problemas de renders, efectos, esperas y carga de componentes React/Next.js; no cargar para cambios de texto o estilo sin lógica.
 license: MIT
 metadata:
   author: vercel

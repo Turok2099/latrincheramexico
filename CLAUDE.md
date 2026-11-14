@@ -19,7 +19,7 @@ Sitio de infraestructura para eventos: https://latrincheramexico.com. Español d
 - Responder brevemente: cambios, comprobaciones y limitaciones reales. No afirmar entrega de correo, indexación, despliegue o mejora de rendimiento sin comprobarlos.
 
 ## Skills
-- Automáticas y específicas: trinchera-seo (contenido/SEO), trinchera-conversion (formularios/WhatsApp/Resend).
-- Solo por petición explícita: /trinchera-performance, /vercel-react-best-practices, /web-design-guidelines. No encadenarlas para cambios rutinarios.
-- frontend-design: reservar para solicitudes explícitas de diseño visual nuevo; respetar la identidad actual. El plugin está habilitado en settings.json; no se verificó su instalación global.
+- Las cinco skills locales admiten selección automática según la tarea; no exigir comandos manuales. También pueden invocarse con /nombre.
+- Elegir solo la pertinente: trinchera-seo (contenido/SEO), trinchera-conversion (formularios/Resend), trinchera-performance (rendimiento), vercel-react-best-practices (lógica/rendimiento React), web-design-guidelines (interfaz/accesibilidad). No cargar todas ni encadenarlas para cambios rutinarios.
+- Cambios visuales: atender el diseño solicitado con las capacidades disponibles y usar web-design-guidelines para revisar lo pertinente. No depender de frontend-design ni instalar plugins adicionales por defecto. La guía de interfaz no es una herramienta generadora de imágenes.
 - React 19.1: no usar Activity ni useEffectEvent. En la guía externa leer solo reglas relevantes, nunca AGENTS.md completo.

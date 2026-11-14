@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return fallo("Solicitud inválida.", 400);
     body = parsed as Record<string, unknown>;
   } catch { return fallo("Solicitud inválida.", 400); }
-  if (typeof body.sitioWeb === "string" && body.sitioWeb) return NextResponse.json({ ok: true });
+  if (typeof body.controlInterno === "string" && body.controlInterno) return NextResponse.json({ ok: true });
 
   const datos = { ...contactoVacio };
   for (const clave of Object.keys(contactoVacio) as (keyof DatosContacto)[]) {

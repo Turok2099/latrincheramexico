@@ -10,7 +10,7 @@ commit 063bee94c3f4df8453406c830b0a7df0f2860278.
 
 ## Carga y compatibilidad
 
-SEO y conversión conservan activación automática específica. Rendimiento, React e interfaz requieren invocación manual. frontend-design sigue habilitado en settings.json; no se modificó el plugin externo ni se comprobó su instalación global. CLAUDE.md reserva su uso para solicitudes explícitas de diseño nuevo.
+Las cinco skills locales admiten selección automática con descripciones específicas y también pueden invocarse manualmente. Leer solo las referencias pertinentes. Se retiró de settings.json la referencia al plugin frontend-design no instalado; no se instalaron skills ni plugins adicionales. Los cambios visuales se atienden con las capacidades disponibles y la guía de interfaz permite revisarlos.
 
 Next.js instalado 15.5.29; React 19.1. No usar rendering-activity, advanced-effect-event-deps ni advanced-use-latest. En advanced-event-handler-refs omitir la alternativa useEffectEvent. No actualizar React solo para aplicar una regla.
 

@@ -43,8 +43,8 @@ export default function HeroCarousel() {
           }}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/90" />
-      <div className="absolute inset-0 bg-black/15" />
+      {/* Oscuro donde va el texto, imagen visible en el resto */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 via-45% to-black/10 md:bg-gradient-to-r md:from-black/95 md:via-black/75 md:via-45% md:to-black/5" />
     </div>
   );
 }

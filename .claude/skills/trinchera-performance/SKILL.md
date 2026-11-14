@@ -1,7 +1,6 @@
 ---
 name: trinchera-performance
-description: Medir y corregir rendimiento de imágenes, carga, fuentes o bundle; invocar manualmente para trabajos de rendimiento.
-disable-model-invocation: true
+description: Diagnosticar y optimizar rendimiento de imágenes, fuentes, carga o bundle; no activar por cambios de texto o ajustes visuales rutinarios.
 ---
 # Rendimiento
 
@@ -13,5 +12,5 @@ disable-model-invocation: true
 - Open Sans con next/font/google y CSS crítico en app/layout.tsx; estilos en src/styles/globals.css. optimizeCss usa critters.
 - Componentes de servidor por defecto; cargar módulos pesados cuando se necesiten. No añadir memoización, paquetes ni refactorizaciones sin un beneficio pertinente.
 - Sin scripts de medición de Google; no restaurarlos como parte de una optimización.
-- Si hace falta una regla especializada, pedir la invocación manual de vercel-react-best-practices; no leer su AGENTS.md completo. No usar Activity/useEffectEvent con React 19.1.
+- Si hace falta una regla especializada de React, consultar vercel-react-best-practices y solo la regla pertinente, sin pedir comandos manuales; no leer su AGENTS.md completo. No usar Activity/useEffectEvent con React 19.1.
 - Comprobaciones generales en CLAUDE.md. Reportar métricas reales o indicar que no se midió; no repetir builds sin cambios relevantes.

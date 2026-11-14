@@ -11,13 +11,13 @@ export const serviciosContacto = [
 export const limitesContacto = { nombre: 120, email: 200, telefono: 30, mensaje: 3000 };
 export type DatosContacto = {
   nombre: string; email: string; telefono: string; tipoEvento: string;
-  fechaEvento: string; numeroInvitados: string; mensaje: string; sitioWeb: string;
+  fechaEvento: string; numeroInvitados: string; mensaje: string; controlInterno: string;
   privacidad: boolean;
 };
 export type ErroresContacto = Partial<Record<keyof DatosContacto, string>>;
 export const contactoVacio: DatosContacto = {
   nombre: "", email: "", telefono: "", tipoEvento: "", fechaEvento: "",
-  numeroInvitados: "", mensaje: "", sitioWeb: "", privacidad: false,
+  numeroInvitados: "", mensaje: "", controlInterno: "", privacidad: false,
 };
 
 export function fechaLocal() {
@@ -33,7 +33,8 @@ export function validarContacto(datos: DatosContacto): ErroresContacto {
     if (datos[clave].length > max) errores[clave] = `Usa como máximo ${max} caracteres.`;
   }
   if (datos.nombre.trim().length < 2) errores.nombre = "Escribe tu nombre (al menos 2 caracteres).";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email.trim()) || /[\r\n]/.test(datos.email)) errores.email = "Escribe un correo válido.";
+  // Sin espacios ni <>,;"()[]\ para que el valor sea una sola dirección y no pueda sumar destinatarios en reply_to.
+  if (!/^[^\s@<>,;"()[\]\\]+@[^\s@<>,;"()[\]\\]+\.[^\s@<>,;"()[\]\\]+$/.test(datos.email.trim()) || /[\r\n]/.test(datos.email)) errores.email = "Escribe un correo válido.";
   if (!/^[+\d\s().-]+$/.test(datos.telefono) || !/^\d{7,15}$/.test(datos.telefono.replace(/\D/g, ""))) errores.telefono = "Escribe un teléfono de 7 a 15 dígitos.";
   if (!serviciosContacto.some(([valor]) => valor === datos.tipoEvento)) errores.tipoEvento = "Selecciona un servicio.";
   if (datos.fechaEvento) {

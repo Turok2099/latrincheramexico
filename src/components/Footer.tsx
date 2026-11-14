@@ -1,56 +1,128 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const servicios = [
+  {
+    href: "/organizacion-de-eventos/servicio-de-catering-para-eventos",
+    label: "Servicio de catering",
+  },
+  {
+    href: "/organizacion-de-eventos/eventos-corporativos",
+    label: "Eventos corporativos",
+  },
+  {
+    href: "/organizacion-de-eventos/organizacion-de-bodas",
+    label: "Organización de bodas",
+  },
+  {
+    href: "/organizacion-de-eventos/pantallas-para-escenarios",
+    label: "Pantallas para escenarios",
+  },
+  {
+    href: "/organizacion-de-eventos/stands-para-eventos",
+    label: "Stands para eventos",
+  },
+  {
+    href: "/organizacion-de-eventos/musica-para-eventos",
+    label: "Música para eventos",
+  },
+];
+
 export default function Footer() {
   return (
-    <footer className="bg-surface-light text-ink-muted py-12 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Marca */}
-        <div className="flex justify-center mb-8">
-          <Link href="/" aria-label="La Trinchera México, inicio">
-            <Image
-              src="/logo-trinchera.png"
-              alt="La Trinchera México"
-              width={800}
-              height={328}
-              sizes="160px"
-              className="h-16 w-auto"
-            />
-          </Link>
-        </div>
-
-        {/* Navegación superior */}
-        <div className="flex justify-center mb-8">
-          <nav className="flex space-x-8 text-sm font-medium">
+    <footer className="bg-black text-white/70 border-t border-white/10 px-6 pt-14 pb-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid gap-12 md:grid-cols-12">
+          {/* Marca */}
+          <div className="md:col-span-5">
             <Link
-              href="/about"
-              className="hover:text-[#22d3f7] transition-colors"
+              href="/"
+              aria-label="La Trinchera México, inicio"
+              className="inline-block"
             >
-              Sobre Nosotros
+              <Image
+                src="/logo-trinchera.png"
+                alt="La Trinchera México"
+                width={800}
+                height={328}
+                sizes="(min-width: 768px) 288px, 256px"
+                className="w-64 md:w-72 h-auto"
+              />
             </Link>
-            <Link
-              href="/organizacion-de-eventos"
-              className="hover:text-[#22d3f7] transition-colors"
-            >
+            <p className="mt-5 max-w-sm text-sm leading-relaxed">
+              Organización de eventos en CDMX y Estado de México. Planeación,
+              producción y montaje.
+            </p>
+          </div>
+
+          {/* Servicios */}
+          <nav aria-label="Servicios" className="md:col-span-4">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white">
               Servicios
-            </Link>
-            <Link
-              href="/contact"
-              className="hover:text-[#22d3f7] transition-colors"
-            >
-              Contacto
-            </Link>
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              {servicios.map((s) => (
+                <li key={s.href}>
+                  <Link
+                    href={s.href}
+                    className="hover:text-[#22d3f7] transition-colors"
+                  >
+                    {s.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
-        </div>
 
-        {/* Línea divisoria */}
-        <div className="border-t border-black/10 mb-8"></div>
+          {/* Empresa y contacto */}
+          <div className="md:col-span-3">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-white">
+              Contacto
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <a
+                  href="mailto:contacto@latrincheramexico.com"
+                  className="break-all hover:text-[#22d3f7] transition-colors"
+                >
+                  contacto@latrincheramexico.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+525545210178"
+                  className="hover:text-[#22d3f7] transition-colors"
+                >
+                  +52 55 4521 0178
+                </a>
+              </li>
+              <li>CDMX y Estado de México</li>
+              <li>
+                <Link
+                  href="/about"
+                  className="hover:text-[#22d3f7] transition-colors"
+                >
+                  Sobre nosotros
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="font-semibold text-[#22d3f7] hover:text-white transition-colors"
+                >
+                  Solicita tu cotización →
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
 
         {/* Footer inferior */}
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 md:flex-row">
           {/* Copyright */}
-          <div className="text-sm text-ink-muted">
-            © 2025 La Trinchera México. Todos los derechos reservados.
+          <div className="text-sm text-white/50">
+            © {new Date().getFullYear()} La Trinchera México. Todos los
+            derechos reservados.
           </div>
 
           {/* Redes sociales */}

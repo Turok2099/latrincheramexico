@@ -28,7 +28,7 @@ Marcar `[x]` al terminar y anotar fecha. Un cambio de código se cierra con `npm
 
 Implementado el 2026-11-14 (lint y tsc sin errores nuevos; build correcto; HTML servido localmente comprobado). Sin publicar: el efecto en Google no está medido.
 
-- [x] **Inicio:** H1 = "La Trinchera México" + línea "Organización de eventos en CDMX y Estado de México" (el diseño del hero no cambia).
+- [x] **Inicio:** H1 = "La Trinchera México" + línea "Organización de eventos en CDMX y Estado de México". *Reemplazado el mismo día: ver «Cambios posteriores» (hero rediseñado).*
 - [x] **Inicio:** quitado `searchParams`; la página ahora es estática (○ en el build).
 - [x] **Middleware:** `middleware.js` estaba en la raíz y Next no lo cargaba (el proyecto usa `src/`). Movido a `src/middleware.js`; ahora `?p=` y rutas `/wp-*`, `/category/`, `/tag/` devuelven 404 real (comprobado con curl local). Antes solo la inicio daba 404 con `?p=`.
 - [x] **`/contact`:** ya tenía H1 (lo emite `Formulario principal`); no requirió cambio.
@@ -50,9 +50,20 @@ Implementado el 2026-11-14 (lint y tsc sin errores nuevos; `build:sitemap` corre
 - [x] Regenerado con `npm run build:sitemap`; revisado `git diff public/`.
 - [ ] Tras publicar: reenviar/confirmar el sitemap en Search Console y comprobar que /sitemap.xml y /robots.txt publicados coinciden con los del repositorio.
 
+## Cambios posteriores (2026-11-14, rediseño visual)
+
+Solo lint, `tsc` y `npm run test:contacto` (sin correos reales); **falta `npm run build` y revisión visual** en `npm run dev`. Sin publicar y sin medir efecto en Google. Metadata, JSON-LD, URLs y sitemap no cambiaron.
+
+- [x] **Navbar:** logo agrandado (móvil `h-14`, escritorio `h-19`); en Inicio no se muestra porque el logo vive en el hero.
+- [x] **Hero de inicio** (`HeroSection.tsx`, `HeroCarousel.tsx`): logo con subtítulo grande y título "Creamos momentos extraordinarios." (antes "Creamos experiencias extraordinarias"; ninguna consulta de Search Console usaba "experiencias"). El H1 único contiene logo (`alt="La Trinchera México"`), título y la línea "Organización de eventos en CDMX y Estado de México", todo visible, sin texto `sr-only`; ya no hay H2 en el hero. Carrusel con la misma lógica; solo cambió el degradado.
+- [x] **Pie de página** (`Footer.tsx`): fondo negro, columnas de marca, servicios y contacto. Añade enlaces internos sitewide a los seis servicios, correo, teléfono +52 55 4521 0178 y cobertura (datos confirmados). Año dinámico.
+- [x] **Formulario** (rediseño visual + endurecimiento): correo de una sola dirección (sin `,;<>"()[]\`), honeypot renombrado a `controlInterno`, foco en el primer error según el orden visual. El límite global de intentos (regla del Firewall de Vercel o Turnstile) sigue pendiente, ya anotado en `PENDIENTES.md`.
+- [ ] Comprobar el H1 de inicio ya publicado y que no haya contenido tapado por la barra de navegación de escritorio, ahora más alta (~100 px) en las demás páginas.
+- [ ] Revisar jerarquía de encabezados en inicio: el hero ya no tiene H2.
+
 ## Fase 3 – Contenido y autoridad (requiere datos del negocio)
 
-- [ ] Confirmar URLs reales de Facebook e Instagram; sustituir los enlaces del pie y añadir `sameAs`.
+- [ ] Confirmar URLs reales de Facebook e Instagram; sustituir los enlaces del pie (hoy apuntan a `facebook.com` e `instagram.com` genéricos, en `Footer.tsx`) y añadir `sameAs`. Si no existen perfiles, quitar los íconos.
 - [ ] Crear o reclamar el Perfil de Negocio de Google como negocio con área de servicio (sin dirección pública), cobertura CDMX y Estado de México.
 - [ ] Casos o testimonios reales con permiso (cliente, tipo de evento, fotos propias). No inventar reseñas ni cifras.
 - [ ] Desambiguar la marca: usar siempre "La Trinchera México" en títulos, schema y perfiles.
@@ -61,7 +72,7 @@ Implementado el 2026-11-14 (lint y tsc sin errores nuevos; `build:sitemap` corre
 
 ## Fase 4 – Medición
 
-- [ ] Repetir la exportación de Search Console 4 semanas después de publicar la Fase 1 y comparar con la línea base.
+- [ ] Repetir la exportación de Search Console 4 semanas después de publicar la Fase 1 y los cambios posteriores (hero, pie, formulario) y comparar con la línea base. Vigilar posición e impresiones de inicio (línea base: pos 8.03, 998 impresiones, 12 clics) por el cambio de H1 y título del hero.
 - [ ] Correr Lighthouse sobre producción (Node >=22.19).
 - [ ] Configurar Analytics con la cuenta nueva (ver `PENDIENTES.md`) cuando se decida; sin enviar datos de formularios.
 

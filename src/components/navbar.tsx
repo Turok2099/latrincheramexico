@@ -146,9 +146,10 @@ export default function Navbar() {
       )}
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-6 py-3">
           <div className="flex items-center justify-between">
-            {/* Logo */}
+            {/* Logo: en Inicio el logo grande vive en el hero */}
+            {pathname !== "/" && (
             <div className="flex-shrink-0">
               <Link href="/" aria-label="La Trinchera México, inicio" className="block">
                 <Image
@@ -157,14 +158,15 @@ export default function Navbar() {
                   width={800}
                   height={328}
                   priority
-                  sizes="120px"
-                  className="h-12 w-auto"
+                  sizes="(min-width: 768px) 200px, 140px"
+                  className="h-14 md:h-19 w-auto"
                 />
               </Link>
             </div>
+            )}
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-8 ml-auto">
               {navItems.map((item) => (
                 <div key={item.href} className="relative">
                   {item.hasSubmenu ? (
@@ -230,7 +232,7 @@ export default function Navbar() {
             {/* Mobile Menu Button - Icono Modernizado */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative z-50 p-2 text-white focus:outline-none transition-all duration-300"
+              className="md:hidden ml-auto relative z-50 p-2 text-white focus:outline-none transition-all duration-300"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-5 flex flex-col justify-between">

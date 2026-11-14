@@ -11,7 +11,7 @@ let ip=0;const req=(data,origin='https://latrincheramexico.com',fixed)=>new Requ
  assert.equal(calls.length,0);
  assert.equal((await api.POST(req(valid,'https://otro.example'))).status,403);
  assert.equal((await api.POST(req({...valid,mensaje:'x'.repeat(18000)}))).status,413);
- assert.equal((await api.POST(req({...valid,sitioWeb:'bot'}))).status,200);assert.equal(calls.length,0);
+ assert.equal((await api.POST(req({...valid,controlInterno:'bot'}))).status,200);assert.equal(calls.length,0);
  assert.equal((await api.POST(req(valid))).status,200);
  assert.equal((await api.POST(req(valid))).status,200);
  assert.equal(calls[0].headers['Idempotency-Key'],calls[1].headers['Idempotency-Key']);

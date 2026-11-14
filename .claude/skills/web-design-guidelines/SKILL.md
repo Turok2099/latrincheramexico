@@ -1,7 +1,6 @@
 ---
 name: web-design-guidelines
-description: Revisión manual de interfaz y accesibilidad en archivos o pantallas concretos.
-disable-model-invocation: true
+description: Revisar interfaz, accesibilidad, teclado y adaptación móvil en pantallas concretas; aplicar también al verificar cambios visuales solicitados.
 metadata:
   author: vercel
   version: "1.0.0-local-trinchera"

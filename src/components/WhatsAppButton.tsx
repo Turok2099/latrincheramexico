@@ -2,13 +2,6 @@
 
 import React from "react";
 
-// Declarar tipo para dataLayer de GTM
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-  }
-}
-
 interface WhatsAppButtonProps {
   phoneNumber: string;
   message?: string;
@@ -31,18 +24,6 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   };
 
   const handleClick = () => {
-    // 📊 Track evento en GTM/GA4
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({
-        event: "click_whatsapp",
-        button_name: "WhatsApp Flotante",
-        button_location: "floating_button",
-        phone_number: phoneNumber,
-        page_path: window.location.pathname,
-        page_url: window.location.href,
-      });
-    }
-
     // Abrir en nueva píestaña/ventana
     window.open(generateWhatsAppURL(), "_blank");
   };

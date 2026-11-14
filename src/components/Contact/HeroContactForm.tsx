@@ -56,16 +56,6 @@ export default function HeroContactForm() {
       return;
     }
 
-    // Consulta entregada (guardada en el servidor): sin datos personales en analítica
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({
-        event: "form_submission",
-        form_name: "Formulario de Contacto Página",
-        form_type: formData.tipoEvento || "No especificado",
-        page_path: window.location.pathname,
-      });
-    }
-
     setIsSubmitted(true);
     setFormData({
       nombre: "",

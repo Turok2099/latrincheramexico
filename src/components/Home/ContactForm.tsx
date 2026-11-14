@@ -3,13 +3,6 @@
 import { useState } from "react";
 import { enviarContacto } from "@/lib/enviarContacto";
 
-// Declarar tipo para dataLayer de GTM
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-  }
-}
-
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -48,19 +41,6 @@ export default function ContactForm() {
     if (!resultado.ok) {
       setError(resultado.error);
       return;
-    }
-
-    // 📊 Consulta entregada (guardada en el servidor). Sin nombre, correo, teléfono ni mensaje.
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({
-        event: "form_submission",
-        form_name: "Formulario de Contacto Home",
-        form_type: formData.tipoEvento || "No especificado",
-        event_date: formData.fechaEvento || "No especificado",
-        number_of_guests: formData.numeroInvitados || "No especificado",
-        page_path: window.location.pathname,
-        page_url: window.location.href,
-      });
     }
 
     setIsSubmitted(true);

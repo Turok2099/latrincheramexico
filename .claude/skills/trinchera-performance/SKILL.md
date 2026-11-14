@@ -9,9 +9,9 @@ Complementa a `vercel-react-best-practices` (reglas generales; ver exclusiones e
 
 ## Mapa
 - Imagenes: `src/components/OptimizedImage.tsx`, `src/helpers/ImageOptimizer.ts` (`optimizeCloudinaryUrl`), `src/helpers/CloudinaryMapping.ts`, `MainImagesMapping.ts`, `src/lib/cloudinary.ts`. `next.config.ts` permite solo `res.cloudinary.com`, formatos avif/webp y `deviceSizes`/`imageSizes` propios.
-- Carruseles: Swiper en `src/components/Home/HeroCarousel.tsx` y similares.
+- Carruseles: implementados con React en `src/components/Home/HeroCarousel.tsx` y similares; Swiper retirado por no utilizarse.
 - Fuente: Open Sans con `next/font/google` en `src/app/layout.tsx`. CSS critico en linea ahi (`critical.css` ya no existe); `experimental.optimizeCss` (critters) esta activo.
-- Terceros: GTM con `<Script>` en `layout.tsx`.
+- Sin scripts de medicion de Google por solicitud del usuario.
 - Los documentos de optimizacion previos (imagenes, CSS, Lighthouse) ya no estan en el repo: medir de nuevo antes de asumir que algo ya se optimizo.
 
 ## Reglas
@@ -20,7 +20,7 @@ Complementa a `vercel-react-best-practices` (reglas generales; ver exclusiones e
 3. **Carruseles**: `next/dynamic` si estan bajo el pliegue; prioridad solo en la primera diapositiva; importar solo los modulos de Swiper que se usan.
 4. **Cliente y servidor**: `"use client"` lo mas abajo posible del arbol; no volver cliente una pagina entera por un boton. Pasar a componentes cliente solo datos serializables minimos.
 5. **CSS y JS**: Tailwind 4 desde `src/styles/globals.css`; no sumar librerias de UI o animacion sin comparar `npm run analyze`.
-6. **Fuentes y terceros**: no agregar fuentes ni scripts sin medirlos. No cambiar la estrategia de GTM ni quitar los `preconnect`/`dns-prefetch` actuales sin evidencia.
+6. **Fuentes y terceros**: no agregar fuentes ni scripts sin medirlos. No reinstalar la medicion de Google retirada por el usuario.
 7. **Sin optimizaciones especulativas**: `useMemo`/`memo` y similares solo si una medicion los respalda.
 8. De `vercel-react-best-practices`, aplicar solo reglas compatibles con Next 15.4.10 y React 19.1.
 

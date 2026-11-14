@@ -11,7 +11,7 @@ export type DatosContacto = {
 
 export type ResultadoEnvio = { ok: true } | { ok: false; error: string };
 
-// Devuelve ok solo si el servidor confirma que la consulta se guardó.
+// Devuelve ok solo si el servidor confirma que Resend aceptó el envío.
 export async function enviarContacto(
   datos: DatosContacto,
   origen: string

@@ -2,7 +2,7 @@
 
 Sitio de La Trinchera México, infraestructura para eventos (identidad definida por el usuario), con servicios en CDMX (`https://latrincheramexico.com`, desplegado en Vercel). Idioma del sitio y de los textos: español de México.
 
-Stack (versiones instaladas): Next.js 15.4.10 (App Router), React 19.1.0, TypeScript 5, Tailwind CSS 4.1, Swiper, Cloudinary, Google Tag Manager `GTM-55QXTXJ9`.
+Stack (versiones instaladas): Next.js 15.4.10 (App Router), React 19.1.0, TypeScript 5, Tailwind CSS 4.1, Cloudinary.
 
 ## Estructura
 - `src/app/` rutas (App Router); servicios en `organizacion-de-eventos/*`, además `about`, `contact`, `404`.

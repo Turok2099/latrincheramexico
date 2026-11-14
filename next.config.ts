@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   },
   // Optimización de transpilación moderna
   experimental: {
-    optimizePackageImports: ["@heroicons/react", "swiper"],
+    optimizePackageImports: ["@heroicons/react"],
     optimizeCss: true, // Optimización de CSS
   },
   // Configuración de JavaScript moderno

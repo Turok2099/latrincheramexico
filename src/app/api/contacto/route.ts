@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabaseServer";
 
 export const runtime = "nodejs";
 
@@ -22,12 +21,14 @@ const str = (v: unknown, max: number) =>
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
   try {
-    body = await req.json();
+    const parsed: unknown = await req.json();
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("invalid body");
+    body = parsed as Record<string, unknown>;
   } catch {
     return NextResponse.json({ ok: false, error: "Solicitud inválida." }, { status: 400 });
   }
 
-  // Campo trampa: los bots lo rellenan. Respondemos "ok" sin guardar.
+  // Campo trampa: los bots lo rellenan. Respondemos "ok" sin enviar.
   if (str(body.sitioWeb, 200)) return NextResponse.json({ ok: true });
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "desconocida";
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
   const fecha = str(body.fechaEvento, 10);
   const invitados = Number.parseInt(str(body.numeroInvitados, 7), 10);
 
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !/[\r\n]/.test(email);
   const telOk = telefono.replace(/\D/g, "").length >= 7;
   const fechaOk = /^\d{4}-\d{2}-\d{2}$/.test(fecha) && !Number.isNaN(Date.parse(fecha));
 
@@ -57,34 +58,57 @@ export async function POST(req: Request) {
     );
   }
 
-  const supabase = getSupabaseAdmin();
-  if (!supabase) {
-    console.error("contacto: faltan variables de entorno de Supabase");
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
     return NextResponse.json(
       { ok: false, error: "El envío no está disponible por ahora. Escríbenos por WhatsApp." },
       { status: 503 }
     );
   }
 
-  const { error } = await supabase.from("contactos").insert({
-    nombre,
-    email,
-    telefono,
-    tipo_evento: tipoEvento || null,
-    fecha_evento: fechaOk ? fecha : null,
-    numero_invitados: Number.isFinite(invitados) && invitados > 0 ? invitados : null,
-    mensaje: mensaje || null,
-    origen: str(body.origen, 120) || null,
-  });
-
-  if (error) {
-    // Solo el código de error: nunca registrar datos personales.
-    console.error("contacto: error al guardar", error.code);
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      signal: AbortSignal.timeout(15000),
+      body: JSON.stringify({
+        from: "La Trinchera México <contacto@latrincheramexico.com>",
+        to: ["contacto@latrincheramexico.com"],
+        reply_to: email,
+        subject: "Nueva solicitud de cotización — La Trinchera México",
+        text: [
+          "Nueva solicitud desde el sitio web",
+          "",
+          `Nombre: ${nombre}`,
+          `Correo: ${email}`,
+          `Teléfono: ${telefono}`,
+          `Tipo de evento: ${tipoEvento || "No especificado"}`,
+          `Fecha: ${fechaOk ? fecha : "No especificada"}`,
+          `Invitados: ${Number.isFinite(invitados) && invitados > 0 ? invitados : "No especificados"}`,
+          `Origen: ${str(body.origen, 120) || "No especificado"}`,
+          "",
+          "Mensaje:",
+          mensaje || "Sin mensaje",
+        ].join("\n"),
+      }),
+    });
+    const result = await response.json().catch(() => null);
+    if (!response.ok || typeof result?.id !== "string" || !result.id) {
+      // Nunca registrar el cuerpo del correo, credenciales o datos personales.
+      console.error("contacto: Resend no aceptó el envío", response.status);
+      return NextResponse.json(
+        { ok: false, error: "No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp." },
+        { status: 502 }
+      );
+    }
+    return NextResponse.json({ ok: true });
+  } catch {
     return NextResponse.json(
-      { ok: false, error: "No pudimos guardar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp." },
-      { status: 500 }
+      { ok: false, error: "No pudimos confirmar el envío. Inténtalo de nuevo o escríbenos por WhatsApp." },
+      { status: 502 }
     );
   }
-
-  return NextResponse.json({ ok: true });
 }

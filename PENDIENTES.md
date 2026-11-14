@@ -6,12 +6,12 @@
 
 ## Otros
 - Identidad "infraestructura para eventos": sin definir.
-- Formularios simulados y Build Command de Vercel: ver `.claude/HALLAZGOS.md`.
+- Formularios y Build Command de Vercel: ver `.claude/HALLAZGOS.md`.
 - Regenerar el sitemap con `npm run build:sitemap` y commitear `public/sitemap.xml` y `public/robots.txt` tras cambios de rutas.
 
-## Formularios / Supabase
-- Ejecutar `supabase/schema.sql` en el SQL Editor de Supabase y agregar `NEXT_PUBLIC_SUPABASE_URL` y `SUPABASE_SECRET_KEY` en Vercel (Production y Preview).
-- Aviso por correo de nuevas consultas (requiere servicio de envío, p. ej. Resend, y correo destino).
+## Formularios / Resend
+- Agregar RESEND_API_KEY en .env.local y Vercel (Production; Preview solo si se necesitan envios desde vistas previas).
+- Resend integrado por API: remitente y destino contacto@latrincheramexico.com. Pendiente configurar clave y verificar entrega real. No se guardan solicitudes en base de datos. Conservar/exportar contactos antiguos antes de cerrar Supabase.
 - Aviso de privacidad y casilla de aceptación; definir retención de datos.
 - Select de `Home/ContactForm.tsx`: quitar "mobiliario" y "fotografía" (no hay página de esos servicios) y alinear con las opciones de `/contact`.
 - Límite de envíos es en memoria por instancia; si hay spam, pasar a un límite persistente.

@@ -36,6 +36,10 @@ export const metadata: Metadata = {
   },
 };
 
+const analitica =
+  process.env.NODE_ENV === "production" &&
+  process.env.VERCEL_ENV !== "preview";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,18 +89,23 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppButton phoneNumber="+525545210178" />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-K9R5B0D8QR"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-K9R5B0D8QR');
-          `}
-        </Script>
+        {/* GA4 solo en producción real: no en desarrollo local ni en previews de Vercel */}
+        {analitica && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-K9R5B0D8QR"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-K9R5B0D8QR');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );

@@ -80,7 +80,29 @@ Solo lint, `tsc` y `npm run test:contacto` (sin correos reales); **falta `npm ru
 
 - [ ] Repetir la exportación de Search Console 4 semanas después de publicar la Fase 1 y los cambios posteriores (hero, pie, formulario) y comparar con la línea base. Vigilar posición e impresiones de inicio (línea base: pos 8.03, 998 impresiones, 12 clics) por el cambio de H1 y título del hero.
 - [ ] Correr Lighthouse sobre producción (Node >=22.19).
-- [ ] Configurar Analytics con la cuenta nueva (ver «Google y medición») cuando se decida; sin enviar datos de formularios.
+- [~] Analytics con la cuenta nueva: etiqueta GA4 añadida (ver «Google y medición» para lo pendiente); sin enviar datos de formularios.
+
+## Fase 5 – Contenido de las páginas (análisis del 2026-11-14, para revisar más adelante)
+
+Base: HTML publicado de las 15 URLs del sitemap y consultas de Search Console (línea base). Conteos aproximados (contenido principal y menciones exactas de cada frase). No se cambió nada con este análisis; ejecutar tras la primera medición o cuando se decida. Evitar repetir palabras clave de forma artificial; usar solo datos confirmados (`.claude/skills/trinchera-seo/references/servicios.md`).
+
+**Ya está bien:** un solo H1 con la palabra clave por página; títulos y metadescripciones únicos con canonical; páginas de servicio de 590–720 palabras y hub de eventos de 905; 28–37 enlaces internos por página; todas las imágenes del contenido tienen `alt`; `Service`, migas de pan y FAQ en casi todas las páginas (música sin FAQ por falta de preguntas confirmadas). El hub cubre "agencia de eventos", "organizador/organizadores" y "empresas organizadoras"; corporativos cubre "productora" y "empresas organizadoras". Los FAQ ya no suelen dar resultados enriquecidos en Google, pero sirven como contenido.
+
+Prioridad alta:
+- [ ] **Catering** (`/organizacion-de-eventos/servicio-de-catering-para-eventos`): "catering cdmx", "catering ciudad de méxico" y "servicios de catering cdmx" suman ~420 impresiones en posiciones 62–73, pero la página no contiene literalmente "catering cdmx" ni "catering ciudad de méxico" y "servicios de catering" aparece una vez.
+- [ ] **Bodas** (`/organizacion-de-eventos/organizacion-de-bodas`): "catering para bodas cdmx / df / distrito federal" suma ~100 impresiones; la página de bodas no menciona "catering para bodas" ni enlaza a catering con ese texto.
+
+Prioridad media:
+- [ ] **Corporativos:** "agencia de eventos corporativos" (192 impresiones, pos. 51) aparece una sola vez; reforzar en una introducción o H2. "organizadora de eventos" no aparece.
+- [ ] **Hub** (`/organizacion-de-eventos`): "productora de eventos cdmx" no aparece (0 menciones de "productora de eventos").
+- [ ] **Subpáginas de catering** (box lunch, canapés, coffee break, taquizas): 380–430 palabras y Google las marca "descubiertas sin indexar"; ampliar con datos confirmados, sin inventar menús ni precios.
+
+Prioridad baja:
+- [ ] **Sobre Nosotros:** el H1 ("Una empresa de personas al servicio de personas") no lleva palabras clave y la metadescripción mide 203 caracteres (se corta; ~155).
+- [ ] **Música:** quitar los emojis de los H2 (accesibilidad y claridad).
+- [ ] **Inicio:** el H2 "Una empresa de personas al servicio de personas." repite el H1 de about; cosmético y de bajo riesgo. Inicio ya rankea en pos. 8: tocarlo poco.
+
+Límites: los títulos de corporativos y del hub miden 74 caracteres y Google puede cortarlos (decisión del usuario: priorizar palabras clave sobre la marca). Con tan pocas impresiones, la exportación de las 4 semanas decide qué cambios sirvieron.
 
 ## Formularios y privacidad
 
@@ -98,7 +120,14 @@ Hecho (publicado): Resend por API desde `contacto@latrincheramexico.com` con dom
 Hecho: `public/google66de2f41c6a4bac9.html` conservado (verificación de Search Console completada según el usuario); retirados el contenedor antiguo `GTM-55QXTXJ9`, su script, iframe y conexión anticipada, y los eventos de medición y declaraciones de `dataLayer`; Open Sans se conserva con `next/font/google` (parte del diseño, no analítica).
 
 - [ ] Comprobar permisos, propietarios, tokens antiguos y asociaciones en Search Console, DNS, Tag Manager y Analytics si se quiere desvincular por completo la cuenta anterior. Limpiar el código no elimina accesos externos.
-- [ ] Con la cuenta nueva, configurar Analytics y, si se decide, Tag Manager; definir y comprobar la medición de clics y solicitudes. No restaurar los identificadores antiguos.
+- [x] 2026-11-14: Google Analytics 4 (`G-K9R5B0D8QR`, cuenta nueva) añadido por el usuario en `src/app/layout.tsx` con `next/script` (`afterInteractive`). Comprobado localmente con Chrome: `gtag.js` carga, `window.gtag` existe, sin errores de página y se intenta el envío a `google-analytics.com/g/collect` (bloqueé ese envío en la prueba para no ensuciar los datos). No hay eventos personalizados ni se envían datos de formularios. Pendiente de confirmar en producción (Analytics → Tiempo real).
+  - Revisión del commit `1bfe684` (2026-11-14, build de producción local con Chrome; envíos a Google respondidos localmente con 204, nada llegó a la propiedad): la carga inicial de `/` envía **un** `page_view`; cada navegación interna (`/` → `/about` → `/contact`) envía **un** `page_view` por página (la medición mejorada detecta los cambios de historial); sin duplicados. La única etiqueta de Google en el código es la de `layout.tsx` (el `GTM-55QXTXJ9` antiguo no existe en el repositorio ni en el HTML publicado el 2026-11-14, que aún no incluía la etiqueta nueva).
+  - Medición mejorada de GA4 (comportamiento documentado de Google, no verificado en la propiedad): `page_view`, `scroll` (90 %), clics salientes (WhatsApp, Instagram, Facebook), búsquedas del sitio, vídeos de YouTube incrustados, descargas de archivos y `form_start`/`form_submit`. No recoge el contenido de los campos; `form_submit` también salta con envíos que no pasan la validación, así que no equivale a solicitudes reales. Además usa cookies `_ga`/`_ga_*` con un identificador de cliente, la URL, el referente, el dispositivo y la ubicación aproximada.
+  - Pendientes de privacidad y propiedad: ver los tres puntos siguientes y, en la propiedad de GA, confirmar el ID del flujo (`G-K9R5B0D8QR`, `latrincheramexico.com`), la retención de datos (14 meses), Google Signals y qué toggles de medición mejorada se quieren (dejar activos los cambios de página por historial; valorar desactivar «interacciones con formularios»).
+- [x] 2026-11-14: Analytics solo en producción real (`NODE_ENV === "production"` y `VERCEL_ENV !== "preview"`, en `layout.tsx`); ya no se envía desde `localhost` ni desde previews. `npm run build` correcto y la etiqueta sigue en el HTML de producción generado.
+- [x] 2026-11-14: `/aviso-privacidad` menciona Google Analytics, las cookies, los datos que recoge y cómo rechazarlas (navegador o complemento de inhabilitación de Google). Sin cifras de retención inventadas.
+- [ ] Valorar un aviso o banner de cookies según el criterio del negocio (hay visitas desde España en Search Console); el aviso no se ha validado como legal integral.
+- [ ] Medición de clics y solicitudes (WhatsApp, formulario) solo si se decide, sin enviar datos personales. No restaurar los identificadores antiguos (`GTM-55QXTXJ9`).
 
 ## Dependencias y técnica
 

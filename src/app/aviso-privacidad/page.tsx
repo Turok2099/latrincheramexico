@@ -15,6 +15,9 @@ export default function Privacidad() {
     <h2 className="text-xl font-bold">Cómo se envía tu solicitud</h2>
     <p>El sitio utiliza Vercel para procesar el formulario y Resend para enviar la solicitud al correo de contacto de La Trinchera México. El buzón está alojado en Hostinger. El formulario no guarda las solicitudes en una base de datos del sitio; la información se recibe por correo electrónico.</p>
     <p>Evita incluir datos sensibles o información de otras personas que no sea necesaria para tu consulta.</p>
+    <h2 className="text-xl font-bold">Estadísticas de visitas y cookies</h2>
+    <p>Este sitio usa Google Analytics, un servicio de Google, para conocer cuántas personas lo visitan y qué páginas consultan. Para ello se instalan cookies y se recopilan datos como las páginas visitadas, la página de origen, el tipo de dispositivo y navegador, y una ubicación aproximada. No usamos esta herramienta para enviar el contenido de tus solicitudes de cotización.</p>
+    <p>Puedes rechazar o borrar las cookies desde la configuración de tu navegador, o instalar el <a className="text-[#22d3f7] underline" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">complemento de inhabilitación de Google Analytics (se abre en otra pestaña)</a>.</p>
     <h2 className="text-xl font-bold">Contacto sobre tu información</h2>
     <p>Para consultar sobre el tratamiento de tus datos o solicitar una corrección o eliminación, escríbenos a <a className="text-[#22d3f7] underline" href="mailto:contacto@latrincheramexico.com">contacto@latrincheramexico.com</a>.</p>
   </main>;

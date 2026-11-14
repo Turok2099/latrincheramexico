@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ServiciosRelacionados from "@/components/OrganizacionDeEventos/ServiciosRelacionados";
 import Link from "next/link";
 import InspirationSection from "@/components/Home/InspirationSection";
 import TiposServiciosCatering from "@/components/OrganizacionDeEventos/TiposServiciosCatering";
@@ -185,6 +186,8 @@ export default function CateringPage() {
       />
 
       <FaqSection title="Preguntas frecuentes sobre catering para eventos" faqs={faqs} light />
+
+      <ServiciosRelacionados items={["bodas","corporativos","musica"]} />
 
       <InspirationSection />
     </div>

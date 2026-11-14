@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ServiciosRelacionados from "@/components/OrganizacionDeEventos/ServiciosRelacionados";
 import Link from "next/link";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
@@ -337,6 +338,8 @@ export default function EventosCorporativosPage() {
           </div>
         </div>
       </section>
+
+      <ServiciosRelacionados items={["musica","bodas","catering"]} />
 
       <InspirationSection />
     </div>

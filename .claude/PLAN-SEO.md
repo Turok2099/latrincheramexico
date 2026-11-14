@@ -40,12 +40,15 @@ Implementado el 2026-11-14 (lint y tsc sin errores nuevos; build correcto; HTML 
 
 ## Fase 2 – Base técnica
 
-- [ ] Sitemap: `lastmod` real por página; quitar `changefreq` y `priority`.
-- [ ] `robots.txt`: un solo grupo `User-agent: *`, sin `Host:`; editar solo en `robotsTxtOptions`.
-- [ ] JSON-LD: `WebSite` en inicio, `AboutPage` en about, `ContactPage` en contact. Sin dirección, reseñas, horarios ni precios.
-- [ ] Enlaces internos entre servicios (bodas ↔ catering ↔ música ↔ pantallas ↔ stands) con texto descriptivo.
-- [ ] Revisar `alt` de imágenes en galerías.
-- [ ] Regenerar con `npm run build:sitemap` y revisar `git diff public/`.
+Implementado el 2026-11-14 (lint y tsc sin errores nuevos; `build:sitemap` correcto; HTML servido localmente comprobado). Vercel ya ejecuta `build:sitemap` (confirmado por el usuario). Sin medir el efecto en Google.
+
+- [x] Sitemap: `lastmod` real por ruta desde un mapa fijo en `next-sitemap.config.js` (actualizarlo al cambiar el contenido de cada página); sin `changefreq` ni `priority`. 15 URLs, inicio una sola vez; se retiró `additionalPaths` porque la inicio ya es estática. `aviso-privacidad` se conserva por decisión del usuario.
+- [x] `robots.txt`: un solo grupo `User-agent: *` con `Allow` y `Disallow`, sin `additionalSitemaps` duplicado. La línea `Host:` la agrega next-sitemap siempre; Google la ignora, es inofensiva.
+- [x] JSON-LD: `WebSite` junto a `Organization` en inicio (`@graph`), `AboutPage` en about y `ContactPage` en contact, solo con datos confirmados.
+- [x] Enlaces internos: bloque `ServiciosRelacionados` (3 servicios por página, con título y descripción) en corporativos, bodas, pantallas, stands, catering y música (este desde su `layout.tsx`).
+- [x] `alt` de imágenes: revisados; ya son descriptivos. No se cambiaron porque no se verificó el contenido de cada imagen.
+- [x] Regenerado con `npm run build:sitemap`; revisado `git diff public/`.
+- [ ] Tras publicar: reenviar/confirmar el sitemap en Search Console y comprobar que /sitemap.xml y /robots.txt publicados coinciden con los del repositorio.
 
 ## Fase 3 – Contenido y autoridad (requiere datos del negocio)
 

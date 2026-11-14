@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ServiciosRelacionados from "@/components/OrganizacionDeEventos/ServiciosRelacionados";
 import Link from "next/link";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
@@ -352,6 +353,8 @@ export default function PantallasParaEscenariosPage() {
           </div>
         </div>
       </section>
+
+      <ServiciosRelacionados items={["stands","corporativos","musica"]} />
 
       <InspirationSection />
     </div>

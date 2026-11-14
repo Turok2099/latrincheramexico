@@ -91,8 +91,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const structuredData = {
-    "@context": "https://schema.org",
+  const organization = {
     "@type": "Organization",
     name: "La Trinchera México",
     description:
@@ -167,6 +166,19 @@ export default function Home() {
         },
       ],
     },
+  };
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      organization,
+      {
+        "@type": "WebSite",
+        name: "La Trinchera México",
+        url: "https://latrincheramexico.com",
+        inLanguage: "es-MX",
+      },
+    ],
   };
 
   return (

@@ -50,11 +50,32 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "Sobre Nosotros | La Trinchera México",
+  url: "https://latrincheramexico.com/about",
+  inLanguage: "es-MX",
+  about: {
+    "@type": "Organization",
+    name: "La Trinchera México",
+    url: "https://latrincheramexico.com",
+  },
+};
+
 export default function AboutLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {children}
+    </>
+  );
 }
 

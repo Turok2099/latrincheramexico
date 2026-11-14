@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ServiciosRelacionados from "@/components/OrganizacionDeEventos/ServiciosRelacionados";
 import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
 import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
 
@@ -103,6 +104,7 @@ export default function MusicaLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       {children}
+      <ServiciosRelacionados items={["bodas", "corporativos", "pantallas"]} />
     </>
   );
 }

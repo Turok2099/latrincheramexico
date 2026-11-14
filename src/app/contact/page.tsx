@@ -30,9 +30,28 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contacto y Cotización de Eventos | La Trinchera México",
+  url: "https://latrincheramexico.com/contact",
+  inLanguage: "es-MX",
+  about: {
+    "@type": "Organization",
+    name: "La Trinchera México",
+    url: "https://latrincheramexico.com",
+    telephone: "+52-55-4521-0178",
+    email: "contacto@latrincheramexico.com",
+  },
+};
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-black text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <HeroContactForm />
     </div>
   );

@@ -1,26 +1,17 @@
 ---
 name: trinchera-conversion
-description: Formularios de contacto, boton de WhatsApp y recorrido de solicitud de cotizacion de La Trinchera Mexico. Usar al editar o crear formularios, validacion, estados de carga/error/exito, eventos de GTM/GA4 o la integracion de envio.
+description: Cambios al formulario compartido, validación, envío por Resend y contacto por WhatsApp de La Trinchera México.
 ---
+# Formularios y contacto
 
-# Conversion y cotizaciones
-
-## Estado actual (verificar con Read antes de actuar)
-- Envio real: /api/contacto valida y envia por la API de Resend con RESEND_API_KEY, solo en servidor. Destino y remitente: contacto@latrincheramexico.com; reply_to del visitante. Sin base de datos. Exito significa aceptacion del proveedor, no entrega garantizada.
-- Los dos formularios muestran exito solo si la API responde `ok`; no emiten eventos de medicion.
-- `src/components/WhatsAppButton.tsx`: enlace `wa.me` con +525545210178, sin eventos de medicion.
-- Notificacion por correo implementada con Resend; pendiente configurar clave y comprobar entrega. Aviso de privacidad pendiente.
-- Sin etiquetas ni eventos de Google. Configuracion nueva pendiente de solicitud del usuario, despues del contenido.
-
-## Reglas
-1. **Exito solo con evidencia**: mostrar confirmacion unicamente tras una respuesta 2xx del destino real. Nunca tras un `setTimeout`. Si falta configuracion (variables de entorno), la API responde 503 y el formulario muestra error; no mostrar "Mensaje Enviado": mostrar error o la alternativa de WhatsApp y reportar la limitacion.
-2. **Destino existente primero**: buscar con Grep (`api`, `fetch`, `mailto`, `formspree`, `resend`, `emailjs`, `process.env`) y revisar solo los NOMBRES de variables de `.env.local`, sin imprimir valores. No proponer un servicio nuevo si ya hay uno. Si no existe, no elegir proveedor por cuenta propia: pedir al usuario (a) proveedor o destino (correo, CRM, webhook), (b) direccion que recibira las consultas, (c) variables de entorno disponibles en Vercel.
-3. **Servidor**: el envio va a `src/app/api/<nombre>/route.ts` o a una Server Action que valide en servidor (la validacion del cliente no basta), limite longitud de campos, incluya honeypot o limite de tasa si es viable y lea secretos solo de `process.env` (sin prefijo `NEXT_PUBLIC_`).
-4. **Validacion y accesibilidad**: `label` con `htmlFor`, `required` y `type` adecuados (`email`, `tel`), errores asociados con `aria-describedby` o `role="alert"`, boton `disabled` con texto de carga durante el envio, foco visible, resultado anunciado con `aria-live="polite"`. Conservar los estilos Tailwind existentes (`#22d3f7`, fondo negro).
-5. **Estados**: reposo, enviando, exito, error (con reintento y sin perder lo escrito). No vaciar el formulario hasta confirmar exito.
-6. **Analitica**: retirada por solicitud del usuario. No restaurar etiquetas ni eventos antiguos; configurar de nuevo solo cuando el usuario lo solicite.
-7. **Privacidad**: no enviar datos personales a analitica ni registrarlos en consola o logs.
-8. **WhatsApp**: mantener `wa.me` con mensaje prellenado, sin medicion hasta nueva solicitud.
-
-## Verificacion
-`npm run lint`, `npx tsc --noEmit` y `npm run build`. Probar el flujo solo contra un destino de prueba; no enviar formularios reales. Reportar de forma explicita si el envio no pudo probarse de extremo a extremo.
+- Un solo formulario: src/components/Contact/Formulario.tsx. Home/ContactForm.tsx y Contact/HeroContactForm.tsx son envolturas; no duplicar campos ni lógica.
+- Catálogo, límites y validación: src/lib/contacto.ts. Cliente: src/lib/enviarContacto.ts. Servidor: src/app/api/contacto/route.ts. Leer solo lo que afecte al cambio.
+- Resend por fetch, RESEND_API_KEY solo en servidor. Remitente/destino: contacto@latrincheramexico.com; reply_to del visitante. Sin Supabase, Neon ni almacenamiento local de datos personales.
+- Conservar errores por campo, datos tras fallo, límites sin recortes, bloqueo de doble envío, foco visible, labels, autocompletado y anuncio de estados.
+- Fecha e invitados opcionales; validar fechas reales no pasadas y cantidades enteras positivas. Servicio y autorización de privacidad obligatorios; validar de nuevo en servidor.
+- Éxito solo tras aceptación de Resend; no equivale a entrega. No prometer respuesta en 24 h. Mantener enlace a WhatsApp en errores.
+- Idempotencia: mismo contenido e intento reutilizan la clave; cambiar datos o recargar crea otro intento. No generar una clave nueva en cada reintento idéntico. Resend deduplica durante 24 h.
+- Protección: origen, JSON de hasta 16 KiB, honeypot, límite por IP/instancia con memoria acotada. No afirmar que es un límite global ni agregar servicios externos sin necesidad.
+- /aviso-privacidad es información del flujo real; aviso integral pendiente de datos del responsable. No inventar domicilio, retención ni procedimientos legales.
+- WhatsApp usa wa.me/+525545210178. No reinstalar eventos de Google ni enviar datos personales a analítica o logs.
+- Verificación según CLAUDE.md y npm run test:contacto. Simular el proveedor; no enviar correos reales durante pruebas. Distinguir pruebas locales de entrega comprobada en producción; estado en la sección pertinente de PENDIENTES.md.

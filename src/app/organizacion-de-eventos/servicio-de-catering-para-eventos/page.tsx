@@ -32,7 +32,11 @@ const faqs: Faq[] = [
   },
   {
     q: "¿Ofrecen servicio de catering en CDMX?",
-    a: "Sí. Por ahora atendemos eventos en CDMX y en el Estado de México.",
+    a: "Sí. Por ahora atendemos eventos en la Ciudad de México (antes Distrito Federal) y en el Estado de México.",
+  },
+  {
+    q: "¿Tienen catering para bodas?",
+    a: "Sí. El catering puede ser un complemento de la organización de tu boda en CDMX o en el Estado de México. Cuéntanos la fecha, la ubicación y el número de invitados para preparar tu cotización.",
   },
   {
     q: "¿Qué información necesitan para cotizar?",
@@ -68,7 +72,7 @@ export default function CateringPage() {
 
       <CateringHero
         titleTop="SERVICIO DE CATERING"
-        titleAccent="PARA EVENTOS"
+        titleAccent="PARA EVENTOS EN CDMX"
         subtitle="Taquizas, box lunch, coffee break, canapés y más para tu evento"
         cta="Cotizar catering"
         image={cateringImages[0]}
@@ -86,7 +90,7 @@ export default function CateringPage() {
             La Trinchera México es una empresa de organización de eventos con más
             de 10 años de experiencia. Ofrecemos servicio de catering para
             eventos empresariales y celebraciones en CDMX y en el Estado de
-            México.
+            México, incluido el catering para bodas.
           </p>
           <p className="text-muted text-lg leading-relaxed">
             Si tu catering forma parte de un evento mayor, conoce la{" "}

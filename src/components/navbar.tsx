@@ -98,7 +98,7 @@ export default function Navbar() {
   };
 
   const navItems = [
-    { href: "/", label: "Home" },
+    { href: "/", label: "Inicio" },
     {
       href: "/organizacion-de-eventos",
       label: "Organización de Eventos",

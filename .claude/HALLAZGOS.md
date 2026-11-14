@@ -1,14 +1,9 @@
-# Hallazgos confirmados (revisión de código, 2026-10-08)
+# Estado de los hallazgos
 
-Cada punto fue verificado leyendo los archivos citados. Los cambios de aplicación NO están hechos; son propuestas pendientes.
+Actualizado: 14 de noviembre de 2026.
 
-| # | Hallazgo (confirmado) | Evidencia | Acción propuesta |
-|---|---|---|---|
-| 1 | Formularios conectados a Resend, sin Supabase. Pendiente configurar RESEND_API_KEY y comprobar entrega real. | | |
-| 2 | Medicion retirada por solicitud del usuario. Formularios y WhatsApp conservan su funcionamiento sin eventos de Google. | | |
-| 3 | ~~Código de verificación de ejemplo en la página principal.~~ **Resuelto**: se quitó el marcador de `page.tsx`; la propiedad está verificada por archivo HTML (`public/google66de2f41c6a4bac9.html`). | | |
-| 4 | `build` y `build:sitemap` difieren. | `package.json`: `build` = `next build`; `build:sitemap` = `next build && next-sitemap`. `public/sitemap.xml` está versionado (lastmod 2025-10-03) y repite 3 URLs por `additionalPaths`. No hay `vercel.json`. | Confirmar el Build Command real en Vercel. Opciones: `postbuild` con `next-sitemap`, o regenerar y commitear. Deduplicar `additionalPaths`. |
-| 5 | ~~Ruta interna `propuesta-colores`.~~ **Resuelto**: eliminada. | | |
+El estado detallado y los pendientes vigentes están en PENDIENTES.md. Leer únicamente la sección que corresponda a la tarea; no cargar ambos documentos por defecto.
 
-## No verificado
-Build Command configurado en Vercel, configuración del contenedor GTM/GA4, indexación en Search Console, medidas de Lighthouse.
+Correcciones históricas: formulario conectado a Resend sin Supabase; formulario único con validación compartida; medición antigua de Google retirada; archivo nuevo de Search Console conservado; Swiper eliminado; dependencias auditadas y corregidas durante la sesión.
+
+No inferir comprobaciones de producción a partir de cambios locales: sigue pendiente verificar la publicación del formulario nuevo y una entrega real. La configuración de RESEND_API_KEY en Vercel fue confirmada por el usuario. El sitemap se regeneró localmente; el Build Command real de Vercel sigue pendiente de comprobar.

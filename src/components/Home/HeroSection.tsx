@@ -22,6 +22,10 @@ export default function HeroSection() {
               }}
             >
               LA TRINCHERA MÉXICO
+              <span className="sr-only">. </span>
+              <span className="mt-2 block text-base font-semibold text-white/80 sm:text-lg">
+                Organización de eventos en CDMX y Estado de México
+              </span>
             </h1>
             <h2
               className="text-white font-bold tracking-wide leading-tight animate-slide-in-left"

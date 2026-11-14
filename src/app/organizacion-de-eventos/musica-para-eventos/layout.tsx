@@ -1,54 +1,44 @@
 import type { Metadata } from "next";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
+
+const SITE = "https://latrincheramexico.com";
+const PAGE_PATH = "/organizacion-de-eventos/musica-para-eventos";
+const PAGE_URL = `${SITE}${PAGE_PATH}`;
+const TITLE = "Música para Eventos en CDMX | La Trinchera México";
+const DESCRIPTION =
+  "DJ, grupos musicales y mariachis para bodas, cumpleaños, fiestas y eventos corporativos en CDMX y Estado de México. Cotiza con La Trinchera México.";
+
+const ogImage = optimizeCloudinaryUrl(cloudinaryImages["musica-para-eventos"][5], {
+  width: 1200,
+  height: 630,
+});
 
 export const metadata: Metadata = {
-  title:
-    "Música para Eventos | DJ para Fiestas | Grupos Musicales | Mariachis - La Trinchera México",
-  description:
-    "DJ para fiestas, grupos musicales para eventos, mariachis para serenata y músicos para bodas. Contratación de DJs para eventos, bandas musicales, música para bodas, cumpleaños y fiestas infantiles en CDMX.",
-  keywords: [
-    "dj para fiestas",
-    "dj para eventos",
-    "dj para fiestas en casa",
-    "djs para bodas",
-    "sonido dj para fiestas",
-    "musica para eventos",
-    "grupos musicales para eventos",
-    "grupos musicales para fiestas",
-    "musicos para bodas",
-    "grupos musicales para bodas",
-    "bandas musicales para eventos",
-    "contratacion de mariachis",
-    "mariachis para serenata",
-    "mariachis para cumpleaños",
-    "mariachi boda",
-    "mariachi para serenatas",
-    "mariachis en cumpleaños",
-    "musica de mariachi para cumpleaños",
-    "musica fiesta",
-    "musica para bautizo",
-    "musica para fiesta de adultos",
-    "musica para fiesta infantil",
-    "musica para fiestas infantiles",
-    "musica para la boda",
-    "musica para una boda",
-    "musicas para cumpleaños",
-    "musicas para fiestas",
-    "La Trinchera México",
-    "música CDMX",
-    "entretenimiento eventos",
-  ],
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: PAGE_PATH },
   openGraph: {
-    title: "Música para Eventos | DJ y Grupos Musicales - La Trinchera México",
-    description:
-      "DJ para fiestas, grupos musicales, mariachis y música para eventos. Entretenimiento profesional para bodas, cumpleaños y eventos corporativos.",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: PAGE_URL,
+    siteName: "La Trinchera México",
     type: "website",
     locale: "es_MX",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Música para eventos en CDMX - La Trinchera México",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Música para Eventos - La Trinchera México",
-    description:
-      "DJ para fiestas, grupos musicales y mariachis. Música profesional para todo tipo de eventos.",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [ogImage],
   },
   robots: {
     index: true,
@@ -63,10 +53,56 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      name: "Música para eventos",
+      serviceType: "DJ, grupos musicales y mariachis para eventos",
+      url: PAGE_URL,
+      description:
+        "DJ, grupos musicales y mariachis para bodas, cumpleaños, fiestas y eventos corporativos en CDMX y Estado de México.",
+      areaServed: [
+        { "@type": "City", name: "Ciudad de México" },
+        { "@type": "State", name: "Estado de México" },
+      ],
+      provider: {
+        "@type": "Organization",
+        name: "La Trinchera México",
+        url: SITE,
+        telephone: "+52-55-4521-0178",
+        email: "contacto@latrincheramexico.com",
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: SITE },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Organización de eventos",
+          item: `${SITE}/organizacion-de-eventos`,
+        },
+        { "@type": "ListItem", position: 3, name: "Música para eventos", item: PAGE_URL },
+      ],
+    },
+  ],
+};
+
 export default function MusicaLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {children}
+    </>
+  );
 }

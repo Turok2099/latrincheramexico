@@ -49,8 +49,7 @@ La API usa fetch directamente: no hace falta instalar el SDK de Resend.
 Sin clave responde 503; si Resend rechaza el envio o falla la conexion responde 502.
 La confirmacion solo aparece cuando Resend acepta el mensaje, no garantiza su entrega.
 El limite antiabuso es local a cada instancia y no reemplaza un limite distribuido.
-El esquema en supabase/schema.sql queda como referencia historica: no ejecutarlo
-para configurar formularios. Exportar contactos antiguos antes de cerrar Supabase.
+
 ## Dependencias y seguridad
 
 Lighthouse 13.6 requiere Node.js >=22.19 (verificado con Node 24.22.1).
@@ -60,3 +59,16 @@ resuelven avisos de seguridad sin migrar Next.js ni degradar el complemento de
 TypeScript a una version incompatible con ESLint 9. Revisar estas excepciones
 cuando los paquetes superiores incorporen las correcciones. No aplicar
 npm audit fix --force: puede degradar herramientas a versiones incompatibles.
+## Formulario compartido
+
+Inicio y contacto usan src/components/Contact/Formulario.tsx. Catalogo, limites y
+validacion comun en src/lib/contacto.ts; la API vuelve a validar todos los campos.
+Fecha e invitados son opcionales. Privacidad requiere confirmacion expresa.
+Los reintentos con el mismo contenido conservan su UUID durante la vida del
+componente (hasta 23 horas). Resend deduplica durante 24 horas; recargar la pagina
+crea un nuevo intento. No se persisten datos personales en el navegador.
+Proteccion complementaria: JSON limitado a 16 KiB, origen igual al sitio, honeypot
+y 5 intentos por IP/10 minutos por instancia. No es un limite global; ante abuso
+configurar reglas de Firewall en Vercel. No se agrego CAPTCHA ni base de datos.
+La pagina de privacidad describe el flujo tecnico; queda pendiente completar el
+aviso integral con los datos y procedimientos reales del responsable.

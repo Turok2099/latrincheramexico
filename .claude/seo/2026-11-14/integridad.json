@@ -1,0 +1,52 @@
+[
+  {
+    "archivo": "rendimiento/Aparición en búsquedas.csv",
+    "bytes": 56,
+    "sha256": "fc461129af3cb4e5289a639bb63ede6c68ca1b6f9fff6d8276b9e90d908c208f"
+  },
+  {
+    "archivo": "rendimiento/Consultas.csv",
+    "bytes": 7804,
+    "sha256": "83aec6332f6793041578140a59e5d9243905de3e76b01ff200338461424a1785"
+  },
+  {
+    "archivo": "rendimiento/Dispositivos.csv",
+    "bytes": 125,
+    "sha256": "fa883062be60cc7f3fbc88cdb7944847f15a6546ef58248cd77c2251a0c43aaa"
+  },
+  {
+    "archivo": "rendimiento/Filtros.csv",
+    "bytes": 77,
+    "sha256": "3e98401fb88d8467e207c89ff62f804330fb67e819210e920f34f8f60de17754"
+  },
+  {
+    "archivo": "rendimiento/Gráfico.csv",
+    "bytes": 2274,
+    "sha256": "413205584c97b21d1fe09e9fbfd8b7dfa8ac275dc3ddac8c577124ffd6727d23"
+  },
+  {
+    "archivo": "rendimiento/Países.csv",
+    "bytes": 731,
+    "sha256": "426ab60cb584ea0d226fe365f57452920204a552ecd70cee37306becc756faa3"
+  },
+  {
+    "archivo": "rendimiento/Páginas.csv",
+    "bytes": 936,
+    "sha256": "1913280c3236e74de0ba9e04b244ea0a94c6e29faf62965e36a0233953314343"
+  },
+  {
+    "archivo": "cobertura-rastreada-sin-indexar/Gráfico.csv",
+    "bytes": 1214,
+    "sha256": "cbd959fae58680ec875929252e2f9bfad07903d58236b149b983fc7823b4802f"
+  },
+  {
+    "archivo": "cobertura-rastreada-sin-indexar/Metadatos.csv",
+    "bytes": 98,
+    "sha256": "d2ccd1a6a01bdae7aee223bf4218f5cf9149c286e2b8658859f09c8d417a9f05"
+  },
+  {
+    "archivo": "cobertura-rastreada-sin-indexar/Tabla.csv",
+    "bytes": 4751,
+    "sha256": "eabf08fb8720216ef98b038f10254ea5a5c3c6e48319b633a14d0f07552218dd"
+  }
+]

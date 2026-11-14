@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import { cloudinaryImages } from "@/helpers/CloudinaryMapping";
+import { optimizeCloudinaryUrl } from "@/helpers/ImageOptimizer";
+
+const ogImage = optimizeCloudinaryUrl(cloudinaryImages["eventos-empresariales"][0], {
+  width: 1200,
+  height: 630,
+});
 
 export const metadata: Metadata = {
   title: "Sobre Nosotros | La Trinchera México",
@@ -24,12 +31,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: "https://latrincheramexico.com/about",
+    siteName: "La Trinchera México",
+    images: [{ url: ogImage, width: 1200, height: 630, alt: "Sobre La Trinchera México" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sobre Nosotros - La Trinchera México",
     description:
       "Expertos en organización de eventos en CDMX. Más de 10 años creando experiencias inolvidables.",
+    images: [ogImage],
   },
   alternates: {
     canonical: "/about",

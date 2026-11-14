@@ -1,114 +1,81 @@
 import { NextResponse } from "next/server";
+import { createHash } from "node:crypto";
+import { contactoVacio, serviciosContacto, validarContacto, type DatosContacto } from "@/lib/contacto";
 
 export const runtime = "nodejs";
-
-// Límite básico por IP (en memoria: por instancia, es una barrera ligera, no total).
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_PER_WINDOW = 5;
-const hits = new Map<string, number[]>();
-
+// Barrera por instancia, complementaria al Firewall de Vercel; no es un limite global.
+const hits = new Map<string, { hasta: number; cuenta: number }>();
 function limited(ip: string) {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > MAX_PER_WINDOW;
+  const ahora = Date.now();
+  for (const [clave, entrada] of hits) if (entrada.hasta <= ahora) hits.delete(clave);
+  const entrada = hits.get(ip) ?? { hasta: ahora + WINDOW_MS, cuenta: 0 };
+  if (!hits.has(ip) && hits.size >= 5000) return true;
+  entrada.cuenta++; hits.set(ip, entrada);
+  return entrada.cuenta > 5;
 }
-
-const str = (v: unknown, max: number) =>
-  typeof v === "string" ? v.trim().slice(0, max) : "";
+const fallo = (error: string, status: number) => NextResponse.json({ ok: false, error }, { status });
 
 export async function POST(req: Request) {
+  const origen = req.headers.get("origin");
+  if (!origen || origen !== new URL(req.url).origin) return fallo("Envía la solicitud desde el formulario de nuestro sitio.", 403);
+  if (!req.headers.get("content-type")?.toLowerCase().startsWith("application/json")) return fallo("Formato de solicitud inválido.", 415);
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "desconocida";
+  if (limited(ip)) return NextResponse.json({ ok: false, error: "Has realizado varios intentos. Espera 10 minutos o escríbenos por WhatsApp." }, { status: 429, headers: { "Retry-After": "600" } });
+
   let body: Record<string, unknown>;
   try {
-    const parsed: unknown = await req.json();
-    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("invalid body");
+    // Limitar los bytes leidos, incluso cuando no existe Content-Length.
+    const lector = req.body?.getReader();
+    if (!lector) return fallo("Solicitud inválida.", 400);
+    const partes: Uint8Array[] = []; let bytes = 0;
+    while (true) {
+      const { done, value } = await lector.read();
+      if (done) break;
+      bytes += value.byteLength;
+      if (bytes > 16384) { await lector.cancel(); return fallo("La solicitud es demasiado larga.", 413); }
+      partes.push(value);
+    }
+    const parsed: unknown = JSON.parse(Buffer.concat(partes).toString("utf8"));
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return fallo("Solicitud inválida.", 400);
     body = parsed as Record<string, unknown>;
-  } catch {
-    return NextResponse.json({ ok: false, error: "Solicitud inválida." }, { status: 400 });
+  } catch { return fallo("Solicitud inválida.", 400); }
+  if (typeof body.sitioWeb === "string" && body.sitioWeb) return NextResponse.json({ ok: true });
+
+  const datos = { ...contactoVacio };
+  for (const clave of Object.keys(contactoVacio) as (keyof DatosContacto)[]) {
+    if (clave === "privacidad") { datos.privacidad = body.privacidad === true; continue; }
+    if (typeof body[clave] !== "string") return fallo("Revisa el formato de los campos del formulario.", 400);
+    datos[clave] = body[clave] as string;
   }
-
-  // Campo trampa: los bots lo rellenan. Respondemos "ok" sin enviar.
-  if (str(body.sitioWeb, 200)) return NextResponse.json({ ok: true });
-
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "desconocida";
-  if (limited(ip)) {
-    return NextResponse.json(
-      { ok: false, error: "Demasiados intentos. Inténtalo de nuevo en unos minutos." },
-      { status: 429 }
-    );
-  }
-
-  const nombre = str(body.nombre, 120);
-  const email = str(body.email, 200);
-  const telefono = str(body.telefono, 30);
-  const mensaje = str(body.mensaje, 3000);
-  const tipoEvento = str(body.tipoEvento, 60);
-  const fecha = str(body.fechaEvento, 10);
-  const invitados = Number.parseInt(str(body.numeroInvitados, 7), 10);
-
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !/[\r\n]/.test(email);
-  const telOk = telefono.replace(/\D/g, "").length >= 7;
-  const fechaOk = /^\d{4}-\d{2}-\d{2}$/.test(fecha) && !Number.isNaN(Date.parse(fecha));
-
-  if (nombre.length < 2 || !emailOk || !telOk) {
-    return NextResponse.json(
-      { ok: false, error: "Revisa tu nombre, correo y teléfono." },
-      { status: 400 }
-    );
-  }
-
+  const campos = validarContacto(datos);
+  if (Object.keys(campos).length) return NextResponse.json({ ok: false, error: "Revisa los campos señalados.", campos }, { status: 400 });
+  if (typeof body.solicitudId !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.solicitudId)) return fallo("Actualiza la página y vuelve a enviar tu solicitud.", 400);
+  if (body.origen !== "/" && body.origen !== "/contact") return fallo("Origen del formulario inválido.", 400);
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json(
-      { ok: false, error: "El envío no está disponible por ahora. Escríbenos por WhatsApp." },
-      { status: 503 }
-    );
-  }
-
+  if (!apiKey) return fallo("El envío no está disponible por ahora. Escríbenos por WhatsApp.", 503);
+  const servicio = serviciosContacto.find(([valor]) => valor === datos.tipoEvento)![1];
+  const contenido = {
+    from: "La Trinchera México <contacto@latrincheramexico.com>",
+    to: ["contacto@latrincheramexico.com"], reply_to: datos.email.trim(),
+    subject: "Nueva solicitud de cotización — La Trinchera México",
+    text: ["Nueva solicitud desde el sitio web", "", `Nombre: ${datos.nombre.trim()}`, `Correo: ${datos.email.trim()}`,
+      `Teléfono: ${datos.telefono.trim()}`, `Servicio: ${servicio}`, `Fecha: ${datos.fechaEvento || "Por definir"}`,
+      `Invitados aproximados: ${datos.numeroInvitados || "Por definir"}`, `Origen: ${body.origen}`,
+      "Privacidad: el visitante confirmó la lectura y autorizó atender su solicitud.", "", "Mensaje:", datos.mensaje.trim()].join("\n"),
+  };
+  // Mismo contenido + misma solicitud = mismo correo, aunque cambie la instancia de Vercel.
+  const clave = createHash("sha256").update(JSON.stringify({ id: body.solicitudId, contenido })).digest("hex");
   try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      signal: AbortSignal.timeout(15000),
-      body: JSON.stringify({
-        from: "La Trinchera México <contacto@latrincheramexico.com>",
-        to: ["contacto@latrincheramexico.com"],
-        reply_to: email,
-        subject: "Nueva solicitud de cotización — La Trinchera México",
-        text: [
-          "Nueva solicitud desde el sitio web",
-          "",
-          `Nombre: ${nombre}`,
-          `Correo: ${email}`,
-          `Teléfono: ${telefono}`,
-          `Tipo de evento: ${tipoEvento || "No especificado"}`,
-          `Fecha: ${fechaOk ? fecha : "No especificada"}`,
-          `Invitados: ${Number.isFinite(invitados) && invitados > 0 ? invitados : "No especificados"}`,
-          `Origen: ${str(body.origen, 120) || "No especificado"}`,
-          "",
-          "Mensaje:",
-          mensaje || "Sin mensaje",
-        ].join("\n"),
-      }),
+    const respuesta = await fetch("https://api.resend.com/emails", {
+      method: "POST", headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", "Idempotency-Key": `contacto/${clave}` },
+      signal: AbortSignal.timeout(15000), body: JSON.stringify(contenido),
     });
-    const result = await response.json().catch(() => null);
-    if (!response.ok || typeof result?.id !== "string" || !result.id) {
-      // Nunca registrar el cuerpo del correo, credenciales o datos personales.
-      console.error("contacto: Resend no aceptó el envío", response.status);
-      return NextResponse.json(
-        { ok: false, error: "No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp." },
-        { status: 502 }
-      );
+    const resultado = await respuesta.json().catch(() => null);
+    if (!respuesta.ok || typeof resultado?.id !== "string" || !resultado.id) {
+      console.error("contacto: Resend no aceptó el envío", respuesta.status);
+      return fallo("No pudimos confirmar el envío. Puedes reintentar sin cambiar los datos o escribirnos por WhatsApp.", 502);
     }
     return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "No pudimos confirmar el envío. Inténtalo de nuevo o escríbenos por WhatsApp." },
-      { status: 502 }
-    );
-  }
+  } catch { return fallo("No pudimos confirmar el envío. Puedes reintentar sin cambiar los datos o escribirnos por WhatsApp.", 502); }
 }

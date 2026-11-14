@@ -33,9 +33,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  overflow-x: hidden;
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: clip;
   position: relative;
   font-feature-settings: "kern";
   text-rendering: optimizeLegibility;
@@ -94,11 +92,9 @@ html {
     right: 1rem;
   }
 
-  /* Prevenir scroll bounce en iOS */
-  body {
-    overflow-x: hidden !important;
-    overscroll-behavior-y: contain !important;
-  }
+  /* El body ya recorta el desborde horizontal con overflow-x: clip (sin crear
+     un contenedor de scroll). No usar overflow:hidden ni overscroll-behavior:
+     contain aquí: bloqueaban el scroll con rueda/táctil en el modo móvil. */
 }
 
 /* 🎯 Optimizaciones de rendimiento */

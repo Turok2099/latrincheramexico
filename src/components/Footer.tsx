@@ -129,7 +129,7 @@ export default function Footer() {
           <div className="flex space-x-6">
             {/* Facebook */}
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/latrincheramexico"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-transform duration-300"
@@ -142,7 +142,7 @@ export default function Footer() {
 
             {/* Instagram */}
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/latrinchera_mexico"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition-transform duration-300"

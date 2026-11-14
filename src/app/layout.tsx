@@ -67,12 +67,12 @@ export default function RootLayout({
             :root{--color-primary:#22d3f7;--color-accent:#22d3f7;--background:#000000;--foreground:#ededed;--font-sans:"Open Sans",system-ui,-apple-system,sans-serif}
             *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}
             html{font-family:var(--font-sans);line-height:1.6;-webkit-text-size-adjust:100%;tab-size:4;overflow-x:hidden}
-            body{background:var(--background);color:var(--foreground);font-family:var(--font-sans);margin:0;padding:0;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:touch;line-height:inherit;font-feature-settings:"kern"}
+            body{background:var(--background);color:var(--foreground);font-family:var(--font-sans);margin:0;padding:0;overflow-x:clip;line-height:inherit;font-feature-settings:"kern"}
             img,video{max-width:100%;height:auto}
             h1,h2,h3{margin:0;font-weight:700;line-height:1.2}
             button{cursor:pointer}
             .fixed{position:fixed}
-            @media(max-width:768px){body{position:relative;width:100%;overscroll-behavior-y:contain}}
+            @media(max-width:768px){body{position:relative;width:100%}}
           `,
           }}
         />

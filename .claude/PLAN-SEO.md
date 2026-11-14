@@ -1,6 +1,6 @@
 # Plan de acción SEO – La Trinchera México
 
-Creado: 14 de noviembre de 2026. Basado en lectura del código y en el reporte de Search Console (12 ago – 11 nov 2026). No hay mediciones en producción ni Lighthouse. Estado de formularios y otros pendientes: ver `PENDIENTES.md`.
+Creado: 14 de noviembre de 2026. Basado en lectura del código y en el reporte de Search Console (12 ago – 11 nov 2026). No hay mediciones en producción ni Lighthouse. Este es el único documento de estado y pendientes (absorbió `PENDIENTES.md` el 2026-11-14): fases SEO, más las secciones «Formularios y privacidad», «Google y medición» y «Dependencias y técnica». Distingue lo implementado de lo comprobado en producción: una compilación correcta o la aceptación de Resend no confirman por sí solas la entrega.
 
 Marcar `[x]` al terminar y anotar fecha. Un cambio de código se cierra con `npm run lint`, `npx tsc --noEmit` y `npm run build` (o `build:sitemap` si cambian rutas).
 
@@ -57,13 +57,14 @@ Solo lint, `tsc` y `npm run test:contacto` (sin correos reales); **falta `npm ru
 - [x] **Navbar:** logo agrandado (móvil `h-14`, escritorio `h-19`); en Inicio no se muestra porque el logo vive en el hero.
 - [x] **Hero de inicio** (`HeroSection.tsx`, `HeroCarousel.tsx`): logo con subtítulo grande y título "Creamos momentos extraordinarios." (antes "Creamos experiencias extraordinarias"; ninguna consulta de Search Console usaba "experiencias"). El H1 único contiene logo (`alt="La Trinchera México"`), título y la línea "Organización de eventos en CDMX y Estado de México", todo visible, sin texto `sr-only`; ya no hay H2 en el hero. Carrusel con la misma lógica; solo cambió el degradado.
 - [x] **Pie de página** (`Footer.tsx`): fondo negro, columnas de marca, servicios y contacto. Añade enlaces internos sitewide a los seis servicios, correo, teléfono +52 55 4521 0178 y cobertura (datos confirmados). Año dinámico.
-- [x] **Formulario** (rediseño visual + endurecimiento): correo de una sola dirección (sin `,;<>"()[]\`), honeypot renombrado a `controlInterno`, foco en el primer error según el orden visual. El límite global de intentos (regla del Firewall de Vercel o Turnstile) sigue pendiente, ya anotado en `PENDIENTES.md`.
+- [x] **Formulario** (rediseño visual + endurecimiento): correo de una sola dirección (sin `,;<>"()[]\`), honeypot renombrado a `controlInterno`, foco en el primer error según el orden visual. Teléfono limitado a 15 dígitos al escribir. El límite global de intentos sigue pendiente (ver «Formularios y privacidad»).
+- [x] **Scroll en modo móvil** (≤768 px): el `body` bloqueaba la rueda por `overflow-x: hidden` y `overscroll-behavior: contain`; ahora usa `overflow-x: clip`. Comprobado con Chrome en modo móvil contra el servidor local; falta un teléfono real.
 - [ ] Comprobar el H1 de inicio ya publicado y que no haya contenido tapado por la barra de navegación de escritorio, ahora más alta (~100 px) en las demás páginas.
 - [ ] Revisar jerarquía de encabezados en inicio: el hero ya no tiene H2.
 
 ## Fase 3 – Contenido y autoridad (requiere datos del negocio)
 
-- [ ] Confirmar URLs reales de Facebook e Instagram; sustituir los enlaces del pie (hoy apuntan a `facebook.com` e `instagram.com` genéricos, en `Footer.tsx`) y añadir `sameAs`. Si no existen perfiles, quitar los íconos.
+- [x] 2026-11-14: perfiles confirmados por el usuario (instagram.com/latrinchera_mexico, facebook.com/latrincheramexico); enlaces del pie sustituidos y `sameAs` añadido al JSON-LD de inicio. Falta comprobar tras publicar que abren bien.
 - [ ] Crear o reclamar el Perfil de Negocio de Google como negocio con área de servicio (sin dirección pública), cobertura CDMX y Estado de México.
 - [ ] Casos o testimonios reales con permiso (cliente, tipo de evento, fotos propias). No inventar reseñas ni cifras.
 - [ ] Desambiguar la marca: usar siempre "La Trinchera México" en títulos, schema y perfiles.
@@ -74,7 +75,34 @@ Solo lint, `tsc` y `npm run test:contacto` (sin correos reales); **falta `npm ru
 
 - [ ] Repetir la exportación de Search Console 4 semanas después de publicar la Fase 1 y los cambios posteriores (hero, pie, formulario) y comparar con la línea base. Vigilar posición e impresiones de inicio (línea base: pos 8.03, 998 impresiones, 12 clics) por el cambio de H1 y título del hero.
 - [ ] Correr Lighthouse sobre producción (Node >=22.19).
-- [ ] Configurar Analytics con la cuenta nueva (ver `PENDIENTES.md`) cuando se decida; sin enviar datos de formularios.
+- [ ] Configurar Analytics con la cuenta nueva (ver «Google y medición») cuando se decida; sin enviar datos de formularios.
+
+## Formularios y privacidad
+
+Hecho (verificado localmente, `npm run test:contacto` sin correos reales): un solo componente `Formulario.tsx` (inicio y contacto); catálogo y validación compartidos cliente/servidor en `src/lib/contacto.ts`; errores por campo, límites sin recortes, fecha e invitados opcionales, bloqueo de doble envío, foco/autocompletado/estados accesibles; idempotencia con clave de Resend; protección por origen, JSON de 16 KiB, honeypot y 5 intentos por IP cada 10 min por instancia; sin base de datos ni datos personales en el navegador.
+
+Hecho (publicado): Resend por API desde `contacto@latrincheramexico.com` con dominio verificado y `RESEND_API_KEY` en Vercel; los mensajes llegan a la bandeja de Hostinger (confirmado por el usuario el 2026-11-14, sin inspeccionar el buzón). Supabase retirado por completo: código, dependencias y variables de Vercel y `.env.local` (confirmado por el usuario; el proyecto remoto ya está resuelto). Aviso `/aviso-privacidad` con responsable Jorge Castro Cruz, teléfono y correo, y casilla obligatoria validada también en servidor.
+
+- [ ] Probar un envío desde inicio y otro desde `/contact` tras el último push (formulario, aviso y pie) y revisar spam.
+- [ ] Revisar visualmente el formulario publicado en móvil y escritorio, con teclado y autocompletado, y probar el scroll en un teléfono real.
+- [ ] Límite global de intentos: el actual es por instancia (no global) y no hay CAPTCHA. Si el tráfico o el abuso lo requiere, regla del Firewall de Vercel o Turnstile (requiere autorización).
+- [ ] Aviso integral: domicilio del responsable, procedimientos (acceso, rectificación, cancelación, oposición) y política de conservación confirmados por el negocio. La página actual es informativa, no un aviso legal integral. No inventar esos datos.
+
+## Google y medición
+
+Hecho: `public/google66de2f41c6a4bac9.html` conservado (verificación de Search Console completada según el usuario); retirados el contenedor antiguo `GTM-55QXTXJ9`, su script, iframe y conexión anticipada, y los eventos de medición y declaraciones de `dataLayer`; Open Sans se conserva con `next/font/google` (parte del diseño, no analítica).
+
+- [ ] Comprobar permisos, propietarios, tokens antiguos y asociaciones en Search Console, DNS, Tag Manager y Analytics si se quiere desvincular por completo la cuenta anterior. Limpiar el código no elimina accesos externos.
+- [ ] Con la cuenta nueva, configurar Analytics y, si se decide, Tag Manager; definir y comprobar la medición de clics y solicitudes. No restaurar los identificadores antiguos.
+
+## Dependencias y técnica
+
+Hecho: Swiper eliminado; avisos de PostCSS y Minimatch resueltos con excepciones específicas en `package.json`; Lighthouse 13.6.0 (requiere Node >=22.19); última auditoría sin vulnerabilidades (repetir al cambiar dependencias; no es garantía permanente); lint, tipos, `build` y `build:sitemap` correctos al unificar el formulario.
+
+- [ ] Resolver las dos advertencias de dependencias de `useEffect` en `src/components/Home/Galeria.tsx`.
+- [ ] Planificar la migración de `next lint` (deprecado; funciona con Next.js 15).
+- [ ] Revisar las excepciones de PostCSS y Minimatch cuando los paquetes superiores incluyan las versiones corregidas. No ejecutar `npm audit fix --force` sin revisar compatibilidad.
+- [ ] Medir rendimiento y accesibilidad en producción (Lighthouse visual tras estos cambios; ver Fase 4).
 
 ## Riesgos y límites
 

@@ -9,6 +9,7 @@ export const serviciosContacto = [
 ] as const;
 
 export const limitesContacto = { nombre: 120, email: 200, telefono: 30, mensaje: 3000 };
+export const digitosTelefono = { min: 7, max: 15 };
 export type DatosContacto = {
   nombre: string; email: string; telefono: string; tipoEvento: string;
   fechaEvento: string; numeroInvitados: string; mensaje: string; controlInterno: string;

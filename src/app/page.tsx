@@ -102,6 +102,10 @@ export default function Home() {
       "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     telephone: "+52-55-4521-0178",
     email: "contacto@latrincheramexico.com",
+    sameAs: [
+      "https://www.instagram.com/latrinchera_mexico",
+      "https://www.facebook.com/latrincheramexico",
+    ],
     areaServed: [
       { "@type": "City", name: "Ciudad de México" },
       { "@type": "State", name: "Estado de México" },

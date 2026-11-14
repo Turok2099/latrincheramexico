@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { enviarContacto } from "@/lib/enviarContacto";
-import { contactoVacio, limitesContacto, serviciosContacto, validarContacto, fechaLocal, type DatosContacto, type ErroresContacto } from "@/lib/contacto";
+import { contactoVacio, digitosTelefono, limitesContacto, serviciosContacto, validarContacto, fechaLocal, type DatosContacto, type ErroresContacto } from "@/lib/contacto";
 
 const control = "w-full px-4 py-3 bg-black/50 border border-white/20 rounded-lg text-white placeholder:text-muted/70 transition-colors hover:border-white/40 focus-visible:outline-none focus-visible:border-[#22d3f7] focus-visible:ring-2 focus-visible:ring-[#22d3f7] disabled:opacity-60";
 const etiqueta = "block mb-2 text-sm font-semibold text-white/90";
@@ -26,6 +26,8 @@ export default function Formulario({ origen, principal = false }: { origen: "/" 
 
   function cambiar(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
+    // Teléfono: no admitir más dígitos que el máximo válido (se ignora la tecla o el pegado que lo exceda).
+    if (name === "telefono" && value.replace(/\D/g, "").length > digitosTelefono.max) return;
     const valor = e.target instanceof HTMLInputElement && e.target.type === "checkbox" ? e.target.checked : value;
     setDatos(prev => ({ ...prev, [name]: valor }));
     setErrores(prev => ({ ...prev, [name]: undefined }));

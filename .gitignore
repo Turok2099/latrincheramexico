@@ -48,7 +48,6 @@ lighthouse-*.json
 *.md
 !README.md
 !CLAUDE.md
-!PENDIENTES.md
 !.claude/
 !.claude/**
 

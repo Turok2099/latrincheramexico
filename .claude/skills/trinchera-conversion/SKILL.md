@@ -14,4 +14,4 @@ description: Cambios al formulario compartido, validación, envío por Resend y 
 - Protección: origen, JSON de hasta 16 KiB, honeypot, límite por IP/instancia con memoria acotada. No afirmar que es un límite global ni agregar servicios externos sin necesidad.
 - /aviso-privacidad es información del flujo real; aviso integral pendiente de datos del responsable. No inventar domicilio, retención ni procedimientos legales.
 - WhatsApp usa wa.me/+525545210178. No reinstalar eventos de Google ni enviar datos personales a analítica o logs.
-- Verificación según CLAUDE.md y npm run test:contacto. Simular el proveedor; no enviar correos reales durante pruebas. Distinguir pruebas locales de entrega comprobada en producción; estado en la sección pertinente de PENDIENTES.md.
+- Verificación según CLAUDE.md y npm run test:contacto. Simular el proveedor; no enviar correos reales durante pruebas. Distinguir pruebas locales de entrega comprobada en producción; estado en la sección «Formularios y privacidad» de .claude/PLAN-SEO.md.

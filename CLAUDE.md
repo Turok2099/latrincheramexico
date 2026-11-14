@@ -12,7 +12,7 @@ Sitio de infraestructura para eventos: https://latrincheramexico.com. Español d
 
 ## Trabajo y comprobación
 - Leer solo los archivos pertinentes; buscar antes de abrir archivos grandes. No cargar todo el repositorio, el historial ni todas las skills para una tarea.
-- Estado del trabajo: consultar únicamente la sección pertinente de PENDIENTES.md. No importarlo completo en estas instrucciones.
+- Estado del trabajo: consultar únicamente la sección pertinente de .claude/PLAN-SEO.md (documento único de estado y pendientes). No importarlo completo en estas instrucciones.
 - Código: npm run lint y npx tsc --noEmit; npm run test:contacto si cambia el flujo del formulario; npm run build al terminar un conjunto de cambios funcionales. No repetir checks ya correctos sin cambios relevantes.
 - Rutas: npm run build:sitemap sustituye a build y regenera sitemap/robots. Solo documentación: comprobar diff, rutas e instrucciones; no compilar.
 - Rendimiento: npm run analyze:win o Lighthouse solo si corresponde a la tarea. Lighthouse 13.6 requiere Node >=22.19.

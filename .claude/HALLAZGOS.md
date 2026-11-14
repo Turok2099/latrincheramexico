@@ -2,7 +2,7 @@
 
 Actualizado: 14 de noviembre de 2026.
 
-El estado detallado y los pendientes vigentes están en PENDIENTES.md. Leer únicamente la sección que corresponda a la tarea; no cargar ambos documentos por defecto.
+El estado detallado y los pendientes vigentes están en .claude/PLAN-SEO.md (documento único). Leer únicamente la sección que corresponda a la tarea.
 
 Correcciones históricas: formulario conectado a Resend sin Supabase; formulario único con validación compartida; medición antigua de Google retirada; archivo nuevo de Search Console conservado; Swiper eliminado; dependencias auditadas y corregidas durante la sesión.
 

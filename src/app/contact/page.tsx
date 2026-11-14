@@ -9,12 +9,12 @@ const ogImage = optimizeCloudinaryUrl(cloudinaryImages["eventos-empresariales"][
 });
 
 export const metadata: Metadata = {
-  title: "Contacto y Cotización de Eventos | La Trinchera México",
+  title: "Contacto y Cotización | La Trinchera México",
   description:
     "Solicita una cotización para tu evento en CDMX. Escríbenos y cuéntanos qué necesitas: eventos corporativos, bodas, catering, stands o pantallas.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contacto y Cotización de Eventos | La Trinchera México",
+    title: "Contacto y Cotización | La Trinchera México",
     description: "Solicita una cotización para tu evento en CDMX.",
     url: "https://latrincheramexico.com/contact",
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contacto y Cotización de Eventos | La Trinchera México",
+    title: "Contacto y Cotización | La Trinchera México",
     description: "Solicita una cotización para tu evento en CDMX.",
     images: [ogImage],
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  name: "Contacto y Cotización de Eventos | La Trinchera México",
+  name: "Contacto y Cotización | La Trinchera México",
   url: "https://latrincheramexico.com/contact",
   inLanguage: "es-MX",
   about: {

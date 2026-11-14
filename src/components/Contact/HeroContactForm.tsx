@@ -16,6 +16,7 @@ export default function HeroContactForm() {
       {imagenes.length > 0 && <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${imagenes[indice]})` }} />}
       <div className="absolute inset-0 bg-black/85" />
     </div>
-    <div className="relative z-10"><Formulario origen="/contact" principal /></div>
+    {/* data-nosnippet: que Google use la meta descripción y no el texto del formulario */}
+    <div className="relative z-10" data-nosnippet><Formulario origen="/contact" principal /></div>
   </section>;
 }

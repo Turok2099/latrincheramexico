@@ -178,7 +178,10 @@ export default function AboutPage() {
               <h3 className="text-2xl font-bold text-[#22d3f7] mb-4 text-center">
                 Nuestra Visión
               </h3>
-              <p className="text-muted text-center leading-relaxed">
+              <p
+                className="text-muted text-center leading-relaxed"
+                data-nosnippet
+              >
                 Ser la empresa líder en organización de eventos en México,
                 reconocida por nuestra innovación, excelencia en el servicio y
                 nuestra capacidad para crear celebraciones que trascienden y

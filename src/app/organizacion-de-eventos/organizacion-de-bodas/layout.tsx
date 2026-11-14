@@ -8,7 +8,7 @@ const ogImage = optimizeCloudinaryUrl(cloudinaryImages["organizacion-de-bodas"][
 });
 
 export const metadata: Metadata = {
-  title: "Organización de Bodas y Wedding Planner CDMX | La Trinchera",
+  title: "Organización de Bodas y Wedding Planner CDMX | La Trinchera México",
   description:
     "Organización de bodas en CDMX: planeación, coordinación e infraestructura para bodas privadas, pequeñas o grandes. Cotiza con tu wedding planner. Más de 10 años de experiencia.",
   alternates: {

@@ -19,7 +19,7 @@ const ogImage = optimizeCloudinaryUrl(cloudinaryImages["eventos-empresariales"][
 });
 
 export const metadata: Metadata = {
-  title: "Organización de Eventos en CDMX | Agencia de Eventos - La Trinchera",
+  title: "Organización de Eventos en CDMX | Agencia de Eventos - La Trinchera México",
   description:
     "Agencia de eventos en CDMX: organización y producción integral de eventos corporativos, bodas, catering, stands, pantallas y música. Más de 10 años de experiencia.",
   alternates: { canonical: "/organizacion-de-eventos" },

@@ -8,7 +8,7 @@ const ogImage = optimizeCloudinaryUrl(cloudinaryImages["eventos-empresariales"][
 });
 
 export const metadata: Metadata = {
-  title: "Eventos Corporativos en CDMX | Productora de Eventos - La Trinchera",
+  title: "Eventos Corporativos en CDMX | Productora de Eventos - La Trinchera México",
   description:
     "Organización y producción de eventos corporativos y empresariales en CDMX. Planeación, infraestructura y operación para tu empresa. Más de 10 años de experiencia.",
   alternates: {

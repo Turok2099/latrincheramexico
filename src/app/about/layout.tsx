@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "empresa de eventos CDMX",
     "organizadores de eventos profesionales",
     "equipo de eventos",
-    "historia La Trinchera",
+    "historia La Trinchera México",
     "experiencia en eventos",
     "valores empresariales",
     "misión y visión",

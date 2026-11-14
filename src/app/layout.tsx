@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "../styles/globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
@@ -84,7 +85,18 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppButton phoneNumber="+525545210178" />
-
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-K9R5B0D8QR"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-K9R5B0D8QR');
+          `}
+        </Script>
       </body>
     </html>
   );

@@ -6,7 +6,7 @@ Sitio de infraestructura para eventos: https://latrincheramexico.com. Español d
 - Next.js 15 (instalado 15.5.29), React 19.1, TypeScript 5, Tailwind 4, Cloudinary; consultar package.json/lock si importan versiones exactas.
 - App Router en src/app; servidor por defecto. Metadata en servidor; reutilizar componentes y estilos existentes.
 - Formulario único: src/components/Contact/Formulario.tsx; catálogo y validación: src/lib/contacto.ts; API: src/app/api/contacto/route.ts. Resend envía a contacto@latrincheramexico.com. Sin base de datos.
-- Conservar public/google66de2f41c6a4bac9.html. Sin analítica ni eventos de Google: no restaurarlos sin solicitud.
+- Conservar public/google66de2f41c6a4bac9.html. Analytics GA4 autorizado por el usuario: G-K9R5B0D8QR en el layout mediante next/script. No restaurar el contenedor GTM antiguo ni enviar datos de formularios.
 - No leer, imprimir ni versionar valores de .env*. Secretos solo en servidor; nunca registrar datos de formularios.
 - No publicar, enviar correos reales ni modificar servicios externos sin autorización para esa acción.
 

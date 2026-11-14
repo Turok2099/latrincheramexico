@@ -59,10 +59,10 @@ export const metadata: Metadata = {
     siteName: "La Trinchera México",
     images: [
       {
-        url: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
+        url: "https://latrincheramexico.com/og-trinchera.png",
         width: 1200,
         height: 630,
-        alt: "La Trinchera México - Organización de Eventos",
+        alt: "La Trinchera México",
       },
     ],
     locale: "es_MX",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     description:
       "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música para eventos. Más de 10 años de experiencia.",
     images: [
-      "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
+      "https://latrincheramexico.com/og-trinchera.png",
     ],
   },
   robots: {
@@ -97,7 +97,7 @@ export default function Home() {
     description:
       "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música para eventos. Más de 10 años de experiencia.",
     url: "https://latrincheramexico.com",
-    logo: "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_400,h_400,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
+    logo: "https://latrincheramexico.com/logo.png",
     image:
       "https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_1200,h_630,c_fill/v1758905577/trinchera/eventos-sociales/23.png",
     telephone: "+52-55-4521-0178",

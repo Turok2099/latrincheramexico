@@ -20,6 +20,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://latrincheramexico.com"),
   title: "La Trinchera México | Organización de eventos en CDMX",
   description: "Organización de eventos en CDMX: eventos corporativos, bodas, catering, stands, pantallas y música.",
+  openGraph: {
+    siteName: "La Trinchera México",
+    type: "website",
+    locale: "es_MX",
+    images: [{ url: "/og-trinchera.png", width: 1200, height: 630, alt: "La Trinchera México" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-trinchera.png"],
+  },
   other: {
     "font-display": "swap",
   },

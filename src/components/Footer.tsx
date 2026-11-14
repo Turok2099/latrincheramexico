@@ -1,9 +1,24 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="bg-surface-light text-ink-muted py-12 px-6">
       <div className="max-w-6xl mx-auto">
+        {/* Marca */}
+        <div className="flex justify-center mb-8">
+          <Link href="/" aria-label="La Trinchera México, inicio">
+            <Image
+              src="/logo-trinchera.png"
+              alt="La Trinchera México"
+              width={800}
+              height={328}
+              sizes="160px"
+              className="h-16 w-auto"
+            />
+          </Link>
+        </div>
+
         {/* Navegación superior */}
         <div className="flex justify-center mb-8">
           <nav className="flex space-x-8 text-sm font-medium">

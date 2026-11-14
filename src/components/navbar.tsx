@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -149,11 +150,16 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link
-                href="/"
-                className="text-[#22d3f7] font-bold text-xl tracking-wider"
-              >
-                LA TRINCHERA
+              <Link href="/" aria-label="La Trinchera México, inicio" className="block">
+                <Image
+                  src="/logo-trinchera.png"
+                  alt="La Trinchera México"
+                  width={800}
+                  height={328}
+                  priority
+                  sizes="120px"
+                  className="h-12 w-auto"
+                />
               </Link>
             </div>
 
